@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "intctrl.h": "c",
+        "stdint.h": "c",
+        "nvic.h": "c"
+    }
+}

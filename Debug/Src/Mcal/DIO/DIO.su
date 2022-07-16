@@ -1,0 +1,5 @@
+DIO.c:63:15:Dio_ReadChannel	24	static
+DIO.c:81:6:Dio_WriteChannel	32	static
+DIO.c:100:19:Dio_ReadPort	24	static
+DIO.c:116:6:Dio_WritePort	24	static
+DIO.c:131:15:Dio_FlipChannel	32	static
