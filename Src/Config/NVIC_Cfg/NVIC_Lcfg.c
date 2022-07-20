@@ -142,12 +142,8 @@
  */
 const NVIC_Configs_t NVIC_Cfg[NVIC_ACTIVATED_INT_SIZE] ={
 	/* Interupt_Number    Group_Priority     SubGroup_Priority 		interruptState*/
- { SVC    		        ,2,                       1,                  INERRUPT_ENABLE},
- { SysTick			    ,1,                       0,                  INERRUPT_ENABLE},
- { MemManage		    ,2,                       0,                  INERRUPT_ENABLE},
- { EXTI2_IRQ		    ,3,                       1,                  INERRUPT_ENABLE},
- { EXTI3_IRQ    	    ,0,                       0,                  INERRUPT_ENABLE},
-	
+ { SysTick			    ,2,                       0,                  INERRUPT_ENABLE},
+ { TIM4_IRQ 		    ,1,                       1,                  INERRUPT_ENABLE}
 };
 const uint32_t Group = (uint32_t)GROUP3;
 

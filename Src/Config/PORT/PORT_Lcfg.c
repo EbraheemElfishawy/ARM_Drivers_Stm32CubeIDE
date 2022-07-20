@@ -45,7 +45,7 @@
  *********************************************************************************************************************/
 Port_ConfigType AllPinConfigs[NUM_OF_USED_PINS]={
 /* Pin Type     Pin Direction           Output Type                 Pin Mode                                Initial Value                   Pin Internal Attach         Pin Output Speed*/
-{Port_PIN_PA5,  Port_PIN_DIR_OUTPUT,    Port_OUTPUT_TYPE_PUSHPULL,  Port_PIN_MODE_GENERAL_PURPOSE_OUTPUT,   0                          ,    Port_PIN_ATTACH_NO_PULL,    Port_PIN_SPEED_LOW},
+{Port_PIN_PA5,  Port_PIN_DIR_OUTPUT,    Port_OUTPUT_TYPE_PUSHPULL,  Port_PIN_MODE_GENERAL_PURPOSE_OUTPUT,   Port_PIN_INITIAL_LOW_LEVEL ,    Port_PIN_ATTACH_NO_PULL,    Port_PIN_SPEED_LOW},
 {Port_PIN_PC13, Port_PIN_DIR_INPUT ,    Port_OUTPUT_TYPE_PUSHPULL,  Port_PIN_MODE_INPUT                 ,   0                          ,    Port_PIN_ATTACH_PULL_UP,    0                 },
 {Port_PIN_PA6,  Port_PIN_DIR_OUTPUT,    Port_OUTPUT_TYPE_PUSHPULL,  Port_PIN_MODE_GENERAL_PURPOSE_OUTPUT,   Port_PIN_INITIAL_HIGH_LEVEL,    Port_PIN_ATTACH_NO_PULL,    Port_PIN_SPEED_LOW},
 {Port_PIN_PA7,  Port_PIN_DIR_OUTPUT,    Port_OUTPUT_TYPE_PUSHPULL,  Port_PIN_MODE_GENERAL_PURPOSE_OUTPUT,   Port_PIN_INITIAL_HIGH_LEVEL,    Port_PIN_ATTACH_NO_PULL,    Port_PIN_SPEED_LOW},

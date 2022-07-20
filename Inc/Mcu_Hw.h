@@ -62,7 +62,9 @@
 /********************** SCB ********************/
 #define SCB_BASE_ADDRESS			0xE000ED00
 /***************************************************/
+/*********************** 	AHB3 Peripheral base addresses 		**************************/
 
+/*********************** 	AHB2 Peripheral base addresses 		**************************/
 
 /*********************** 	AHB1 Peripheral base addresses 		**************************/
 
@@ -78,14 +80,28 @@
 #define GPIOG_BASE_ADDRESS		0x40021800UL
 #define GPIOH_BASE_ADDRESS		0x40021C00UL
 /*************************************************************/
-/*********************** 	AHB2 Peripheral base addresses 		**************************/
 
+/*********************** 	APB2 Peripheral base addresses 		**************************/
 
-/*********************** 	ABB1 Peripheral base addresses 		**************************/
+/*f446re ref manual 2.2.2 Memory map and register boundary addresses page 58*/
+#define TIM11_BASE_ADDRESS	0x40014800 /*0x4001 4800 - 0x4001 4BFF*/
+#define TIM10_BASE_ADDRESS	0x40014400 /*0x4001 4400 - 0x4001 47FF*/
+#define TIM9_BASE_ADDRESS	0x40014000 /*0x4001 4000 - 0x4001 43FF*/
 
+#define TIM8_BASE_ADDRESS	0x40010400 /*0x4001 0400 - 0x4001 07FF*/
+#define TIM1_BASE_ADDRESS	0x40010000 /*0x4001 0000 - 0x4001 03FF*/
 
-/*********************** 	ABB2 Peripheral base addresses 		**************************/
-
+/*********************** 	APB1 Peripheral base addresses 		**************************/
+/*f446re ref manual 2.2.2 Memory map and register boundary addresses page 59*/
+#define TIM14_BASE_ADDRESS	0x40002000 /*0x4000 2000 - 0x4000 23FF*/
+#define TIM13_BASE_ADDRESS	0x40001C00 /*0x4000 1C00 - 0x4000 1FFF*/
+#define TIM12_BASE_ADDRESS	0x40001800 /*0x4000 1800 - 0x4000 1BFF*/
+#define TIM7_BASE_ADDRESS	0x40001400 /*0x4000 1400 - 0x4000 17FF*/
+#define TIM6_BASE_ADDRESS	0x40001000 /*0x4000 1000 - 0x4000 13FF*/
+#define TIM5_BASE_ADDRESS	0x40000C00 /*0x4000 0C00 - 0x4000 0FFF*/
+#define TIM4_BASE_ADDRESS	0x40000800 /*0x4000 0800 - 0x4000 0BFF*/
+#define TIM3_BASE_ADDRESS	0x40000400 /*0x4000 0400 - 0x4000 07FF*/
+#define TIM2_BASE_ADDRESS	0x40000000 /*0x4000 0000 - 0x4000 03FF*/
 
 
 
@@ -269,22 +285,60 @@ typedef union
 		uint32_t          	   :13;
 	}BIT;	
 }SCB_SHCSR_Tag;
-
-
-
-/**********************************************************************************************************************
- *  GLOBAL CONSTANT MACROS
- *********************************************************************************************************************/
+/*********** SCB peripheral definitions ********************/
 #define CORTEXM4_PERI_BASE_ADDRESS             0xE000E000
+#define SCB        							    ((volatile SCB_RegDef_t *)(SCB_BASE_ADDRESS     ))
 #define SCB_ICSR                                ((volatile  SCB_ICSR_Tag*)(SCB_BASE_ADDRESS+0x04))
 #define SCB_AIRCR                              *((volatile uint32_t*     )(SCB_BASE_ADDRESS+0x0C))
 #define SCB_SHCSR                               ((volatile SCB_SHCSR_Tag*)(SCB_BASE_ADDRESS+0x24))
 
-/*********** SCB peripheral definitions ********************/
-#define SCB         ((volatile SCB_RegDef_t *) SCB_BASE_ADDRESS )
-/**************************************************************/
+/***********************************************************************************************************************/
+/*************************************************************/	
+/*********** TIMERS Register definition structure *************/
+/*************************************************************/
+/** 
+  * @brief TIM
+  */
 
-
+typedef struct
+{
+   uint32_t CR1;         /*!< TIM control register 1,              Address offset: 0x00 */
+   uint32_t CR2;         /*!< TIM control register 2,              Address offset: 0x04 */
+   uint32_t SMCR;        /*!< TIM slave mode control register,     Address offset: 0x08 */
+   uint32_t DIER;        /*!< TIM DMA/interrupt enable register,   Address offset: 0x0C */
+   uint32_t SR;          /*!< TIM status register,                 Address offset: 0x10 */
+   uint32_t EGR;         /*!< TIM event generation register,       Address offset: 0x14 */
+   uint32_t CCMR1;       /*!< TIM capture/compare mode register 1, Address offset: 0x18 */
+   uint32_t CCMR2;       /*!< TIM capture/compare mode register 2, Address offset: 0x1C */
+   uint32_t CCER;        /*!< TIM capture/compare enable register, Address offset: 0x20 */
+   uint32_t CNT;         /*!< TIM counter register,                Address offset: 0x24 */
+   uint32_t PSC;         /*!< TIM prescaler,                       Address offset: 0x28 */
+   uint32_t ARR;         /*!< TIM auto-reload register,            Address offset: 0x2C */
+   uint32_t RCR;         /*!< TIM repetition counter register,     Address offset: 0x30 */
+   uint32_t CCR1;        /*!< TIM capture/compare register 1,      Address offset: 0x34 */
+   uint32_t CCR2;        /*!< TIM capture/compare register 2,      Address offset: 0x38 */
+   uint32_t CCR3;        /*!< TIM capture/compare register 3,      Address offset: 0x3C */
+   uint32_t CCR4;        /*!< TIM capture/compare register 4,      Address offset: 0x40 */
+   uint32_t BDTR;        /*!< TIM break and dead-time register,    Address offset: 0x44 */
+   uint32_t DCR;         /*!< TIM DMA control register,            Address offset: 0x48 */
+   uint32_t DMAR;        /*!< TIM DMA address for full transfer,   Address offset: 0x4C */
+   uint32_t OR;          /*!< TIM option register,                 Address offset: 0x50 */
+} TIM_RegDef_t;
+/*********** TIMERS peripheral definitions ********************/
+#define TIM14	((TIM_RegDef_t*)TIM14_BASE_ADDRESS)
+#define TIM13	((TIM_RegDef_t*)TIM13_BASE_ADDRESS)
+#define TIM12	((TIM_RegDef_t*)TIM12_BASE_ADDRESS)
+#define TIM7	((TIM_RegDef_t*)TIM7_BASE_ADDRESS )
+#define TIM6	((TIM_RegDef_t*)TIM6_BASE_ADDRESS )
+#define TIM5	((TIM_RegDef_t*)TIM5_BASE_ADDRESS )
+#define TIM4	((TIM_RegDef_t*)TIM4_BASE_ADDRESS )
+#define TIM3	((TIM_RegDef_t*)TIM3_BASE_ADDRESS )
+#define TIM2	((TIM_RegDef_t*)TIM2_BASE_ADDRESS )
+#define TIM8	((TIM_RegDef_t*)TIM8_BASE_ADDRESS )
+#define TIM1	((TIM_RegDef_t*)TIM1_BASE_ADDRESS )
+#define TIM11	((TIM_RegDef_t*)TIM11_BASE_ADDRESS)
+#define TIM10	((TIM_RegDef_t*)TIM10_BASE_ADDRESS)
+#define TIM9	((TIM_RegDef_t*)TIM9_BASE_ADDRESS )
 
 #endif
 /************************************************TM4c123**************************************************************/

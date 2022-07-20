@@ -53,10 +53,10 @@
 void NVIC_Init(void)
 {
 	uint8_t NVIC_Cfg_Counter;
-	int8_t InterruptNumber;/*Signed int*/
+	NVIC_InterruptNumber InterruptNumber;/*Signed int*/
 	uint8_t SubgroupPriority;
 	uint8_t Groupriority;
-	uint8_t InterruptState;
+	NVIC_InterruptState_t InterruptState;
 	
 
 /*TODO Configure Grouping\SubGrouping System in Application Interrupt and Reset Control Register (AIRCR) in SCB*/
@@ -100,9 +100,9 @@ void NVIC_Init(void)
 		}
 		else if( InterruptNumber >= 0 )
 		{
-			NVIC->NVIC_IPR [ InterruptNumber   ]  = Priority << IPR_BITSHIFT ;
-			NVIC->NVIC_ISER[ InterruptNumber/8 ] &= ~(NVIC_ONE << (InterruptNumber%8));
-			NVIC->NVIC_ISER[ InterruptNumber/8 ] |= InterruptState << (InterruptNumber%8) ;
+			NVIC->NVIC_IPR [ InterruptNumber/4  ] |=  Priority << ((8*(InterruptNumber%4))+4) ;
+			NVIC->NVIC_ISER[ InterruptNumber/31 ] &= ~(NVIC_ONE << (InterruptNumber%31));
+			NVIC->NVIC_ISER[ InterruptNumber/31 ] |= InterruptState << (InterruptNumber%31) ;
 		}
 	}
     

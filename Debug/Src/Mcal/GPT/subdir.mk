@@ -5,23 +5,23 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Src/Mcal/SYSTICK/SYSTICK.c 
+../Src/Mcal/GPT/GPT.c 
 
 OBJS += \
-./Src/Mcal/SYSTICK/SYSTICK.o 
+./Src/Mcal/GPT/GPT.o 
 
 C_DEPS += \
-./Src/Mcal/SYSTICK/SYSTICK.d 
+./Src/Mcal/GPT/GPT.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-Src/Mcal/SYSTICK/%.o: ../Src/Mcal/SYSTICK/%.c Src/Mcal/SYSTICK/subdir.mk
+Src/Mcal/GPT/%.o: ../Src/Mcal/GPT/%.c Src/Mcal/GPT/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 
-clean: clean-Src-2f-Mcal-2f-SYSTICK
+clean: clean-Src-2f-Mcal-2f-GPT
 
-clean-Src-2f-Mcal-2f-SYSTICK:
-	-$(RM) ./Src/Mcal/SYSTICK/SYSTICK.d ./Src/Mcal/SYSTICK/SYSTICK.o
+clean-Src-2f-Mcal-2f-GPT:
+	-$(RM) ./Src/Mcal/GPT/GPT.d ./Src/Mcal/GPT/GPT.o
 
-.PHONY: clean-Src-2f-Mcal-2f-SYSTICK
+.PHONY: clean-Src-2f-Mcal-2f-GPT
 

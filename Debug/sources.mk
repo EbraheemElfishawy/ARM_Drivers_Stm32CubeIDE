@@ -22,13 +22,13 @@ OBJCOPY_BIN :=
 SUBDIRS := \
 Src/App \
 Src/Config/DIO \
+Src/Config/GPT \
 Src/Config/NVIC_Cfg \
 Src/Config/PORT \
-Src/Config/SYSTICK \
 Src/Mcal/DIO \
+Src/Mcal/GPT \
 Src/Mcal/NVIC \
 Src/Mcal/PORT \
-Src/Mcal/SYSTICK \
 Src \
 Startup \
 

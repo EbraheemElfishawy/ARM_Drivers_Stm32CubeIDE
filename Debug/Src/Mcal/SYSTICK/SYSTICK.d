@@ -1,1 +1,0 @@
-Src/Mcal/SYSTICK/SYSTICK.o: ../Src/Mcal/SYSTICK/SYSTICK.c

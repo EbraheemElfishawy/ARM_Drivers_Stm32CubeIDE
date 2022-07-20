@@ -10,13 +10,13 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include Startup/subdir.mk
--include Src/Mcal/SYSTICK/subdir.mk
 -include Src/Mcal/PORT/subdir.mk
 -include Src/Mcal/NVIC/subdir.mk
+-include Src/Mcal/GPT/subdir.mk
 -include Src/Mcal/DIO/subdir.mk
--include Src/Config/SYSTICK/subdir.mk
 -include Src/Config/PORT/subdir.mk
 -include Src/Config/NVIC_Cfg/subdir.mk
+-include Src/Config/GPT/subdir.mk
 -include Src/Config/DIO/subdir.mk
 -include Src/App/subdir.mk
 -include Src/subdir.mk
