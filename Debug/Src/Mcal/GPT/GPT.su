@@ -2,7 +2,7 @@ GPT.c:67:6:Gpt_Init	56	static
 GPT.c:137:6:Gpt_DeInit	4	static
 GPT.c:156:15:Gpt_GetTimeElapsed	24	static
 GPT.c:201:15:Gpt_GetTimeRemaining	24	static
-GPT.c:248:6:Gpt_StartTimer	24	static
-GPT.c:302:6:Gpt_StopTimer	24	static
-GPT.c:345:6:Gpt_EnableNotification	24	static
-GPT.c:392:6:Gpt_DisableNotification	24	static
+GPT.c:252:6:Gpt_StartTimer	24	static
+GPT.c:307:6:Gpt_StopTimer	24	static
+GPT.c:350:6:Gpt_EnableNotification	24	static
+GPT.c:399:6:Gpt_DisableNotification	24	static

@@ -215,7 +215,7 @@ typedef struct
 }NVIC_RegDef_t;
 /*********** NVIC peripheral definitions ********************/
 #define NVIC			((NVIC_RegDef_t*    )NVIC_BASE_ADDRESS     )
-#define NVIC_STIR		((volatile uint32_t*)NVIC_STIR_BASE_ADDRESS)
+#define NVIC_STIR		*((volatile uint32_t*)NVIC_STIR_BASE_ADDRESS)
 /***********************************************************/
 
 /************** SCB Register definition structure**********/

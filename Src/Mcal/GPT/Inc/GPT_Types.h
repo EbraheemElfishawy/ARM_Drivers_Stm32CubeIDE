@@ -85,7 +85,7 @@ typedef struct
     uint32_t            GptChannelTickValueMax;/**<Maximum value in ticks, the timer channel is able to count. With the next tick, the timer rolls over to zero*/
     Gpt_ChannelModeType GptChannelMode;/**<Channel mode*/
     Gpt_NotifyType      GptNotificationFn;/**<Function pointer to callback function (for non-wakeup notification)*/
-    uint8_t             GptPrescale;/**<The input GPT clock will be divided by this value*/
+    uint16_t             GptPrescale;/**<The input GPT clock will be divided by this value*/
 }Gpt_ChannelConfigType;
 
 typedef struct 

@@ -142,10 +142,10 @@
  */
 const NVIC_Configs_t NVIC_Cfg[NVIC_ACTIVATED_INT_SIZE] ={
 	/* Interupt_Number    Group_Priority     SubGroup_Priority 		interruptState*/
- { SysTick			    ,2,                       0,                  INERRUPT_ENABLE},
- { TIM4_IRQ 		    ,1,                       1,                  INERRUPT_ENABLE}
+ { SysTick_IRQn			    ,0,                       0,                  INERRUPT_ENABLE},
+ { TIM2_IRQn 		        ,0,                       1,                  INERRUPT_ENABLE}
 };
-const uint32_t Group = (uint32_t)GROUP3;
+const uint32_t Group = (uint32_t)GROUP7;
 
 /**********************************************************************************************************************
  *  END OF FILE: NVIC_Lcfg.c

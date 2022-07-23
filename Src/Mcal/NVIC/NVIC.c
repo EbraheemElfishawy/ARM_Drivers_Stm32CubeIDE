@@ -77,21 +77,21 @@ void NVIC_Init(void)
 			//Core Peripheral
 			switch(InterruptNumber)
 			{
-				case MemManage :
+				case MemoryManagement_IRQn :
 					SCB->SCB_SHPR1 = ( Priority ) << (MEMMANAGE_BITSHIFT );
 					SCB_SHCSR->BIT.MEMFAULTENA=InterruptState;
 					break;
-				case BusFault  :
+				case BusFault_IRQn  :
 					SCB->SCB_SHPR1 = ( Priority ) << (BUSFAULT_BITSHIFT  );
 					SCB_SHCSR->BIT.BUSFAULTENA=InterruptState;
 					break;
-				case UsageFault:
+				case UsageFault_IRQn:
 					SCB->SCB_SHPR1 = ( Priority ) << (USAGEFAULT_BITSHIFT);
 					SCB_SHCSR->BIT.USGFAULTENA=InterruptState;
 					break;
-				case SVC       :SCB->SCB_SHPR2 = ( Priority ) << (SVC_BITSHIFT   );break;
-				case PendSV    :SCB->SCB_SHPR3 = ( Priority ) << (PENDSV_BITSHIFT);break;
-				case SysTick   :
+				case SVCall_IRQn :SCB->SCB_SHPR2 = ( Priority ) << (SVC_BITSHIFT   );break;
+				case PendSV_IRQn :SCB->SCB_SHPR3 = ( Priority ) << (PENDSV_BITSHIFT);break;
+				case SysTick_IRQn:
 					SCB->SCB_SHPR3 = ( Priority ) << (SYSTICK_BITSHIFT);
 					SYSTICK->STK_CTRL = InterruptState << SYSTICK_INT_EN_BITSHIFT;
 					break;
@@ -100,9 +100,10 @@ void NVIC_Init(void)
 		}
 		else if( InterruptNumber >= 0 )
 		{
-			NVIC->NVIC_IPR [ InterruptNumber/4  ] |=  Priority << ((8*(InterruptNumber%4))+4) ;
-			NVIC->NVIC_ISER[ InterruptNumber/31 ] &= ~(NVIC_ONE << (InterruptNumber%31));
-			NVIC->NVIC_ISER[ InterruptNumber/31 ] |= InterruptState << (InterruptNumber%31) ;
+			NVIC->NVIC_IPR [ InterruptNumber    ] &= ~0xF << (4) ;
+			NVIC->NVIC_IPR [ InterruptNumber    ]  =  (uint8_t)(Priority << (4) & (uint32_t)0xFFUL);
+			NVIC->NVIC_ISER[ InterruptNumber/32 ] &= ~(NVIC_ONE << (InterruptNumber%32));
+			NVIC->NVIC_ISER[ InterruptNumber/32 ] |= InterruptState << (InterruptNumber%32) ;
 		}
 	}
     

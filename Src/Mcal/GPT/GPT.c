@@ -112,7 +112,7 @@ void Gpt_Init(const Gpt_ConfigType *CfgPtr)
         else
         {
         UsedTimerRegSet->CR1 &=~(CR1_ARPE_MASK<<CR1_ARPE_BIT_ACCESS); 
-        UsedTimerRegSet->CR1 |= (ChannelMode<<CR1_ARPE_BIT_ACCESS);
+        UsedTimerRegSet->CR1 |= (1<<CR1_ARPE_BIT_ACCESS);
         UsedTimerRegSet->CR1 &=~(CR1_OPM_MASK<<CR1_OPM_BIT_ACCESS); 
         UsedTimerRegSet->CR1 |= (ChannelMode <<CR1_OPM_BIT_ACCESS);
         UsedTimerRegSet->PSC  = Prescale;
@@ -225,6 +225,10 @@ Gpt_ValueType Gpt_GetTimeRemaining	(Gpt_ChannelType Channel)
         {
            ReturnValue=(SYSTICK->STK_VAL);
         }
+        else
+        {
+        	ReturnValue= UsedTimerRegSet->CNT;
+        }
 
         return ReturnValue;
 }		
@@ -278,7 +282,8 @@ void Gpt_StartTimer(Gpt_ChannelType Channel,Gpt_ValueType Value )
         }
         else
         {
-        UsedTimerRegSet->CNT = Value;
+        UsedTimerRegSet->ARR = Value;
+        UsedTimerRegSet->CR1|=(1<<0);
         }
 
 }	
@@ -370,8 +375,10 @@ void Gpt_EnableNotification	(Gpt_ChannelType Channel)
         }
         else
         {
-        	UsedTimerRegSet->EGR &=~(EGR_TG_MASK<<EGR_TG_BIT_ACCESS);
-        	UsedTimerRegSet->EGR |= (EGR_TG_MASK<<EGR_TG_BIT_ACCESS);
+//        	UsedTimerRegSet->EGR &=~(EGR_TG_MASK<<EGR_TG_BIT_ACCESS);
+//        	UsedTimerRegSet->EGR |= (EGR_TG_MASK<<EGR_TG_BIT_ACCESS);
+        	UsedTimerRegSet->DIER&=~(DIER_TIE_MASK<<DIER_TIE_BIT_ACCESS);
+        	UsedTimerRegSet->DIER |= (DIER_TIE_MASK<<DIER_TIE_BIT_ACCESS);
         }
 }	
 /**

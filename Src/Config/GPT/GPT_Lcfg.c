@@ -50,7 +50,7 @@
 const Gpt_ChannelConfigType Gpt_ChannelesCfg[NUM_OF_ALL_TIMERS]={
 /*Channel ID                Channel Tick Frequency        Maximum value in ticks     Channel mode      callback function     GptPrescale  */
 {GPT_PREDEF_TIMER_1US_24BIT    ,0,                             SYSTICK_MAX,       GPT_CH_MODE_CONTINOUS,   NULL,                 1},
-{GPT_TIMER_CHANNEL_4           ,0,                             10000,                 0,                NULL,                 1}
+{GPT_TIMER_CHANNEL_2           ,0,                             1000,          GPT_CH_MODE_CONTINOUS,   NULL,                 65535}
 };
 const Gpt_ConfigType    Gpt_Configs={(Gpt_ChannelConfigType*)&Gpt_ChannelesCfg,NUM_OF_ALL_TIMERS};
 /**********************************************************************************************************************
