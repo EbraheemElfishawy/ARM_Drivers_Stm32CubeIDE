@@ -1,11 +1,11 @@
 /*!
 *********************************************************************************************************
-* @file     GPT_Lcfg.c
+* @file     LED.h
 * @author   Ebraheem El-Feshawy
 * @tester   Ebraheem El-Feshawy
 * @brief    
 * @version  V1.0
-* @date		Jul 15, 2022
+* @date		Jul 26, 2022
 *
 * <b>File History</b>\n
 * This section contains comments describing changes made to this file.\n
@@ -20,20 +20,22 @@
 *
 * @note :  
 */
+#ifndef HAL_LED_LED_H_
+#define HAL_LED_LED_H_
 
 /**********************************************************************************************************************
  * INCLUDES
  *********************************************************************************************************************/
-#include "../../Mcal/GPT/Inc/GPT_Types.h"
+#include "Std_Types.h"
+#include "Mcu_Hw.h"
+
+#include"../../Mcal/DIO/Inc/DIO.h"
 #include "../../Mcal/GPT/Inc/GPT.h"
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
 
-#define NUM_OF_ALL_TIMERS   3
 
-#define AHB_8   
-#define	AHB
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
  *********************************************************************************************************************/
@@ -42,34 +44,34 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
-
+typedef enum
+{
+	LED_0=Dio_CHANNEL_PA5,
+	LED_1,
+	LED_2,
+	LED_3,
+	LED_4,
+	LED_5,
+	LED_6,
+	LED_7,
+	LED_8,
+	LED_9,
+	LED_10
+}LED_LedIdType;
 
 /**********************************************************************************************************************
- *  GLOBAL VARIABLES
+ *  GLOBAL DATA PROTOTYPES
  *********************************************************************************************************************/
-const Gpt_ChannelConfigType Gpt_ChannelesCfg[NUM_OF_ALL_TIMERS]={
-/*Channel ID                Channel Tick Frequency        Maximum value in ticks     Channel mode      callback function     GptPrescale  */
-{GPT_PREDEF_TIMER_1US_24BIT    ,0,                             SYSTICK_MAX,       GPT_CH_MODE_CONTINOUS,   NULL,                 80},
-{GPT_TIMER_CHANNEL_1           ,0,                             1000,          GPT_CH_MODE_CONTINOUS,   NULL,                 80},
-{GPT_TIMER_CHANNEL_4           ,0,                             1000,          GPT_CH_MODE_CONTINOUS,   NULL,                 80},
-{GPT_TIMER_CHANNEL_2           ,0,                             1000,          GPT_CH_MODE_CONTINOUS,   NULL,                 80}
-};
-const Gpt_ConfigType    Gpt_Configs={(Gpt_ChannelConfigType*)&Gpt_ChannelesCfg,NUM_OF_ALL_TIMERS};
+
+ 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
-/**
- **********************************************************************************************************************
- *  Function Name
- *  @brief       
- *  @usage       
- *  @param        
- *  @param       
- *  @return      
- *********************************************************************************************************************/
+void LED_Init(void);
+void LED_Blink(LED_LedIdType LED_Id,uint32_t ON_Time,uint32_t OFF_Time);
 
 
-
+#endif /* HAL_LED_LED_H_ */
 /**********************************************************************************************************************
- *  END OF FILE: GPT_Lcfg.c.h
+ *  END OF FILE: LED.h.h
  *********************************************************************************************************************/

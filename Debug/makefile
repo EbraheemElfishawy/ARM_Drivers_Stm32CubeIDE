@@ -14,6 +14,7 @@ RM := rm -rf
 -include Src/Mcal/NVIC/subdir.mk
 -include Src/Mcal/GPT/subdir.mk
 -include Src/Mcal/DIO/subdir.mk
+-include Src/Hal/LED/subdir.mk
 -include Src/Config/PORT/subdir.mk
 -include Src/Config/NVIC_Cfg/subdir.mk
 -include Src/Config/GPT/subdir.mk

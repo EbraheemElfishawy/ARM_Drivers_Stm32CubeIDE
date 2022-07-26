@@ -3,6 +3,7 @@
 "./Src/Config/GPT/GPT_Lcfg.o"
 "./Src/Config/NVIC_Cfg/NVIC_Lcfg.o"
 "./Src/Config/PORT/PORT_Lcfg.o"
+"./Src/Hal/LED/LED.o"
 "./Src/Mcal/DIO/DIO.o"
 "./Src/Mcal/GPT/GPT.o"
 "./Src/Mcal/NVIC/NVIC.o"

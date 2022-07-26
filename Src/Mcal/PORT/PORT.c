@@ -64,6 +64,8 @@ void Port_Init(Port_ConfigType* ConfigArrayOfPtrs)
     uint8_t PinPort;
     uint8_t PinNumber; 
     GPIO_RegDef_t* UsedGpioPort_Ptr;
+
+
     for(uint8_t i=0; i<NUM_OF_USED_PINS;i++)
     {
         PinId            =ConfigArrayOfPtrs[i].pinId;

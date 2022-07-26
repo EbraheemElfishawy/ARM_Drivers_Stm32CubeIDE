@@ -1,11 +1,11 @@
 /*!
 *********************************************************************************************************
-* @file     GPT_Lcfg.c
+* @file     LED.c
 * @author   Ebraheem El-Feshawy
 * @tester   Ebraheem El-Feshawy
 * @brief    
 * @version  V1.0
-* @date		Jul 15, 2022
+* @date		Jul 26, 2022
 *
 * <b>File History</b>\n
 * This section contains comments describing changes made to this file.\n
@@ -24,16 +24,12 @@
 /**********************************************************************************************************************
  * INCLUDES
  *********************************************************************************************************************/
-#include "../../Mcal/GPT/Inc/GPT_Types.h"
-#include "../../Mcal/GPT/Inc/GPT.h"
+#include "LED.h"
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
 
-#define NUM_OF_ALL_TIMERS   3
 
-#define AHB_8   
-#define	AHB
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
  *********************************************************************************************************************/
@@ -45,31 +41,29 @@
 
 
 /**********************************************************************************************************************
- *  GLOBAL VARIABLES
+ *  GLOBAL DATA PROTOTYPES
  *********************************************************************************************************************/
-const Gpt_ChannelConfigType Gpt_ChannelesCfg[NUM_OF_ALL_TIMERS]={
-/*Channel ID                Channel Tick Frequency        Maximum value in ticks     Channel mode      callback function     GptPrescale  */
-{GPT_PREDEF_TIMER_1US_24BIT    ,0,                             SYSTICK_MAX,       GPT_CH_MODE_CONTINOUS,   NULL,                 80},
-{GPT_TIMER_CHANNEL_1           ,0,                             1000,          GPT_CH_MODE_CONTINOUS,   NULL,                 80},
-{GPT_TIMER_CHANNEL_4           ,0,                             1000,          GPT_CH_MODE_CONTINOUS,   NULL,                 80},
-{GPT_TIMER_CHANNEL_2           ,0,                             1000,          GPT_CH_MODE_CONTINOUS,   NULL,                 80}
-};
-const Gpt_ConfigType    Gpt_Configs={(Gpt_ChannelConfigType*)&Gpt_ChannelesCfg,NUM_OF_ALL_TIMERS};
+
+ 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
-/**
- **********************************************************************************************************************
- *  Function Name
- *  @brief       
- *  @usage       
- *  @param        
- *  @param       
- *  @return      
- *********************************************************************************************************************/
+void LED_Init(void)
+{
 
 
+	Gpt_EnableNotification(GPT_TIMER_CHANNEL_1);
+	Gpt_StartTimer(GPT_TIMER_CHANNEL_1, 0xFFFFFFFE);
+
+}
+void LED_Blink(LED_LedIdType LED_Id,uint32_t ON_Time,uint32_t OFF_Time)
+{
+	Dio_WriteChannel(LED_Id, Dio_HIGH_LEVEL);
+	delay_ms(ON_Time);
+	Dio_WriteChannel(LED_Id, Dio_LOW_LEVEL);
+	delay_ms(OFF_Time);
+}
 
 /**********************************************************************************************************************
- *  END OF FILE: GPT_Lcfg.c.h
+ *  END OF FILE: LED.c.h
  *********************************************************************************************************************/

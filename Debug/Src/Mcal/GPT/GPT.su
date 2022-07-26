@@ -6,3 +6,4 @@ GPT.c:252:6:Gpt_StartTimer	24	static
 GPT.c:307:6:Gpt_StopTimer	24	static
 GPT.c:350:6:Gpt_EnableNotification	24	static
 GPT.c:399:6:Gpt_DisableNotification	24	static
+GPT.c:430:6:delay_ms	24	static

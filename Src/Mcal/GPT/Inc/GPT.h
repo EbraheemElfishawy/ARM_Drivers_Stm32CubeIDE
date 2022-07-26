@@ -218,6 +218,7 @@ void Gpt_DisableNotification(Gpt_ChannelType Channel);
 *  Description         : Sets the operation mode of the GPT.
 ***********************************************************************************************************************
 */
+void delay_ms(uint32_t delay);
 #endif /* MCAL_GPT_INC_GPT_H_ */
 /**********************************************************************************************************************
  *  END OF FILE: GPT.h.h

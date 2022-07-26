@@ -427,7 +427,11 @@ void Gpt_DisableNotification(Gpt_ChannelType Channel)
         }
 }	
 	
-	
+void delay_ms(uint32_t delay)
+{
+	uint32_t Current = Gpt_GetTimeRemaining(GPT_TIMER_CHANNEL_1);
+	while((  Gpt_GetTimeRemaining(GPT_TIMER_CHANNEL_1) -Current ) < (delay*16000) );
+}
 
 /**********************************************************************************************************************
  *  END OF FILE: GPT.c.h

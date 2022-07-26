@@ -118,6 +118,7 @@ void NVIC_Init(void)
 			NVIC->NVIC_ISER[ InterruptNumber/8 ] |= InterruptState << (InterruptNumber%8) ;
 		}
 	}
+	__asm volatile ("SVC #0x32");
 }
 
 /**********************************************************************************************************************

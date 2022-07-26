@@ -25,6 +25,7 @@ Src/Config/DIO \
 Src/Config/GPT \
 Src/Config/NVIC_Cfg \
 Src/Config/PORT \
+Src/Hal/LED \
 Src/Mcal/DIO \
 Src/Mcal/GPT \
 Src/Mcal/NVIC \

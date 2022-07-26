@@ -4,40 +4,56 @@ extern Port_ConfigType AllPinConfigs[NUM_OF_USED_PINS];
 extern const Gpt_ConfigType    Gpt_Configs;
 uint32_t Counter=0;
 volatile uint16_t i=0;
-void delay_ms(uint32_t delay)
+
+#define EnablePrivilegedMode()
+void ReadCONTROL(void)
 {
-	uint32_t Current = Gpt_GetTimeRemaining(GPT_TIMER_CHANNEL_2);
-	while((  Gpt_GetTimeRemaining(GPT_TIMER_CHANNEL_2) -Current ) < (delay*16000) );
+	uint32_t ControlReg;
+	__asm volatile ("MRS %0, CONTROL":"=r"(ControlReg):);
 }
+
 int main()
 {
+	 RCC->RCC_AHB1ENR |=(1<<0);
+	    RCC->RCC_APB1ENR |=(1<<0);/*TIM2EN*/
+	    RCC->RCC_APB2ENR |=(1<<0);/*TIM1EN*/
     NVIC_Init();
-    RCC->RCC_AHB1ENR |=(1<<0);/*GPIOAEN*/
-    RCC->RCC_APB1ENR |=(1<<0);/*TIM2EN*/
-//    RCC->RCC_APB1ENR |=(1<<2);/*TIM4EN*/
-//    RCC->RCC_APB1ENR |=(1<<2);/*TIM4EN*/
-//    RCC->RCC_APB2ENR |=(1<<3);/*TIM5EN*/
-//    RCC->RCC_APB2ENR |=(1<<5);/*TIM7EN*/
     Port_Init(&AllPinConfigs);
     Gpt_Init(&Gpt_Configs);
-    Dio_ReadChannel(Dio_CHANNEL_PA5);
-	Gpt_EnableNotification(GPT_TIMER_CHANNEL_15);
-	Gpt_EnableNotification(GPT_TIMER_CHANNEL_2);
-    //Gpt_StartTimer(GPT_TIMER_CHANNEL_4, 1000000);
-	Gpt_StartTimer(GPT_TIMER_CHANNEL_2, 100);
+
+    LED_Init();
+//    __asm volatile ("SVC #0x32");
+
     while(1)
     {
-    	Counter=Gpt_GetTimeRemaining(GPT_TIMER_CHANNEL_2);
-    		Dio_FlipChannel(Dio_CHANNEL_PA5);
-    		delay_ms(500);
-    		i++;
+    	LED_Blink(LED_0, 1000, 500);
+    	Counter=Gpt_GetTimeRemaining(GPT_TIMER_CHANNEL_1);
     }
-} 
-void SysTick_Handler(void)
-{
-	//Dio_FlipChannel(Dio_CHANNEL_PA5);
 }
-void TIM4_IRQHandler(void)
+
+void SVC_Handler(void)
+{
+	__asm volatile ("MOV R10,#80");
+	__asm volatile ("MSR BASEPRI,R10");
+}
+void SysTick_Handler(void)
 {
 	Dio_FlipChannel(Dio_CHANNEL_PA5);
 }
+void TIM1_CC_IRQHandler(void)
+{
+	Dio_FlipChannel(Dio_CHANNEL_PA5);
+}
+void TIM1_BRK_TIM9_IRQHandler (void)
+{
+	Dio_FlipChannel(Dio_CHANNEL_PA5);
+}
+void TIM1_UP_TIM10_IRQHandler(void)
+{
+	Dio_FlipChannel(Dio_CHANNEL_PA5);
+}
+void TIM1_TRG_COM_TIM11_IRQHandler(void)
+{
+	Dio_FlipChannel(Dio_CHANNEL_PA5);
+}
+
