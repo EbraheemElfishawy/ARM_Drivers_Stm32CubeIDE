@@ -282,7 +282,7 @@ void Gpt_StartTimer(Gpt_ChannelType Channel,Gpt_ValueType Value )
         }
         else
         {
-        UsedTimerRegSet->ARR = Value;
+       // UsedTimerRegSet->ARR = Value;
         UsedTimerRegSet->CR1|=(1<<0);
         }
 

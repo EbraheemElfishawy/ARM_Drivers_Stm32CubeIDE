@@ -1,1 +1,1 @@
-NVIC.c:53:6:NVIC_Init	16	static,ignoring_inline_asm
+NVIC.c:53:6:NVIC_Init	16	static

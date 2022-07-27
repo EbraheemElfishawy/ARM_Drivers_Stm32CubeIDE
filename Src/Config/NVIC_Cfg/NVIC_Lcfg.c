@@ -143,10 +143,10 @@
 const NVIC_Configs_t NVIC_Cfg[NVIC_ACTIVATED_INT_SIZE] ={
 	/* Interupt_Number    Group_Priority     SubGroup_Priority 		interruptState*/
  { SysTick_IRQn			    ,0,                       0,                  INERRUPT_ENABLE},
- { TIM1_BRK_TIM9_IRQn		,0,                       1,                  INERRUPT_ENABLE},
+ { TIM2_IRQn				,0,                       1,                  INERRUPT_ENABLE},
  { TIM1_UP_TIM10_IRQn		,0,                       2,                  INERRUPT_ENABLE},
  { TIM1_TRG_COM_TIM11_IRQn	,0,                       3,                  INERRUPT_ENABLE},
- { TIM1_CC_IRQn			    ,0,                       4,                  INERRUPT_ENABLE}
+ { TIM1_CC_IRQn			    ,0,                       34,                  INERRUPT_ENABLE}
 };
 
 const uint32_t Group = (uint32_t)GROUP7;

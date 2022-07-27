@@ -98,27 +98,17 @@ void NVIC_Init(void)
 				default:break;
 			}
 		}
+		/*TODO : Enable\Disable based on user configurations in NVIC_ENx and SCB_Sys Registers */
 		else if( InterruptNumber >= 0 )
 		{
 			NVIC->NVIC_IPR [ InterruptNumber    ] &= ~0xF << (4) ;
-			NVIC->NVIC_IPR [ InterruptNumber    ]  =  (uint8_t)(Priority << (4) & (uint32_t)0xFFUL);
+			NVIC->NVIC_IPR [ InterruptNumber    ]  =  (uint8_t)(Priority << (4) );
 			NVIC->NVIC_ISER[ InterruptNumber/32 ] &= ~(NVIC_ONE << (InterruptNumber%32));
 			NVIC->NVIC_ISER[ InterruptNumber/32 ] |= InterruptState << (InterruptNumber%32) ;
 		}
 	}
     
-	/*TODO : Enable\Disable based on user configurations in NVIC_ENx and SCB_Sys Registers */
-	for(NVIC_Cfg_Counter=0;NVIC_Cfg_Counter<NVIC_ACTIVATED_INT_SIZE;NVIC_Cfg_Counter++)
-	{	
-		InterruptNumber= NVIC_Cfg[NVIC_Cfg_Counter].interruptNumber;
-		
-		if(InterruptNumber>=0)
-		{
-			NVIC->NVIC_ISER[ InterruptNumber/8 ] &= ~(NVIC_ONE << (InterruptNumber%8));
-			NVIC->NVIC_ISER[ InterruptNumber/8 ] |= InterruptState << (InterruptNumber%8) ;
-		}
-	}
-	__asm volatile ("SVC #0x32");
+
 }
 
 /**********************************************************************************************************************
