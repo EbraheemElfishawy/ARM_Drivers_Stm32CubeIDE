@@ -29,7 +29,7 @@ int main()
 
     while(1)
     {
-    	//LED_Blink(LED_0, 1000, 500);
+    	LED_Blink(LED_0, 1000, 500);
     	Counter1=Gpt_GetTimeRemaining(GPT_TIMER_CHANNEL_1);
     	Counter2=Gpt_GetTimeRemaining(GPT_TIMER_CHANNEL_2);
     }

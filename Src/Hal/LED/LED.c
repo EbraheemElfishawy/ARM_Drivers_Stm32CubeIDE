@@ -52,8 +52,8 @@ void LED_Init(void)
 {
 
 
-	Gpt_EnableNotification(GPT_TIMER_CHANNEL_1);
-	Gpt_StartTimer(GPT_TIMER_CHANNEL_1, 0xFFFFFFFE);
+	Gpt_EnableNotification(GPT_TIMER_CHANNEL_2);
+	Gpt_StartTimer(GPT_TIMER_CHANNEL_2, 0xFFFFFFFE);
 
 }
 void LED_Blink(LED_LedIdType LED_Id,uint32_t ON_Time,uint32_t OFF_Time)

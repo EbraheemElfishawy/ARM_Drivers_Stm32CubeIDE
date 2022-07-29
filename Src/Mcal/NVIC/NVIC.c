@@ -109,6 +109,16 @@ void NVIC_Init(void)
 	}
     
 
+//	for(NVIC_Cfg_Counter=0;NVIC_Cfg_Counter<NVIC_ACTIVATED_INT_SIZE;NVIC_Cfg_Counter++)
+//	{
+//		InterruptNumber= NVIC_Cfg[NVIC_Cfg_Counter].interruptNumber;
+//
+//		if(InterruptNumber>=0)
+//		{
+//			NVIC->NVIC_ISER[ InterruptNumber/8 ] &= ~(NVIC_ONE << (InterruptNumber%8));
+//			NVIC->NVIC_ISER[ InterruptNumber/8 ] |= InterruptState << (InterruptNumber%8) ;
+//		}
+//	}
 }
 
 /**********************************************************************************************************************

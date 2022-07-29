@@ -5,45 +5,45 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   000001c4  08000000  08000000  00010000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         00000b7c  080001c4  080001c4  000101c4  2**2
+  1 .text         00000bfc  080001c4  080001c4  000101c4  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000068  08000d40  08000d40  00010d40  2**2
+  2 .rodata       00000068  08000dc0  08000dc0  00010dc0  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  08000da8  08000da8  00020024  2**0
+  3 .ARM.extab    00000000  08000e28  08000e28  00020024  2**0
                   CONTENTS
-  4 .ARM          00000000  08000da8  08000da8  00020024  2**0
+  4 .ARM          00000000  08000e28  08000e28  00020024  2**0
                   CONTENTS
-  5 .preinit_array 00000000  08000da8  08000da8  00020024  2**0
+  5 .preinit_array 00000000  08000e28  08000e28  00020024  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08000da8  08000da8  00010da8  2**2
+  6 .init_array   00000004  08000e28  08000e28  00010e28  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  08000dac  08000dac  00010dac  2**2
+  7 .fini_array   00000004  08000e2c  08000e2c  00010e2c  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         00000024  20000000  08000db0  00020000  2**2
+  8 .data         00000024  20000000  08000e30  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000024  20000024  08000dd4  00020024  2**2
+  9 .bss          00000024  20000024  08000e54  00020024  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  20000048  08000dd4  00020048  2**0
+ 10 ._user_heap_stack 00000600  20000048  08000e54  00020048  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00020024  2**0
                   CONTENTS, READONLY
- 12 .debug_info   000039ae  00000000  00000000  00020054  2**0
+ 12 .debug_info   000039ff  00000000  00000000  00020054  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00000a09  00000000  00000000  00023a02  2**0
+ 13 .debug_abbrev 00000a09  00000000  00000000  00023a53  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 000001d8  00000000  00000000  00024410  2**3
+ 14 .debug_aranges 000001d8  00000000  00000000  00024460  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 00000128  00000000  00000000  000245e8  2**3
+ 15 .debug_ranges 00000128  00000000  00000000  00024638  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  000019e6  00000000  00000000  00024710  2**0
+ 16 .debug_macro  000019e6  00000000  00000000  00024760  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00002fe2  00000000  00000000  000260f6  2**0
+ 17 .debug_line   00002feb  00000000  00000000  00026146  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000070ab  00000000  00000000  000290d8  2**0
+ 18 .debug_str    000070ab  00000000  00000000  00029131  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  00030183  2**0
+ 19 .comment      00000053  00000000  00000000  000301dc  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000044c  00000000  00000000  000301d8  2**2
+ 20 .debug_frame  0000044c  00000000  00000000  00030230  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -62,7 +62,7 @@ Disassembly of section .text:
  80001da:	bd10      	pop	{r4, pc}
  80001dc:	20000024 	.word	0x20000024
  80001e0:	00000000 	.word	0x00000000
- 80001e4:	08000d28 	.word	0x08000d28
+ 80001e4:	08000da8 	.word	0x08000da8
 
 080001e8 <frame_dummy>:
  80001e8:	b508      	push	{r3, lr}
@@ -74,7 +74,7 @@ Disassembly of section .text:
  80001f6:	bd08      	pop	{r3, pc}
  80001f8:	00000000 	.word	0x00000000
  80001fc:	20000028 	.word	0x20000028
- 8000200:	08000d28 	.word	0x08000d28
+ 8000200:	08000da8 	.word	0x08000da8
 
 08000204 <main>:
 	uint32_t ControlReg;
@@ -88,1650 +88,1724 @@ int main()
 	__asm volatile ("SVC #0x32");
  8000208:	df32      	svc	50	; 0x32
 	RCC->RCC_AHB1ENR |=(1<<0);
- 800020a:	4b18      	ldr	r3, [pc, #96]	; (800026c <main+0x68>)
+ 800020a:	4b1c      	ldr	r3, [pc, #112]	; (800027c <main+0x78>)
  800020c:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 800020e:	4a17      	ldr	r2, [pc, #92]	; (800026c <main+0x68>)
+ 800020e:	4a1b      	ldr	r2, [pc, #108]	; (800027c <main+0x78>)
  8000210:	f043 0301 	orr.w	r3, r3, #1
  8000214:	6313      	str	r3, [r2, #48]	; 0x30
 	RCC->RCC_APB1ENR |=(1<<0);/*TIM2EN*/
- 8000216:	4b15      	ldr	r3, [pc, #84]	; (800026c <main+0x68>)
+ 8000216:	4b19      	ldr	r3, [pc, #100]	; (800027c <main+0x78>)
  8000218:	6c1b      	ldr	r3, [r3, #64]	; 0x40
- 800021a:	4a14      	ldr	r2, [pc, #80]	; (800026c <main+0x68>)
+ 800021a:	4a18      	ldr	r2, [pc, #96]	; (800027c <main+0x78>)
  800021c:	f043 0301 	orr.w	r3, r3, #1
  8000220:	6413      	str	r3, [r2, #64]	; 0x40
 	RCC->RCC_APB2ENR |=(1<<0);/*TIM1EN*/
- 8000222:	4b12      	ldr	r3, [pc, #72]	; (800026c <main+0x68>)
+ 8000222:	4b16      	ldr	r3, [pc, #88]	; (800027c <main+0x78>)
  8000224:	6c5b      	ldr	r3, [r3, #68]	; 0x44
- 8000226:	4a11      	ldr	r2, [pc, #68]	; (800026c <main+0x68>)
+ 8000226:	4a15      	ldr	r2, [pc, #84]	; (800027c <main+0x78>)
  8000228:	f043 0301 	orr.w	r3, r3, #1
  800022c:	6453      	str	r3, [r2, #68]	; 0x44
     NVIC_Init();
- 800022e:	f000 fb6d 	bl	800090c <NVIC_Init>
+ 800022e:	f000 fbad 	bl	800098c <NVIC_Init>
     Port_Init(&AllPinConfigs);
- 8000232:	480f      	ldr	r0, [pc, #60]	; (8000270 <main+0x6c>)
- 8000234:	f000 fc6e 	bl	8000b14 <Port_Init>
+ 8000232:	4813      	ldr	r0, [pc, #76]	; (8000280 <main+0x7c>)
+ 8000234:	f000 fcae 	bl	8000b94 <Port_Init>
     Gpt_Init(&Gpt_Configs);
- 8000238:	480e      	ldr	r0, [pc, #56]	; (8000274 <main+0x70>)
- 800023a:	f000 f8bf 	bl	80003bc <Gpt_Init>
+ 8000238:	4812      	ldr	r0, [pc, #72]	; (8000284 <main+0x80>)
+ 800023a:	f000 f8e3 	bl	8000404 <Gpt_Init>
     Gpt_EnableNotification(GPT_TIMER_CHANNEL_2);
  800023e:	2002      	movs	r0, #2
- 8000240:	f000 fad6 	bl	80007f0 <Gpt_EnableNotification>
+ 8000240:	f000 fafa 	bl	8000838 <Gpt_EnableNotification>
     Gpt_StartTimer(GPT_TIMER_CHANNEL_2, 0xFFFE);
  8000244:	f64f 71fe 	movw	r1, #65534	; 0xfffe
  8000248:	2002      	movs	r0, #2
- 800024a:	f000 fa41 	bl	80006d0 <Gpt_StartTimer>
+ 800024a:	f000 fa65 	bl	8000718 <Gpt_StartTimer>
     LED_Init();
- 800024e:	f000 f84c 	bl	80002ea <LED_Init>
+ 800024e:	f000 f854 	bl	80002fa <LED_Init>
 
 
     while(1)
     {
-    	//LED_Blink(LED_0, 1000, 500);
+    	LED_Blink(LED_0, 1000, 500);
+ 8000252:	f44f 72fa 	mov.w	r2, #500	; 0x1f4
+ 8000256:	f44f 717a 	mov.w	r1, #1000	; 0x3e8
+ 800025a:	2005      	movs	r0, #5
+ 800025c:	f000 f859 	bl	8000312 <LED_Blink>
     	Counter1=Gpt_GetTimeRemaining(GPT_TIMER_CHANNEL_1);
- 8000252:	2001      	movs	r0, #1
- 8000254:	f000 f9b6 	bl	80005c4 <Gpt_GetTimeRemaining>
- 8000258:	4603      	mov	r3, r0
- 800025a:	4a07      	ldr	r2, [pc, #28]	; (8000278 <main+0x74>)
- 800025c:	6013      	str	r3, [r2, #0]
+ 8000260:	2001      	movs	r0, #1
+ 8000262:	f000 f9d3 	bl	800060c <Gpt_GetTimeRemaining>
+ 8000266:	4603      	mov	r3, r0
+ 8000268:	4a07      	ldr	r2, [pc, #28]	; (8000288 <main+0x84>)
+ 800026a:	6013      	str	r3, [r2, #0]
     	Counter2=Gpt_GetTimeRemaining(GPT_TIMER_CHANNEL_2);
- 800025e:	2002      	movs	r0, #2
- 8000260:	f000 f9b0 	bl	80005c4 <Gpt_GetTimeRemaining>
- 8000264:	4603      	mov	r3, r0
- 8000266:	4a05      	ldr	r2, [pc, #20]	; (800027c <main+0x78>)
- 8000268:	6013      	str	r3, [r2, #0]
-    	Counter1=Gpt_GetTimeRemaining(GPT_TIMER_CHANNEL_1);
- 800026a:	e7f2      	b.n	8000252 <main+0x4e>
- 800026c:	40023800 	.word	0x40023800
- 8000270:	20000000 	.word	0x20000000
- 8000274:	08000d88 	.word	0x08000d88
- 8000278:	20000040 	.word	0x20000040
- 800027c:	20000044 	.word	0x20000044
+ 800026c:	2002      	movs	r0, #2
+ 800026e:	f000 f9cd 	bl	800060c <Gpt_GetTimeRemaining>
+ 8000272:	4603      	mov	r3, r0
+ 8000274:	4a05      	ldr	r2, [pc, #20]	; (800028c <main+0x88>)
+ 8000276:	6013      	str	r3, [r2, #0]
+    	LED_Blink(LED_0, 1000, 500);
+ 8000278:	e7eb      	b.n	8000252 <main+0x4e>
+ 800027a:	bf00      	nop
+ 800027c:	40023800 	.word	0x40023800
+ 8000280:	20000000 	.word	0x20000000
+ 8000284:	08000e08 	.word	0x08000e08
+ 8000288:	20000040 	.word	0x20000040
+ 800028c:	20000044 	.word	0x20000044
 
-08000280 <SVC_Handler>:
+08000290 <SVC_Handler>:
     }
 }
 
 void SVC_Handler(void)
 {
- 8000280:	b480      	push	{r7}
- 8000282:	af00      	add	r7, sp, #0
+ 8000290:	b480      	push	{r7}
+ 8000292:	af00      	add	r7, sp, #0
 	__asm volatile ("MOV R10,#80");
- 8000284:	f04f 0a50 	mov.w	sl, #80	; 0x50
+ 8000294:	f04f 0a50 	mov.w	sl, #80	; 0x50
 	__asm volatile ("MSR BASEPRI,R10");
- 8000288:	f38a 8811 	msr	BASEPRI, sl
+ 8000298:	f38a 8811 	msr	BASEPRI, sl
 }
- 800028c:	bf00      	nop
- 800028e:	46bd      	mov	sp, r7
- 8000290:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000294:	4770      	bx	lr
+ 800029c:	bf00      	nop
+ 800029e:	46bd      	mov	sp, r7
+ 80002a0:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80002a4:	4770      	bx	lr
 
-08000296 <SysTick_Handler>:
+080002a6 <SysTick_Handler>:
 void SysTick_Handler(void)
 {
- 8000296:	b580      	push	{r7, lr}
- 8000298:	af00      	add	r7, sp, #0
+ 80002a6:	b580      	push	{r7, lr}
+ 80002a8:	af00      	add	r7, sp, #0
 	Dio_FlipChannel(Dio_CHANNEL_PA5);
- 800029a:	2005      	movs	r0, #5
- 800029c:	f000 f85a 	bl	8000354 <Dio_FlipChannel>
+ 80002aa:	2005      	movs	r0, #5
+ 80002ac:	f000 f875 	bl	800039a <Dio_FlipChannel>
 }
- 80002a0:	bf00      	nop
- 80002a2:	bd80      	pop	{r7, pc}
+ 80002b0:	bf00      	nop
+ 80002b2:	bd80      	pop	{r7, pc}
 
-080002a4 <TIM1_CC_IRQHandler>:
+080002b4 <TIM1_CC_IRQHandler>:
 void TIM1_CC_IRQHandler(void)
 {
- 80002a4:	b580      	push	{r7, lr}
- 80002a6:	af00      	add	r7, sp, #0
+ 80002b4:	b580      	push	{r7, lr}
+ 80002b6:	af00      	add	r7, sp, #0
 	Dio_FlipChannel(Dio_CHANNEL_PA5);
- 80002a8:	2005      	movs	r0, #5
- 80002aa:	f000 f853 	bl	8000354 <Dio_FlipChannel>
+ 80002b8:	2005      	movs	r0, #5
+ 80002ba:	f000 f86e 	bl	800039a <Dio_FlipChannel>
 }
- 80002ae:	bf00      	nop
- 80002b0:	bd80      	pop	{r7, pc}
+ 80002be:	bf00      	nop
+ 80002c0:	bd80      	pop	{r7, pc}
 
-080002b2 <TIM1_BRK_TIM9_IRQHandler>:
+080002c2 <TIM1_BRK_TIM9_IRQHandler>:
 void TIM1_BRK_TIM9_IRQHandler (void)
 {
- 80002b2:	b580      	push	{r7, lr}
- 80002b4:	af00      	add	r7, sp, #0
+ 80002c2:	b580      	push	{r7, lr}
+ 80002c4:	af00      	add	r7, sp, #0
 	Dio_FlipChannel(Dio_CHANNEL_PA5);
- 80002b6:	2005      	movs	r0, #5
- 80002b8:	f000 f84c 	bl	8000354 <Dio_FlipChannel>
+ 80002c6:	2005      	movs	r0, #5
+ 80002c8:	f000 f867 	bl	800039a <Dio_FlipChannel>
 }
- 80002bc:	bf00      	nop
- 80002be:	bd80      	pop	{r7, pc}
+ 80002cc:	bf00      	nop
+ 80002ce:	bd80      	pop	{r7, pc}
 
-080002c0 <TIM1_UP_TIM10_IRQHandler>:
+080002d0 <TIM1_UP_TIM10_IRQHandler>:
 void TIM1_UP_TIM10_IRQHandler(void)
 {
- 80002c0:	b580      	push	{r7, lr}
- 80002c2:	af00      	add	r7, sp, #0
+ 80002d0:	b580      	push	{r7, lr}
+ 80002d2:	af00      	add	r7, sp, #0
 	Dio_FlipChannel(Dio_CHANNEL_PA5);
- 80002c4:	2005      	movs	r0, #5
- 80002c6:	f000 f845 	bl	8000354 <Dio_FlipChannel>
+ 80002d4:	2005      	movs	r0, #5
+ 80002d6:	f000 f860 	bl	800039a <Dio_FlipChannel>
 }
- 80002ca:	bf00      	nop
- 80002cc:	bd80      	pop	{r7, pc}
+ 80002da:	bf00      	nop
+ 80002dc:	bd80      	pop	{r7, pc}
 
-080002ce <TIM1_TRG_COM_TIM11_IRQHandler>:
+080002de <TIM1_TRG_COM_TIM11_IRQHandler>:
 void TIM1_TRG_COM_TIM11_IRQHandler(void)
 {
- 80002ce:	b580      	push	{r7, lr}
- 80002d0:	af00      	add	r7, sp, #0
+ 80002de:	b580      	push	{r7, lr}
+ 80002e0:	af00      	add	r7, sp, #0
 	Dio_FlipChannel(Dio_CHANNEL_PA5);
- 80002d2:	2005      	movs	r0, #5
- 80002d4:	f000 f83e 	bl	8000354 <Dio_FlipChannel>
+ 80002e2:	2005      	movs	r0, #5
+ 80002e4:	f000 f859 	bl	800039a <Dio_FlipChannel>
 }
- 80002d8:	bf00      	nop
- 80002da:	bd80      	pop	{r7, pc}
+ 80002e8:	bf00      	nop
+ 80002ea:	bd80      	pop	{r7, pc}
 
-080002dc <TIM2_IRQHandler>:
+080002ec <TIM2_IRQHandler>:
 void TIM2_IRQHandler(void)
 {
- 80002dc:	b580      	push	{r7, lr}
- 80002de:	af00      	add	r7, sp, #0
+ 80002ec:	b580      	push	{r7, lr}
+ 80002ee:	af00      	add	r7, sp, #0
 	Dio_FlipChannel(Dio_CHANNEL_PA5);
- 80002e0:	2005      	movs	r0, #5
- 80002e2:	f000 f837 	bl	8000354 <Dio_FlipChannel>
+ 80002f0:	2005      	movs	r0, #5
+ 80002f2:	f000 f852 	bl	800039a <Dio_FlipChannel>
 }
- 80002e6:	bf00      	nop
- 80002e8:	bd80      	pop	{r7, pc}
+ 80002f6:	bf00      	nop
+ 80002f8:	bd80      	pop	{r7, pc}
 
-080002ea <LED_Init>:
+080002fa <LED_Init>:
  
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
 void LED_Init(void)
 {
- 80002ea:	b580      	push	{r7, lr}
- 80002ec:	af00      	add	r7, sp, #0
+ 80002fa:	b580      	push	{r7, lr}
+ 80002fc:	af00      	add	r7, sp, #0
 
 
-	Gpt_EnableNotification(GPT_TIMER_CHANNEL_1);
- 80002ee:	2001      	movs	r0, #1
- 80002f0:	f000 fa7e 	bl	80007f0 <Gpt_EnableNotification>
-	Gpt_StartTimer(GPT_TIMER_CHANNEL_1, 0xFFFFFFFE);
- 80002f4:	f06f 0101 	mvn.w	r1, #1
- 80002f8:	2001      	movs	r0, #1
- 80002fa:	f000 f9e9 	bl	80006d0 <Gpt_StartTimer>
+	Gpt_EnableNotification(GPT_TIMER_CHANNEL_2);
+ 80002fe:	2002      	movs	r0, #2
+ 8000300:	f000 fa9a 	bl	8000838 <Gpt_EnableNotification>
+	Gpt_StartTimer(GPT_TIMER_CHANNEL_2, 0xFFFFFFFE);
+ 8000304:	f06f 0101 	mvn.w	r1, #1
+ 8000308:	2002      	movs	r0, #2
+ 800030a:	f000 fa05 	bl	8000718 <Gpt_StartTimer>
 
 }
- 80002fe:	bf00      	nop
- 8000300:	bd80      	pop	{r7, pc}
+ 800030e:	bf00      	nop
+ 8000310:	bd80      	pop	{r7, pc}
 
-08000302 <Dio_WriteChannel>:
+08000312 <LED_Blink>:
+void LED_Blink(LED_LedIdType LED_Id,uint32_t ON_Time,uint32_t OFF_Time)
+{
+ 8000312:	b580      	push	{r7, lr}
+ 8000314:	b084      	sub	sp, #16
+ 8000316:	af00      	add	r7, sp, #0
+ 8000318:	4603      	mov	r3, r0
+ 800031a:	60b9      	str	r1, [r7, #8]
+ 800031c:	607a      	str	r2, [r7, #4]
+ 800031e:	73fb      	strb	r3, [r7, #15]
+	Dio_WriteChannel(LED_Id, Dio_HIGH_LEVEL);
+ 8000320:	7bfb      	ldrb	r3, [r7, #15]
+ 8000322:	2100      	movs	r1, #0
+ 8000324:	4618      	mov	r0, r3
+ 8000326:	f000 f80f 	bl	8000348 <Dio_WriteChannel>
+	delay_ms(ON_Time);
+ 800032a:	68b8      	ldr	r0, [r7, #8]
+ 800032c:	f000 fb12 	bl	8000954 <delay_ms>
+	Dio_WriteChannel(LED_Id, Dio_LOW_LEVEL);
+ 8000330:	7bfb      	ldrb	r3, [r7, #15]
+ 8000332:	2101      	movs	r1, #1
+ 8000334:	4618      	mov	r0, r3
+ 8000336:	f000 f807 	bl	8000348 <Dio_WriteChannel>
+	delay_ms(OFF_Time);
+ 800033a:	6878      	ldr	r0, [r7, #4]
+ 800033c:	f000 fb0a 	bl	8000954 <delay_ms>
+}
+ 8000340:	bf00      	nop
+ 8000342:	3710      	adds	r7, #16
+ 8000344:	46bd      	mov	sp, r7
+ 8000346:	bd80      	pop	{r7, pc}
+
+08000348 <Dio_WriteChannel>:
  *  @param        
  *  @param       
  *  @return      
  *********************************************************************************************************************/
 void Dio_WriteChannel(Dio_ChannelType ChannelId, Dio_LevelType Level )
 {
- 8000302:	b480      	push	{r7}
- 8000304:	b087      	sub	sp, #28
- 8000306:	af00      	add	r7, sp, #0
- 8000308:	4603      	mov	r3, r0
- 800030a:	460a      	mov	r2, r1
- 800030c:	71fb      	strb	r3, [r7, #7]
- 800030e:	4613      	mov	r3, r2
- 8000310:	71bb      	strb	r3, [r7, #6]
+ 8000348:	b480      	push	{r7}
+ 800034a:	b087      	sub	sp, #28
+ 800034c:	af00      	add	r7, sp, #0
+ 800034e:	4603      	mov	r3, r0
+ 8000350:	460a      	mov	r2, r1
+ 8000352:	71fb      	strb	r3, [r7, #7]
+ 8000354:	4613      	mov	r3, r2
+ 8000356:	71bb      	strb	r3, [r7, #6]
     uint8_t ChannelPort   = ChannelId/BSRR_CHANNEL;
- 8000312:	79fb      	ldrb	r3, [r7, #7]
- 8000314:	091b      	lsrs	r3, r3, #4
- 8000316:	75fb      	strb	r3, [r7, #23]
+ 8000358:	79fb      	ldrb	r3, [r7, #7]
+ 800035a:	091b      	lsrs	r3, r3, #4
+ 800035c:	75fb      	strb	r3, [r7, #23]
     uint8_t ChannelNumber = ChannelId%BSRR_CHANNEL;
- 8000318:	79fb      	ldrb	r3, [r7, #7]
- 800031a:	f003 030f 	and.w	r3, r3, #15
- 800031e:	75bb      	strb	r3, [r7, #22]
+ 800035e:	79fb      	ldrb	r3, [r7, #7]
+ 8000360:	f003 030f 	and.w	r3, r3, #15
+ 8000364:	75bb      	strb	r3, [r7, #22]
     GPIO_RegDef_t* UsedGpioPort_Ptr = GPIOx(ChannelPort*GPIO_OFFSET);
- 8000320:	7dfb      	ldrb	r3, [r7, #23]
- 8000322:	029b      	lsls	r3, r3, #10
- 8000324:	f103 4380 	add.w	r3, r3, #1073741824	; 0x40000000
- 8000328:	f503 3300 	add.w	r3, r3, #131072	; 0x20000
- 800032c:	613b      	str	r3, [r7, #16]
+ 8000366:	7dfb      	ldrb	r3, [r7, #23]
+ 8000368:	029b      	lsls	r3, r3, #10
+ 800036a:	f103 4380 	add.w	r3, r3, #1073741824	; 0x40000000
+ 800036e:	f503 3300 	add.w	r3, r3, #131072	; 0x20000
+ 8000372:	613b      	str	r3, [r7, #16]
     uint32_t BSSR_Val=0;
- 800032e:	2300      	movs	r3, #0
- 8000330:	60fb      	str	r3, [r7, #12]
+ 8000374:	2300      	movs	r3, #0
+ 8000376:	60fb      	str	r3, [r7, #12]
 
     BSSR_Val     = DIO_CONST_1 << (ChannelNumber+Level*BSRR_CHANNEL);
- 8000332:	7dba      	ldrb	r2, [r7, #22]
- 8000334:	79bb      	ldrb	r3, [r7, #6]
- 8000336:	011b      	lsls	r3, r3, #4
- 8000338:	4413      	add	r3, r2
- 800033a:	2201      	movs	r2, #1
- 800033c:	fa02 f303 	lsl.w	r3, r2, r3
- 8000340:	60fb      	str	r3, [r7, #12]
+ 8000378:	7dba      	ldrb	r2, [r7, #22]
+ 800037a:	79bb      	ldrb	r3, [r7, #6]
+ 800037c:	011b      	lsls	r3, r3, #4
+ 800037e:	4413      	add	r3, r2
+ 8000380:	2201      	movs	r2, #1
+ 8000382:	fa02 f303 	lsl.w	r3, r2, r3
+ 8000386:	60fb      	str	r3, [r7, #12]
     UsedGpioPort_Ptr->BSRR= BSSR_Val;
- 8000342:	693b      	ldr	r3, [r7, #16]
- 8000344:	68fa      	ldr	r2, [r7, #12]
- 8000346:	619a      	str	r2, [r3, #24]
+ 8000388:	693b      	ldr	r3, [r7, #16]
+ 800038a:	68fa      	ldr	r2, [r7, #12]
+ 800038c:	619a      	str	r2, [r3, #24]
 }
- 8000348:	bf00      	nop
- 800034a:	371c      	adds	r7, #28
- 800034c:	46bd      	mov	sp, r7
- 800034e:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000352:	4770      	bx	lr
+ 800038e:	bf00      	nop
+ 8000390:	371c      	adds	r7, #28
+ 8000392:	46bd      	mov	sp, r7
+ 8000394:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000398:	4770      	bx	lr
 
-08000354 <Dio_FlipChannel>:
+0800039a <Dio_FlipChannel>:
  *  @param        
  *  @param       
  *  @return      
  *********************************************************************************************************************/
 Dio_LevelType Dio_FlipChannel(Dio_ChannelType ChannelId)
 {
- 8000354:	b480      	push	{r7}
- 8000356:	b087      	sub	sp, #28
- 8000358:	af00      	add	r7, sp, #0
- 800035a:	4603      	mov	r3, r0
- 800035c:	71fb      	strb	r3, [r7, #7]
+ 800039a:	b480      	push	{r7}
+ 800039c:	b087      	sub	sp, #28
+ 800039e:	af00      	add	r7, sp, #0
+ 80003a0:	4603      	mov	r3, r0
+ 80003a2:	71fb      	strb	r3, [r7, #7]
     uint8_t ChannelPort   = ChannelId/BSRR_CHANNEL;
- 800035e:	79fb      	ldrb	r3, [r7, #7]
- 8000360:	091b      	lsrs	r3, r3, #4
- 8000362:	75fb      	strb	r3, [r7, #23]
+ 80003a4:	79fb      	ldrb	r3, [r7, #7]
+ 80003a6:	091b      	lsrs	r3, r3, #4
+ 80003a8:	75fb      	strb	r3, [r7, #23]
     uint8_t ChannelNumber = ChannelId%BSRR_CHANNEL;
- 8000364:	79fb      	ldrb	r3, [r7, #7]
- 8000366:	f003 030f 	and.w	r3, r3, #15
- 800036a:	75bb      	strb	r3, [r7, #22]
+ 80003aa:	79fb      	ldrb	r3, [r7, #7]
+ 80003ac:	f003 030f 	and.w	r3, r3, #15
+ 80003b0:	75bb      	strb	r3, [r7, #22]
     GPIO_RegDef_t* UsedGpioPort_Ptr = GPIOx(ChannelPort*GPIO_OFFSET);
- 800036c:	7dfb      	ldrb	r3, [r7, #23]
- 800036e:	029b      	lsls	r3, r3, #10
- 8000370:	f103 4380 	add.w	r3, r3, #1073741824	; 0x40000000
- 8000374:	f503 3300 	add.w	r3, r3, #131072	; 0x20000
- 8000378:	613b      	str	r3, [r7, #16]
+ 80003b2:	7dfb      	ldrb	r3, [r7, #23]
+ 80003b4:	029b      	lsls	r3, r3, #10
+ 80003b6:	f103 4380 	add.w	r3, r3, #1073741824	; 0x40000000
+ 80003ba:	f503 3300 	add.w	r3, r3, #131072	; 0x20000
+ 80003be:	613b      	str	r3, [r7, #16]
     uint8_t ChannelVal=0;
- 800037a:	2300      	movs	r3, #0
- 800037c:	73fb      	strb	r3, [r7, #15]
+ 80003c0:	2300      	movs	r3, #0
+ 80003c2:	73fb      	strb	r3, [r7, #15]
     uint32_t BSSR_Val=0;
- 800037e:	2300      	movs	r3, #0
- 8000380:	60bb      	str	r3, [r7, #8]
+ 80003c4:	2300      	movs	r3, #0
+ 80003c6:	60bb      	str	r3, [r7, #8]
 
     ChannelVal= (DIO_CONST_1) & ((UsedGpioPort_Ptr->ODR)>>ChannelNumber);
- 8000382:	693b      	ldr	r3, [r7, #16]
- 8000384:	695a      	ldr	r2, [r3, #20]
- 8000386:	7dbb      	ldrb	r3, [r7, #22]
- 8000388:	fa22 f303 	lsr.w	r3, r2, r3
- 800038c:	b2db      	uxtb	r3, r3
- 800038e:	f003 0301 	and.w	r3, r3, #1
- 8000392:	73fb      	strb	r3, [r7, #15]
+ 80003c8:	693b      	ldr	r3, [r7, #16]
+ 80003ca:	695a      	ldr	r2, [r3, #20]
+ 80003cc:	7dbb      	ldrb	r3, [r7, #22]
+ 80003ce:	fa22 f303 	lsr.w	r3, r2, r3
+ 80003d2:	b2db      	uxtb	r3, r3
+ 80003d4:	f003 0301 	and.w	r3, r3, #1
+ 80003d8:	73fb      	strb	r3, [r7, #15]
     BSSR_Val      = DIO_CONST_1 << (ChannelNumber+ (ChannelVal)*BSRR_CHANNEL);
- 8000394:	7dba      	ldrb	r2, [r7, #22]
- 8000396:	7bfb      	ldrb	r3, [r7, #15]
- 8000398:	011b      	lsls	r3, r3, #4
- 800039a:	4413      	add	r3, r2
- 800039c:	2201      	movs	r2, #1
- 800039e:	fa02 f303 	lsl.w	r3, r2, r3
- 80003a2:	60bb      	str	r3, [r7, #8]
+ 80003da:	7dba      	ldrb	r2, [r7, #22]
+ 80003dc:	7bfb      	ldrb	r3, [r7, #15]
+ 80003de:	011b      	lsls	r3, r3, #4
+ 80003e0:	4413      	add	r3, r2
+ 80003e2:	2201      	movs	r2, #1
+ 80003e4:	fa02 f303 	lsl.w	r3, r2, r3
+ 80003e8:	60bb      	str	r3, [r7, #8]
     UsedGpioPort_Ptr->BSRR = BSSR_Val;
- 80003a4:	693b      	ldr	r3, [r7, #16]
- 80003a6:	68ba      	ldr	r2, [r7, #8]
- 80003a8:	619a      	str	r2, [r3, #24]
+ 80003ea:	693b      	ldr	r3, [r7, #16]
+ 80003ec:	68ba      	ldr	r2, [r7, #8]
+ 80003ee:	619a      	str	r2, [r3, #24]
     return ~ChannelVal;
- 80003aa:	7bfb      	ldrb	r3, [r7, #15]
- 80003ac:	43db      	mvns	r3, r3
- 80003ae:	b2db      	uxtb	r3, r3
+ 80003f0:	7bfb      	ldrb	r3, [r7, #15]
+ 80003f2:	43db      	mvns	r3, r3
+ 80003f4:	b2db      	uxtb	r3, r3
 }
- 80003b0:	4618      	mov	r0, r3
- 80003b2:	371c      	adds	r7, #28
- 80003b4:	46bd      	mov	sp, r7
- 80003b6:	f85d 7b04 	ldr.w	r7, [sp], #4
- 80003ba:	4770      	bx	lr
+ 80003f6:	4618      	mov	r0, r3
+ 80003f8:	371c      	adds	r7, #28
+ 80003fa:	46bd      	mov	sp, r7
+ 80003fc:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000400:	4770      	bx	lr
+	...
 
-080003bc <Gpt_Init>:
+08000404 <Gpt_Init>:
 *  @retval             : None
 *  Description         : Initializes the GPT driver.
 *********************************************************************************************************************** 
 */
 void Gpt_Init(const Gpt_ConfigType *CfgPtr)
 {
- 80003bc:	b480      	push	{r7}
- 80003be:	b08d      	sub	sp, #52	; 0x34
- 80003c0:	af00      	add	r7, sp, #0
- 80003c2:	6078      	str	r0, [r7, #4]
+ 8000404:	b480      	push	{r7}
+ 8000406:	b08d      	sub	sp, #52	; 0x34
+ 8000408:	af00      	add	r7, sp, #0
+ 800040a:	6078      	str	r0, [r7, #4]
     uint8_t               ChannelsCount =CfgPtr->GptChannelCount;
- 80003c4:	687b      	ldr	r3, [r7, #4]
- 80003c6:	685b      	ldr	r3, [r3, #4]
- 80003c8:	f887 302a 	strb.w	r3, [r7, #42]	; 0x2a
+ 800040c:	687b      	ldr	r3, [r7, #4]
+ 800040e:	685b      	ldr	r3, [r3, #4]
+ 8000410:	f887 302a 	strb.w	r3, [r7, #42]	; 0x2a
     Gpt_ChannelConfigType* ChannelCfgPtr=CfgPtr->GptChannelCfgPtr;
- 80003cc:	687b      	ldr	r3, [r7, #4]
- 80003ce:	681b      	ldr	r3, [r3, #0]
- 80003d0:	627b      	str	r3, [r7, #36]	; 0x24
+ 8000414:	687b      	ldr	r3, [r7, #4]
+ 8000416:	681b      	ldr	r3, [r3, #0]
+ 8000418:	627b      	str	r3, [r7, #36]	; 0x24
     Gpt_ChannelModeType  ChannelMode;
     Gpt_NotifyType       NotificationFn;
     uint8_t              Prescale;
 
     TIM_RegDef_t*   UsedTimerRegSet;
     for(uint8_t i=0; i<ChannelsCount;i++)
- 80003d2:	2300      	movs	r3, #0
- 80003d4:	f887 302b 	strb.w	r3, [r7, #43]	; 0x2b
- 80003d8:	e0c9      	b.n	800056e <Gpt_Init+0x1b2>
+ 800041a:	2300      	movs	r3, #0
+ 800041c:	f887 302b 	strb.w	r3, [r7, #43]	; 0x2b
+ 8000420:	e0c9      	b.n	80005b6 <Gpt_Init+0x1b2>
     {
         ChannelId           =ChannelCfgPtr[i].GptChannelId;
- 80003da:	f897 202b 	ldrb.w	r2, [r7, #43]	; 0x2b
- 80003de:	4613      	mov	r3, r2
- 80003e0:	005b      	lsls	r3, r3, #1
- 80003e2:	4413      	add	r3, r2
- 80003e4:	00db      	lsls	r3, r3, #3
- 80003e6:	461a      	mov	r2, r3
- 80003e8:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 80003ea:	4413      	add	r3, r2
- 80003ec:	781b      	ldrb	r3, [r3, #0]
- 80003ee:	f887 3023 	strb.w	r3, [r7, #35]	; 0x23
+ 8000422:	f897 202b 	ldrb.w	r2, [r7, #43]	; 0x2b
+ 8000426:	4613      	mov	r3, r2
+ 8000428:	005b      	lsls	r3, r3, #1
+ 800042a:	4413      	add	r3, r2
+ 800042c:	00db      	lsls	r3, r3, #3
+ 800042e:	461a      	mov	r2, r3
+ 8000430:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+ 8000432:	4413      	add	r3, r2
+ 8000434:	781b      	ldrb	r3, [r3, #0]
+ 8000436:	f887 3023 	strb.w	r3, [r7, #35]	; 0x23
         ChannelTickFrequency=ChannelCfgPtr[i].GptChannelTickFrequency;
- 80003f2:	f897 202b 	ldrb.w	r2, [r7, #43]	; 0x2b
- 80003f6:	4613      	mov	r3, r2
- 80003f8:	005b      	lsls	r3, r3, #1
- 80003fa:	4413      	add	r3, r2
- 80003fc:	00db      	lsls	r3, r3, #3
- 80003fe:	461a      	mov	r2, r3
- 8000400:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 8000402:	4413      	add	r3, r2
- 8000404:	685b      	ldr	r3, [r3, #4]
- 8000406:	61fb      	str	r3, [r7, #28]
+ 800043a:	f897 202b 	ldrb.w	r2, [r7, #43]	; 0x2b
+ 800043e:	4613      	mov	r3, r2
+ 8000440:	005b      	lsls	r3, r3, #1
+ 8000442:	4413      	add	r3, r2
+ 8000444:	00db      	lsls	r3, r3, #3
+ 8000446:	461a      	mov	r2, r3
+ 8000448:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+ 800044a:	4413      	add	r3, r2
+ 800044c:	685b      	ldr	r3, [r3, #4]
+ 800044e:	61fb      	str	r3, [r7, #28]
         ChannelTickValueMax =ChannelCfgPtr[i].GptChannelTickValueMax;
- 8000408:	f897 202b 	ldrb.w	r2, [r7, #43]	; 0x2b
- 800040c:	4613      	mov	r3, r2
- 800040e:	005b      	lsls	r3, r3, #1
- 8000410:	4413      	add	r3, r2
- 8000412:	00db      	lsls	r3, r3, #3
- 8000414:	461a      	mov	r2, r3
- 8000416:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 8000418:	4413      	add	r3, r2
- 800041a:	689b      	ldr	r3, [r3, #8]
- 800041c:	61bb      	str	r3, [r7, #24]
+ 8000450:	f897 202b 	ldrb.w	r2, [r7, #43]	; 0x2b
+ 8000454:	4613      	mov	r3, r2
+ 8000456:	005b      	lsls	r3, r3, #1
+ 8000458:	4413      	add	r3, r2
+ 800045a:	00db      	lsls	r3, r3, #3
+ 800045c:	461a      	mov	r2, r3
+ 800045e:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+ 8000460:	4413      	add	r3, r2
+ 8000462:	689b      	ldr	r3, [r3, #8]
+ 8000464:	61bb      	str	r3, [r7, #24]
         ChannelMode         =ChannelCfgPtr[i].GptChannelMode;
- 800041e:	f897 202b 	ldrb.w	r2, [r7, #43]	; 0x2b
- 8000422:	4613      	mov	r3, r2
- 8000424:	005b      	lsls	r3, r3, #1
- 8000426:	4413      	add	r3, r2
- 8000428:	00db      	lsls	r3, r3, #3
- 800042a:	461a      	mov	r2, r3
- 800042c:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 800042e:	4413      	add	r3, r2
- 8000430:	7b1b      	ldrb	r3, [r3, #12]
- 8000432:	75fb      	strb	r3, [r7, #23]
+ 8000466:	f897 202b 	ldrb.w	r2, [r7, #43]	; 0x2b
+ 800046a:	4613      	mov	r3, r2
+ 800046c:	005b      	lsls	r3, r3, #1
+ 800046e:	4413      	add	r3, r2
+ 8000470:	00db      	lsls	r3, r3, #3
+ 8000472:	461a      	mov	r2, r3
+ 8000474:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+ 8000476:	4413      	add	r3, r2
+ 8000478:	7b1b      	ldrb	r3, [r3, #12]
+ 800047a:	75fb      	strb	r3, [r7, #23]
         NotificationFn      =ChannelCfgPtr[i].GptNotificationFn;
- 8000434:	f897 202b 	ldrb.w	r2, [r7, #43]	; 0x2b
- 8000438:	4613      	mov	r3, r2
- 800043a:	005b      	lsls	r3, r3, #1
- 800043c:	4413      	add	r3, r2
- 800043e:	00db      	lsls	r3, r3, #3
- 8000440:	461a      	mov	r2, r3
- 8000442:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 8000444:	4413      	add	r3, r2
- 8000446:	691b      	ldr	r3, [r3, #16]
- 8000448:	613b      	str	r3, [r7, #16]
+ 800047c:	f897 202b 	ldrb.w	r2, [r7, #43]	; 0x2b
+ 8000480:	4613      	mov	r3, r2
+ 8000482:	005b      	lsls	r3, r3, #1
+ 8000484:	4413      	add	r3, r2
+ 8000486:	00db      	lsls	r3, r3, #3
+ 8000488:	461a      	mov	r2, r3
+ 800048a:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+ 800048c:	4413      	add	r3, r2
+ 800048e:	691b      	ldr	r3, [r3, #16]
+ 8000490:	613b      	str	r3, [r7, #16]
         Prescale            =ChannelCfgPtr[i].GptPrescale;
- 800044a:	f897 202b 	ldrb.w	r2, [r7, #43]	; 0x2b
- 800044e:	4613      	mov	r3, r2
- 8000450:	005b      	lsls	r3, r3, #1
- 8000452:	4413      	add	r3, r2
- 8000454:	00db      	lsls	r3, r3, #3
- 8000456:	461a      	mov	r2, r3
- 8000458:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 800045a:	4413      	add	r3, r2
- 800045c:	8a9b      	ldrh	r3, [r3, #20]
- 800045e:	73fb      	strb	r3, [r7, #15]
+ 8000492:	f897 202b 	ldrb.w	r2, [r7, #43]	; 0x2b
+ 8000496:	4613      	mov	r3, r2
+ 8000498:	005b      	lsls	r3, r3, #1
+ 800049a:	4413      	add	r3, r2
+ 800049c:	00db      	lsls	r3, r3, #3
+ 800049e:	461a      	mov	r2, r3
+ 80004a0:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+ 80004a2:	4413      	add	r3, r2
+ 80004a4:	8a9b      	ldrh	r3, [r3, #20]
+ 80004a6:	73fb      	strb	r3, [r7, #15]
         /************/
         switch(ChannelId)
- 8000460:	f897 3023 	ldrb.w	r3, [r7, #35]	; 0x23
- 8000464:	3b01      	subs	r3, #1
- 8000466:	2b0e      	cmp	r3, #14
- 8000468:	d84b      	bhi.n	8000502 <Gpt_Init+0x146>
- 800046a:	a201      	add	r2, pc, #4	; (adr r2, 8000470 <Gpt_Init+0xb4>)
- 800046c:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 8000470:	080004ad 	.word	0x080004ad
- 8000474:	080004b3 	.word	0x080004b3
- 8000478:	080004bb 	.word	0x080004bb
- 800047c:	080004c1 	.word	0x080004c1
- 8000480:	080004c7 	.word	0x080004c7
- 8000484:	080004cd 	.word	0x080004cd
- 8000488:	080004d3 	.word	0x080004d3
- 800048c:	080004d9 	.word	0x080004d9
- 8000490:	080004df 	.word	0x080004df
- 8000494:	080004e5 	.word	0x080004e5
- 8000498:	080004eb 	.word	0x080004eb
- 800049c:	080004f1 	.word	0x080004f1
- 80004a0:	080004f7 	.word	0x080004f7
- 80004a4:	080004fd 	.word	0x080004fd
- 80004a8:	08000503 	.word	0x08000503
+ 80004a8:	f897 3023 	ldrb.w	r3, [r7, #35]	; 0x23
+ 80004ac:	3b01      	subs	r3, #1
+ 80004ae:	2b0e      	cmp	r3, #14
+ 80004b0:	d84b      	bhi.n	800054a <Gpt_Init+0x146>
+ 80004b2:	a201      	add	r2, pc, #4	; (adr r2, 80004b8 <Gpt_Init+0xb4>)
+ 80004b4:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 80004b8:	080004f5 	.word	0x080004f5
+ 80004bc:	080004fb 	.word	0x080004fb
+ 80004c0:	08000503 	.word	0x08000503
+ 80004c4:	08000509 	.word	0x08000509
+ 80004c8:	0800050f 	.word	0x0800050f
+ 80004cc:	08000515 	.word	0x08000515
+ 80004d0:	0800051b 	.word	0x0800051b
+ 80004d4:	08000521 	.word	0x08000521
+ 80004d8:	08000527 	.word	0x08000527
+ 80004dc:	0800052d 	.word	0x0800052d
+ 80004e0:	08000533 	.word	0x08000533
+ 80004e4:	08000539 	.word	0x08000539
+ 80004e8:	0800053f 	.word	0x0800053f
+ 80004ec:	08000545 	.word	0x08000545
+ 80004f0:	0800054b 	.word	0x0800054b
         {
             case GPT_TIMER_CHANNEL_1 : UsedTimerRegSet =TIM1 ;break;
- 80004ac:	4b37      	ldr	r3, [pc, #220]	; (800058c <Gpt_Init+0x1d0>)
- 80004ae:	62fb      	str	r3, [r7, #44]	; 0x2c
- 80004b0:	e028      	b.n	8000504 <Gpt_Init+0x148>
+ 80004f4:	4b37      	ldr	r3, [pc, #220]	; (80005d4 <Gpt_Init+0x1d0>)
+ 80004f6:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 80004f8:	e028      	b.n	800054c <Gpt_Init+0x148>
             case GPT_TIMER_CHANNEL_2 : UsedTimerRegSet =TIM2 ;break;
- 80004b2:	f04f 4380 	mov.w	r3, #1073741824	; 0x40000000
- 80004b6:	62fb      	str	r3, [r7, #44]	; 0x2c
- 80004b8:	e024      	b.n	8000504 <Gpt_Init+0x148>
-            case GPT_TIMER_CHANNEL_3 : UsedTimerRegSet =TIM3 ;break;
- 80004ba:	4b35      	ldr	r3, [pc, #212]	; (8000590 <Gpt_Init+0x1d4>)
- 80004bc:	62fb      	str	r3, [r7, #44]	; 0x2c
- 80004be:	e021      	b.n	8000504 <Gpt_Init+0x148>
-            case GPT_TIMER_CHANNEL_4 : UsedTimerRegSet =TIM4 ;break;
- 80004c0:	4b34      	ldr	r3, [pc, #208]	; (8000594 <Gpt_Init+0x1d8>)
- 80004c2:	62fb      	str	r3, [r7, #44]	; 0x2c
- 80004c4:	e01e      	b.n	8000504 <Gpt_Init+0x148>
-            case GPT_TIMER_CHANNEL_5 : UsedTimerRegSet =TIM5 ;break;
- 80004c6:	4b34      	ldr	r3, [pc, #208]	; (8000598 <Gpt_Init+0x1dc>)
- 80004c8:	62fb      	str	r3, [r7, #44]	; 0x2c
- 80004ca:	e01b      	b.n	8000504 <Gpt_Init+0x148>
-            case GPT_TIMER_CHANNEL_6 : UsedTimerRegSet =TIM6 ;break;
- 80004cc:	4b33      	ldr	r3, [pc, #204]	; (800059c <Gpt_Init+0x1e0>)
- 80004ce:	62fb      	str	r3, [r7, #44]	; 0x2c
- 80004d0:	e018      	b.n	8000504 <Gpt_Init+0x148>
-            case GPT_TIMER_CHANNEL_7 : UsedTimerRegSet =TIM7 ;break;
- 80004d2:	4b33      	ldr	r3, [pc, #204]	; (80005a0 <Gpt_Init+0x1e4>)
- 80004d4:	62fb      	str	r3, [r7, #44]	; 0x2c
- 80004d6:	e015      	b.n	8000504 <Gpt_Init+0x148>
-            case GPT_TIMER_CHANNEL_8 : UsedTimerRegSet =TIM8 ;break;
- 80004d8:	4b32      	ldr	r3, [pc, #200]	; (80005a4 <Gpt_Init+0x1e8>)
- 80004da:	62fb      	str	r3, [r7, #44]	; 0x2c
- 80004dc:	e012      	b.n	8000504 <Gpt_Init+0x148>
-            case GPT_TIMER_CHANNEL_9 : UsedTimerRegSet =TIM9 ;break;
- 80004de:	4b32      	ldr	r3, [pc, #200]	; (80005a8 <Gpt_Init+0x1ec>)
- 80004e0:	62fb      	str	r3, [r7, #44]	; 0x2c
- 80004e2:	e00f      	b.n	8000504 <Gpt_Init+0x148>
-            case GPT_TIMER_CHANNEL_10: UsedTimerRegSet =TIM10;break;
- 80004e4:	4b31      	ldr	r3, [pc, #196]	; (80005ac <Gpt_Init+0x1f0>)
- 80004e6:	62fb      	str	r3, [r7, #44]	; 0x2c
- 80004e8:	e00c      	b.n	8000504 <Gpt_Init+0x148>
-            case GPT_TIMER_CHANNEL_11: UsedTimerRegSet =TIM11;break;
- 80004ea:	4b31      	ldr	r3, [pc, #196]	; (80005b0 <Gpt_Init+0x1f4>)
- 80004ec:	62fb      	str	r3, [r7, #44]	; 0x2c
- 80004ee:	e009      	b.n	8000504 <Gpt_Init+0x148>
-            case GPT_TIMER_CHANNEL_12: UsedTimerRegSet =TIM12;break;
- 80004f0:	4b30      	ldr	r3, [pc, #192]	; (80005b4 <Gpt_Init+0x1f8>)
- 80004f2:	62fb      	str	r3, [r7, #44]	; 0x2c
- 80004f4:	e006      	b.n	8000504 <Gpt_Init+0x148>
-            case GPT_TIMER_CHANNEL_13: UsedTimerRegSet =TIM13;break;
- 80004f6:	4b30      	ldr	r3, [pc, #192]	; (80005b8 <Gpt_Init+0x1fc>)
- 80004f8:	62fb      	str	r3, [r7, #44]	; 0x2c
- 80004fa:	e003      	b.n	8000504 <Gpt_Init+0x148>
-            case GPT_TIMER_CHANNEL_14: UsedTimerRegSet =TIM14;break;
- 80004fc:	4b2f      	ldr	r3, [pc, #188]	; (80005bc <Gpt_Init+0x200>)
+ 80004fa:	f04f 4380 	mov.w	r3, #1073741824	; 0x40000000
  80004fe:	62fb      	str	r3, [r7, #44]	; 0x2c
- 8000500:	e000      	b.n	8000504 <Gpt_Init+0x148>
+ 8000500:	e024      	b.n	800054c <Gpt_Init+0x148>
+            case GPT_TIMER_CHANNEL_3 : UsedTimerRegSet =TIM3 ;break;
+ 8000502:	4b35      	ldr	r3, [pc, #212]	; (80005d8 <Gpt_Init+0x1d4>)
+ 8000504:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 8000506:	e021      	b.n	800054c <Gpt_Init+0x148>
+            case GPT_TIMER_CHANNEL_4 : UsedTimerRegSet =TIM4 ;break;
+ 8000508:	4b34      	ldr	r3, [pc, #208]	; (80005dc <Gpt_Init+0x1d8>)
+ 800050a:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 800050c:	e01e      	b.n	800054c <Gpt_Init+0x148>
+            case GPT_TIMER_CHANNEL_5 : UsedTimerRegSet =TIM5 ;break;
+ 800050e:	4b34      	ldr	r3, [pc, #208]	; (80005e0 <Gpt_Init+0x1dc>)
+ 8000510:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 8000512:	e01b      	b.n	800054c <Gpt_Init+0x148>
+            case GPT_TIMER_CHANNEL_6 : UsedTimerRegSet =TIM6 ;break;
+ 8000514:	4b33      	ldr	r3, [pc, #204]	; (80005e4 <Gpt_Init+0x1e0>)
+ 8000516:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 8000518:	e018      	b.n	800054c <Gpt_Init+0x148>
+            case GPT_TIMER_CHANNEL_7 : UsedTimerRegSet =TIM7 ;break;
+ 800051a:	4b33      	ldr	r3, [pc, #204]	; (80005e8 <Gpt_Init+0x1e4>)
+ 800051c:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 800051e:	e015      	b.n	800054c <Gpt_Init+0x148>
+            case GPT_TIMER_CHANNEL_8 : UsedTimerRegSet =TIM8 ;break;
+ 8000520:	4b32      	ldr	r3, [pc, #200]	; (80005ec <Gpt_Init+0x1e8>)
+ 8000522:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 8000524:	e012      	b.n	800054c <Gpt_Init+0x148>
+            case GPT_TIMER_CHANNEL_9 : UsedTimerRegSet =TIM9 ;break;
+ 8000526:	4b32      	ldr	r3, [pc, #200]	; (80005f0 <Gpt_Init+0x1ec>)
+ 8000528:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 800052a:	e00f      	b.n	800054c <Gpt_Init+0x148>
+            case GPT_TIMER_CHANNEL_10: UsedTimerRegSet =TIM10;break;
+ 800052c:	4b31      	ldr	r3, [pc, #196]	; (80005f4 <Gpt_Init+0x1f0>)
+ 800052e:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 8000530:	e00c      	b.n	800054c <Gpt_Init+0x148>
+            case GPT_TIMER_CHANNEL_11: UsedTimerRegSet =TIM11;break;
+ 8000532:	4b31      	ldr	r3, [pc, #196]	; (80005f8 <Gpt_Init+0x1f4>)
+ 8000534:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 8000536:	e009      	b.n	800054c <Gpt_Init+0x148>
+            case GPT_TIMER_CHANNEL_12: UsedTimerRegSet =TIM12;break;
+ 8000538:	4b30      	ldr	r3, [pc, #192]	; (80005fc <Gpt_Init+0x1f8>)
+ 800053a:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 800053c:	e006      	b.n	800054c <Gpt_Init+0x148>
+            case GPT_TIMER_CHANNEL_13: UsedTimerRegSet =TIM13;break;
+ 800053e:	4b30      	ldr	r3, [pc, #192]	; (8000600 <Gpt_Init+0x1fc>)
+ 8000540:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 8000542:	e003      	b.n	800054c <Gpt_Init+0x148>
+            case GPT_TIMER_CHANNEL_14: UsedTimerRegSet =TIM14;break;
+ 8000544:	4b2f      	ldr	r3, [pc, #188]	; (8000604 <Gpt_Init+0x200>)
+ 8000546:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 8000548:	e000      	b.n	800054c <Gpt_Init+0x148>
             case GPT_TIMER_CHANNEL_15: /*********/;break;default:break;
- 8000502:	bf00      	nop
+ 800054a:	bf00      	nop
         }
         if(ChannelId==GPT_SYSTICK_TIMER)
- 8000504:	f897 3023 	ldrb.w	r3, [r7, #35]	; 0x23
- 8000508:	2b0f      	cmp	r3, #15
- 800050a:	d10c      	bne.n	8000526 <Gpt_Init+0x16a>
+ 800054c:	f897 3023 	ldrb.w	r3, [r7, #35]	; 0x23
+ 8000550:	2b0f      	cmp	r3, #15
+ 8000552:	d10c      	bne.n	800056e <Gpt_Init+0x16a>
         {
             SYSTICK ->STK_CTRL &=~(STCR_MASK<<STCR_CLKSOURCE_PIN_ACCESS);
- 800050c:	4b2c      	ldr	r3, [pc, #176]	; (80005c0 <Gpt_Init+0x204>)
- 800050e:	681b      	ldr	r3, [r3, #0]
- 8000510:	4a2b      	ldr	r2, [pc, #172]	; (80005c0 <Gpt_Init+0x204>)
- 8000512:	f023 0304 	bic.w	r3, r3, #4
- 8000516:	6013      	str	r3, [r2, #0]
+ 8000554:	4b2c      	ldr	r3, [pc, #176]	; (8000608 <Gpt_Init+0x204>)
+ 8000556:	681b      	ldr	r3, [r3, #0]
+ 8000558:	4a2b      	ldr	r2, [pc, #172]	; (8000608 <Gpt_Init+0x204>)
+ 800055a:	f023 0304 	bic.w	r3, r3, #4
+ 800055e:	6013      	str	r3, [r2, #0]
             SYSTICK ->STK_CTRL &=~(STCR_MASK<<STCR_TICKINT_PIN_ACCESS  );
- 8000518:	4b29      	ldr	r3, [pc, #164]	; (80005c0 <Gpt_Init+0x204>)
- 800051a:	681b      	ldr	r3, [r3, #0]
- 800051c:	4a28      	ldr	r2, [pc, #160]	; (80005c0 <Gpt_Init+0x204>)
- 800051e:	f023 0302 	bic.w	r3, r3, #2
- 8000522:	6013      	str	r3, [r2, #0]
- 8000524:	e01e      	b.n	8000564 <Gpt_Init+0x1a8>
+ 8000560:	4b29      	ldr	r3, [pc, #164]	; (8000608 <Gpt_Init+0x204>)
+ 8000562:	681b      	ldr	r3, [r3, #0]
+ 8000564:	4a28      	ldr	r2, [pc, #160]	; (8000608 <Gpt_Init+0x204>)
+ 8000566:	f023 0302 	bic.w	r3, r3, #2
+ 800056a:	6013      	str	r3, [r2, #0]
+ 800056c:	e01e      	b.n	80005ac <Gpt_Init+0x1a8>
         }
         else
         {
         UsedTimerRegSet->CR1 &=~(CR1_ARPE_MASK<<CR1_ARPE_BIT_ACCESS); 
- 8000526:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 8000528:	681b      	ldr	r3, [r3, #0]
- 800052a:	f023 0280 	bic.w	r2, r3, #128	; 0x80
- 800052e:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 8000530:	601a      	str	r2, [r3, #0]
+ 800056e:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 8000570:	681b      	ldr	r3, [r3, #0]
+ 8000572:	f023 0280 	bic.w	r2, r3, #128	; 0x80
+ 8000576:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 8000578:	601a      	str	r2, [r3, #0]
         UsedTimerRegSet->CR1 |= (1<<CR1_ARPE_BIT_ACCESS);
- 8000532:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 8000534:	681b      	ldr	r3, [r3, #0]
- 8000536:	f043 0280 	orr.w	r2, r3, #128	; 0x80
- 800053a:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 800053c:	601a      	str	r2, [r3, #0]
+ 800057a:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 800057c:	681b      	ldr	r3, [r3, #0]
+ 800057e:	f043 0280 	orr.w	r2, r3, #128	; 0x80
+ 8000582:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 8000584:	601a      	str	r2, [r3, #0]
         UsedTimerRegSet->CR1 &=~(CR1_OPM_MASK<<CR1_OPM_BIT_ACCESS); 
- 800053e:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 8000540:	681b      	ldr	r3, [r3, #0]
- 8000542:	f023 0208 	bic.w	r2, r3, #8
- 8000546:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 8000548:	601a      	str	r2, [r3, #0]
+ 8000586:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 8000588:	681b      	ldr	r3, [r3, #0]
+ 800058a:	f023 0208 	bic.w	r2, r3, #8
+ 800058e:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 8000590:	601a      	str	r2, [r3, #0]
         UsedTimerRegSet->CR1 |= (ChannelMode <<CR1_OPM_BIT_ACCESS);
- 800054a:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 800054c:	681b      	ldr	r3, [r3, #0]
- 800054e:	7dfa      	ldrb	r2, [r7, #23]
- 8000550:	00d2      	lsls	r2, r2, #3
- 8000552:	431a      	orrs	r2, r3
- 8000554:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 8000556:	601a      	str	r2, [r3, #0]
+ 8000592:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 8000594:	681b      	ldr	r3, [r3, #0]
+ 8000596:	7dfa      	ldrb	r2, [r7, #23]
+ 8000598:	00d2      	lsls	r2, r2, #3
+ 800059a:	431a      	orrs	r2, r3
+ 800059c:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 800059e:	601a      	str	r2, [r3, #0]
         UsedTimerRegSet->PSC  = Prescale;
- 8000558:	7bfa      	ldrb	r2, [r7, #15]
- 800055a:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 800055c:	629a      	str	r2, [r3, #40]	; 0x28
+ 80005a0:	7bfa      	ldrb	r2, [r7, #15]
+ 80005a2:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 80005a4:	629a      	str	r2, [r3, #40]	; 0x28
         UsedTimerRegSet->ARR  = ChannelTickValueMax;
- 800055e:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 8000560:	69ba      	ldr	r2, [r7, #24]
- 8000562:	62da      	str	r2, [r3, #44]	; 0x2c
+ 80005a6:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 80005a8:	69ba      	ldr	r2, [r7, #24]
+ 80005aa:	62da      	str	r2, [r3, #44]	; 0x2c
     for(uint8_t i=0; i<ChannelsCount;i++)
- 8000564:	f897 302b 	ldrb.w	r3, [r7, #43]	; 0x2b
- 8000568:	3301      	adds	r3, #1
- 800056a:	f887 302b 	strb.w	r3, [r7, #43]	; 0x2b
- 800056e:	f897 202b 	ldrb.w	r2, [r7, #43]	; 0x2b
- 8000572:	f897 302a 	ldrb.w	r3, [r7, #42]	; 0x2a
- 8000576:	429a      	cmp	r2, r3
- 8000578:	f4ff af2f 	bcc.w	80003da <Gpt_Init+0x1e>
+ 80005ac:	f897 302b 	ldrb.w	r3, [r7, #43]	; 0x2b
+ 80005b0:	3301      	adds	r3, #1
+ 80005b2:	f887 302b 	strb.w	r3, [r7, #43]	; 0x2b
+ 80005b6:	f897 202b 	ldrb.w	r2, [r7, #43]	; 0x2b
+ 80005ba:	f897 302a 	ldrb.w	r3, [r7, #42]	; 0x2a
+ 80005be:	429a      	cmp	r2, r3
+ 80005c0:	f4ff af2f 	bcc.w	8000422 <Gpt_Init+0x1e>
         }
     }
 }
- 800057c:	bf00      	nop
- 800057e:	bf00      	nop
- 8000580:	3734      	adds	r7, #52	; 0x34
- 8000582:	46bd      	mov	sp, r7
- 8000584:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000588:	4770      	bx	lr
- 800058a:	bf00      	nop
- 800058c:	40010000 	.word	0x40010000
- 8000590:	40000400 	.word	0x40000400
- 8000594:	40000800 	.word	0x40000800
- 8000598:	40000c00 	.word	0x40000c00
- 800059c:	40001000 	.word	0x40001000
- 80005a0:	40001400 	.word	0x40001400
- 80005a4:	40010400 	.word	0x40010400
- 80005a8:	40014000 	.word	0x40014000
- 80005ac:	40014400 	.word	0x40014400
- 80005b0:	40014800 	.word	0x40014800
- 80005b4:	40001800 	.word	0x40001800
- 80005b8:	40001c00 	.word	0x40001c00
- 80005bc:	40002000 	.word	0x40002000
- 80005c0:	e000e010 	.word	0xe000e010
+ 80005c4:	bf00      	nop
+ 80005c6:	bf00      	nop
+ 80005c8:	3734      	adds	r7, #52	; 0x34
+ 80005ca:	46bd      	mov	sp, r7
+ 80005cc:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80005d0:	4770      	bx	lr
+ 80005d2:	bf00      	nop
+ 80005d4:	40010000 	.word	0x40010000
+ 80005d8:	40000400 	.word	0x40000400
+ 80005dc:	40000800 	.word	0x40000800
+ 80005e0:	40000c00 	.word	0x40000c00
+ 80005e4:	40001000 	.word	0x40001000
+ 80005e8:	40001400 	.word	0x40001400
+ 80005ec:	40010400 	.word	0x40010400
+ 80005f0:	40014000 	.word	0x40014000
+ 80005f4:	40014400 	.word	0x40014400
+ 80005f8:	40014800 	.word	0x40014800
+ 80005fc:	40001800 	.word	0x40001800
+ 8000600:	40001c00 	.word	0x40001c00
+ 8000604:	40002000 	.word	0x40002000
+ 8000608:	e000e010 	.word	0xe000e010
 
-080005c4 <Gpt_GetTimeRemaining>:
+0800060c <Gpt_GetTimeRemaining>:
 *  Description         : Returns the time remaining until the target time is
 *                        reached.
 ***********************************************************************************************************************
 */
 Gpt_ValueType Gpt_GetTimeRemaining	(Gpt_ChannelType Channel)
 {
- 80005c4:	b480      	push	{r7}
- 80005c6:	b085      	sub	sp, #20
- 80005c8:	af00      	add	r7, sp, #0
- 80005ca:	4603      	mov	r3, r0
- 80005cc:	71fb      	strb	r3, [r7, #7]
+ 800060c:	b480      	push	{r7}
+ 800060e:	b085      	sub	sp, #20
+ 8000610:	af00      	add	r7, sp, #0
+ 8000612:	4603      	mov	r3, r0
+ 8000614:	71fb      	strb	r3, [r7, #7]
     Gpt_ValueType ReturnValue=0;
- 80005ce:	2300      	movs	r3, #0
- 80005d0:	60fb      	str	r3, [r7, #12]
+ 8000616:	2300      	movs	r3, #0
+ 8000618:	60fb      	str	r3, [r7, #12]
     TIM_RegDef_t*   UsedTimerRegSet;
     switch(Channel)
- 80005d2:	79fb      	ldrb	r3, [r7, #7]
- 80005d4:	3b01      	subs	r3, #1
- 80005d6:	2b0e      	cmp	r3, #14
- 80005d8:	d84b      	bhi.n	8000672 <Gpt_GetTimeRemaining+0xae>
- 80005da:	a201      	add	r2, pc, #4	; (adr r2, 80005e0 <Gpt_GetTimeRemaining+0x1c>)
- 80005dc:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 80005e0:	0800061d 	.word	0x0800061d
- 80005e4:	08000623 	.word	0x08000623
- 80005e8:	0800062b 	.word	0x0800062b
- 80005ec:	08000631 	.word	0x08000631
- 80005f0:	08000637 	.word	0x08000637
- 80005f4:	0800063d 	.word	0x0800063d
- 80005f8:	08000643 	.word	0x08000643
- 80005fc:	08000649 	.word	0x08000649
- 8000600:	0800064f 	.word	0x0800064f
- 8000604:	08000655 	.word	0x08000655
- 8000608:	0800065b 	.word	0x0800065b
- 800060c:	08000661 	.word	0x08000661
- 8000610:	08000667 	.word	0x08000667
- 8000614:	0800066d 	.word	0x0800066d
- 8000618:	08000673 	.word	0x08000673
+ 800061a:	79fb      	ldrb	r3, [r7, #7]
+ 800061c:	3b01      	subs	r3, #1
+ 800061e:	2b0e      	cmp	r3, #14
+ 8000620:	d84b      	bhi.n	80006ba <Gpt_GetTimeRemaining+0xae>
+ 8000622:	a201      	add	r2, pc, #4	; (adr r2, 8000628 <Gpt_GetTimeRemaining+0x1c>)
+ 8000624:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 8000628:	08000665 	.word	0x08000665
+ 800062c:	0800066b 	.word	0x0800066b
+ 8000630:	08000673 	.word	0x08000673
+ 8000634:	08000679 	.word	0x08000679
+ 8000638:	0800067f 	.word	0x0800067f
+ 800063c:	08000685 	.word	0x08000685
+ 8000640:	0800068b 	.word	0x0800068b
+ 8000644:	08000691 	.word	0x08000691
+ 8000648:	08000697 	.word	0x08000697
+ 800064c:	0800069d 	.word	0x0800069d
+ 8000650:	080006a3 	.word	0x080006a3
+ 8000654:	080006a9 	.word	0x080006a9
+ 8000658:	080006af 	.word	0x080006af
+ 800065c:	080006b5 	.word	0x080006b5
+ 8000660:	080006bb 	.word	0x080006bb
         {
             case GPT_TIMER_CHANNEL_1 : UsedTimerRegSet =TIM1 ;break;
- 800061c:	4b1e      	ldr	r3, [pc, #120]	; (8000698 <Gpt_GetTimeRemaining+0xd4>)
- 800061e:	60bb      	str	r3, [r7, #8]
- 8000620:	e028      	b.n	8000674 <Gpt_GetTimeRemaining+0xb0>
+ 8000664:	4b1e      	ldr	r3, [pc, #120]	; (80006e0 <Gpt_GetTimeRemaining+0xd4>)
+ 8000666:	60bb      	str	r3, [r7, #8]
+ 8000668:	e028      	b.n	80006bc <Gpt_GetTimeRemaining+0xb0>
             case GPT_TIMER_CHANNEL_2 : UsedTimerRegSet =TIM2 ;break;
- 8000622:	f04f 4380 	mov.w	r3, #1073741824	; 0x40000000
- 8000626:	60bb      	str	r3, [r7, #8]
- 8000628:	e024      	b.n	8000674 <Gpt_GetTimeRemaining+0xb0>
-            case GPT_TIMER_CHANNEL_3 : UsedTimerRegSet =TIM3 ;break;
- 800062a:	4b1c      	ldr	r3, [pc, #112]	; (800069c <Gpt_GetTimeRemaining+0xd8>)
- 800062c:	60bb      	str	r3, [r7, #8]
- 800062e:	e021      	b.n	8000674 <Gpt_GetTimeRemaining+0xb0>
-            case GPT_TIMER_CHANNEL_4 : UsedTimerRegSet =TIM4 ;break;
- 8000630:	4b1b      	ldr	r3, [pc, #108]	; (80006a0 <Gpt_GetTimeRemaining+0xdc>)
- 8000632:	60bb      	str	r3, [r7, #8]
- 8000634:	e01e      	b.n	8000674 <Gpt_GetTimeRemaining+0xb0>
-            case GPT_TIMER_CHANNEL_5 : UsedTimerRegSet =TIM5 ;break;
- 8000636:	4b1b      	ldr	r3, [pc, #108]	; (80006a4 <Gpt_GetTimeRemaining+0xe0>)
- 8000638:	60bb      	str	r3, [r7, #8]
- 800063a:	e01b      	b.n	8000674 <Gpt_GetTimeRemaining+0xb0>
-            case GPT_TIMER_CHANNEL_6 : UsedTimerRegSet =TIM6 ;break;
- 800063c:	4b1a      	ldr	r3, [pc, #104]	; (80006a8 <Gpt_GetTimeRemaining+0xe4>)
- 800063e:	60bb      	str	r3, [r7, #8]
- 8000640:	e018      	b.n	8000674 <Gpt_GetTimeRemaining+0xb0>
-            case GPT_TIMER_CHANNEL_7 : UsedTimerRegSet =TIM7 ;break;
- 8000642:	4b1a      	ldr	r3, [pc, #104]	; (80006ac <Gpt_GetTimeRemaining+0xe8>)
- 8000644:	60bb      	str	r3, [r7, #8]
- 8000646:	e015      	b.n	8000674 <Gpt_GetTimeRemaining+0xb0>
-            case GPT_TIMER_CHANNEL_8 : UsedTimerRegSet =TIM8 ;break;
- 8000648:	4b19      	ldr	r3, [pc, #100]	; (80006b0 <Gpt_GetTimeRemaining+0xec>)
- 800064a:	60bb      	str	r3, [r7, #8]
- 800064c:	e012      	b.n	8000674 <Gpt_GetTimeRemaining+0xb0>
-            case GPT_TIMER_CHANNEL_9 : UsedTimerRegSet =TIM9 ;break;
- 800064e:	4b19      	ldr	r3, [pc, #100]	; (80006b4 <Gpt_GetTimeRemaining+0xf0>)
- 8000650:	60bb      	str	r3, [r7, #8]
- 8000652:	e00f      	b.n	8000674 <Gpt_GetTimeRemaining+0xb0>
-            case GPT_TIMER_CHANNEL_10: UsedTimerRegSet =TIM10;break;
- 8000654:	4b18      	ldr	r3, [pc, #96]	; (80006b8 <Gpt_GetTimeRemaining+0xf4>)
- 8000656:	60bb      	str	r3, [r7, #8]
- 8000658:	e00c      	b.n	8000674 <Gpt_GetTimeRemaining+0xb0>
-            case GPT_TIMER_CHANNEL_11: UsedTimerRegSet =TIM11;break;
- 800065a:	4b18      	ldr	r3, [pc, #96]	; (80006bc <Gpt_GetTimeRemaining+0xf8>)
- 800065c:	60bb      	str	r3, [r7, #8]
- 800065e:	e009      	b.n	8000674 <Gpt_GetTimeRemaining+0xb0>
-            case GPT_TIMER_CHANNEL_12: UsedTimerRegSet =TIM12;break;
- 8000660:	4b17      	ldr	r3, [pc, #92]	; (80006c0 <Gpt_GetTimeRemaining+0xfc>)
- 8000662:	60bb      	str	r3, [r7, #8]
- 8000664:	e006      	b.n	8000674 <Gpt_GetTimeRemaining+0xb0>
-            case GPT_TIMER_CHANNEL_13: UsedTimerRegSet =TIM13;break;
- 8000666:	4b17      	ldr	r3, [pc, #92]	; (80006c4 <Gpt_GetTimeRemaining+0x100>)
- 8000668:	60bb      	str	r3, [r7, #8]
- 800066a:	e003      	b.n	8000674 <Gpt_GetTimeRemaining+0xb0>
-            case GPT_TIMER_CHANNEL_14: UsedTimerRegSet =TIM14;break;
- 800066c:	4b16      	ldr	r3, [pc, #88]	; (80006c8 <Gpt_GetTimeRemaining+0x104>)
+ 800066a:	f04f 4380 	mov.w	r3, #1073741824	; 0x40000000
  800066e:	60bb      	str	r3, [r7, #8]
- 8000670:	e000      	b.n	8000674 <Gpt_GetTimeRemaining+0xb0>
+ 8000670:	e024      	b.n	80006bc <Gpt_GetTimeRemaining+0xb0>
+            case GPT_TIMER_CHANNEL_3 : UsedTimerRegSet =TIM3 ;break;
+ 8000672:	4b1c      	ldr	r3, [pc, #112]	; (80006e4 <Gpt_GetTimeRemaining+0xd8>)
+ 8000674:	60bb      	str	r3, [r7, #8]
+ 8000676:	e021      	b.n	80006bc <Gpt_GetTimeRemaining+0xb0>
+            case GPT_TIMER_CHANNEL_4 : UsedTimerRegSet =TIM4 ;break;
+ 8000678:	4b1b      	ldr	r3, [pc, #108]	; (80006e8 <Gpt_GetTimeRemaining+0xdc>)
+ 800067a:	60bb      	str	r3, [r7, #8]
+ 800067c:	e01e      	b.n	80006bc <Gpt_GetTimeRemaining+0xb0>
+            case GPT_TIMER_CHANNEL_5 : UsedTimerRegSet =TIM5 ;break;
+ 800067e:	4b1b      	ldr	r3, [pc, #108]	; (80006ec <Gpt_GetTimeRemaining+0xe0>)
+ 8000680:	60bb      	str	r3, [r7, #8]
+ 8000682:	e01b      	b.n	80006bc <Gpt_GetTimeRemaining+0xb0>
+            case GPT_TIMER_CHANNEL_6 : UsedTimerRegSet =TIM6 ;break;
+ 8000684:	4b1a      	ldr	r3, [pc, #104]	; (80006f0 <Gpt_GetTimeRemaining+0xe4>)
+ 8000686:	60bb      	str	r3, [r7, #8]
+ 8000688:	e018      	b.n	80006bc <Gpt_GetTimeRemaining+0xb0>
+            case GPT_TIMER_CHANNEL_7 : UsedTimerRegSet =TIM7 ;break;
+ 800068a:	4b1a      	ldr	r3, [pc, #104]	; (80006f4 <Gpt_GetTimeRemaining+0xe8>)
+ 800068c:	60bb      	str	r3, [r7, #8]
+ 800068e:	e015      	b.n	80006bc <Gpt_GetTimeRemaining+0xb0>
+            case GPT_TIMER_CHANNEL_8 : UsedTimerRegSet =TIM8 ;break;
+ 8000690:	4b19      	ldr	r3, [pc, #100]	; (80006f8 <Gpt_GetTimeRemaining+0xec>)
+ 8000692:	60bb      	str	r3, [r7, #8]
+ 8000694:	e012      	b.n	80006bc <Gpt_GetTimeRemaining+0xb0>
+            case GPT_TIMER_CHANNEL_9 : UsedTimerRegSet =TIM9 ;break;
+ 8000696:	4b19      	ldr	r3, [pc, #100]	; (80006fc <Gpt_GetTimeRemaining+0xf0>)
+ 8000698:	60bb      	str	r3, [r7, #8]
+ 800069a:	e00f      	b.n	80006bc <Gpt_GetTimeRemaining+0xb0>
+            case GPT_TIMER_CHANNEL_10: UsedTimerRegSet =TIM10;break;
+ 800069c:	4b18      	ldr	r3, [pc, #96]	; (8000700 <Gpt_GetTimeRemaining+0xf4>)
+ 800069e:	60bb      	str	r3, [r7, #8]
+ 80006a0:	e00c      	b.n	80006bc <Gpt_GetTimeRemaining+0xb0>
+            case GPT_TIMER_CHANNEL_11: UsedTimerRegSet =TIM11;break;
+ 80006a2:	4b18      	ldr	r3, [pc, #96]	; (8000704 <Gpt_GetTimeRemaining+0xf8>)
+ 80006a4:	60bb      	str	r3, [r7, #8]
+ 80006a6:	e009      	b.n	80006bc <Gpt_GetTimeRemaining+0xb0>
+            case GPT_TIMER_CHANNEL_12: UsedTimerRegSet =TIM12;break;
+ 80006a8:	4b17      	ldr	r3, [pc, #92]	; (8000708 <Gpt_GetTimeRemaining+0xfc>)
+ 80006aa:	60bb      	str	r3, [r7, #8]
+ 80006ac:	e006      	b.n	80006bc <Gpt_GetTimeRemaining+0xb0>
+            case GPT_TIMER_CHANNEL_13: UsedTimerRegSet =TIM13;break;
+ 80006ae:	4b17      	ldr	r3, [pc, #92]	; (800070c <Gpt_GetTimeRemaining+0x100>)
+ 80006b0:	60bb      	str	r3, [r7, #8]
+ 80006b2:	e003      	b.n	80006bc <Gpt_GetTimeRemaining+0xb0>
+            case GPT_TIMER_CHANNEL_14: UsedTimerRegSet =TIM14;break;
+ 80006b4:	4b16      	ldr	r3, [pc, #88]	; (8000710 <Gpt_GetTimeRemaining+0x104>)
+ 80006b6:	60bb      	str	r3, [r7, #8]
+ 80006b8:	e000      	b.n	80006bc <Gpt_GetTimeRemaining+0xb0>
             case GPT_TIMER_CHANNEL_15: /*********/;break;
             default:break;
- 8000672:	bf00      	nop
+ 80006ba:	bf00      	nop
         }
         if(Channel==GPT_SYSTICK_TIMER)
- 8000674:	79fb      	ldrb	r3, [r7, #7]
- 8000676:	2b0f      	cmp	r3, #15
- 8000678:	d103      	bne.n	8000682 <Gpt_GetTimeRemaining+0xbe>
+ 80006bc:	79fb      	ldrb	r3, [r7, #7]
+ 80006be:	2b0f      	cmp	r3, #15
+ 80006c0:	d103      	bne.n	80006ca <Gpt_GetTimeRemaining+0xbe>
         {
            ReturnValue=(SYSTICK->STK_VAL);
- 800067a:	4b14      	ldr	r3, [pc, #80]	; (80006cc <Gpt_GetTimeRemaining+0x108>)
- 800067c:	689b      	ldr	r3, [r3, #8]
- 800067e:	60fb      	str	r3, [r7, #12]
- 8000680:	e002      	b.n	8000688 <Gpt_GetTimeRemaining+0xc4>
+ 80006c2:	4b14      	ldr	r3, [pc, #80]	; (8000714 <Gpt_GetTimeRemaining+0x108>)
+ 80006c4:	689b      	ldr	r3, [r3, #8]
+ 80006c6:	60fb      	str	r3, [r7, #12]
+ 80006c8:	e002      	b.n	80006d0 <Gpt_GetTimeRemaining+0xc4>
         }
         else
         {
         	ReturnValue= UsedTimerRegSet->CNT;
- 8000682:	68bb      	ldr	r3, [r7, #8]
- 8000684:	6a5b      	ldr	r3, [r3, #36]	; 0x24
- 8000686:	60fb      	str	r3, [r7, #12]
+ 80006ca:	68bb      	ldr	r3, [r7, #8]
+ 80006cc:	6a5b      	ldr	r3, [r3, #36]	; 0x24
+ 80006ce:	60fb      	str	r3, [r7, #12]
         }
 
         return ReturnValue;
- 8000688:	68fb      	ldr	r3, [r7, #12]
+ 80006d0:	68fb      	ldr	r3, [r7, #12]
 }		
- 800068a:	4618      	mov	r0, r3
- 800068c:	3714      	adds	r7, #20
- 800068e:	46bd      	mov	sp, r7
- 8000690:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000694:	4770      	bx	lr
- 8000696:	bf00      	nop
- 8000698:	40010000 	.word	0x40010000
- 800069c:	40000400 	.word	0x40000400
- 80006a0:	40000800 	.word	0x40000800
- 80006a4:	40000c00 	.word	0x40000c00
- 80006a8:	40001000 	.word	0x40001000
- 80006ac:	40001400 	.word	0x40001400
- 80006b0:	40010400 	.word	0x40010400
- 80006b4:	40014000 	.word	0x40014000
- 80006b8:	40014400 	.word	0x40014400
- 80006bc:	40014800 	.word	0x40014800
- 80006c0:	40001800 	.word	0x40001800
- 80006c4:	40001c00 	.word	0x40001c00
- 80006c8:	40002000 	.word	0x40002000
- 80006cc:	e000e010 	.word	0xe000e010
+ 80006d2:	4618      	mov	r0, r3
+ 80006d4:	3714      	adds	r7, #20
+ 80006d6:	46bd      	mov	sp, r7
+ 80006d8:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80006dc:	4770      	bx	lr
+ 80006de:	bf00      	nop
+ 80006e0:	40010000 	.word	0x40010000
+ 80006e4:	40000400 	.word	0x40000400
+ 80006e8:	40000800 	.word	0x40000800
+ 80006ec:	40000c00 	.word	0x40000c00
+ 80006f0:	40001000 	.word	0x40001000
+ 80006f4:	40001400 	.word	0x40001400
+ 80006f8:	40010400 	.word	0x40010400
+ 80006fc:	40014000 	.word	0x40014000
+ 8000700:	40014400 	.word	0x40014400
+ 8000704:	40014800 	.word	0x40014800
+ 8000708:	40001800 	.word	0x40001800
+ 800070c:	40001c00 	.word	0x40001c00
+ 8000710:	40002000 	.word	0x40002000
+ 8000714:	e000e010 	.word	0xe000e010
 
-080006d0 <Gpt_StartTimer>:
+08000718 <Gpt_StartTimer>:
 *  @retval             : None
 *  Description         : Starts a timer channel.
 ***********************************************************************************************************************
 */
 void Gpt_StartTimer(Gpt_ChannelType Channel,Gpt_ValueType Value )
 {
- 80006d0:	b480      	push	{r7}
- 80006d2:	b085      	sub	sp, #20
- 80006d4:	af00      	add	r7, sp, #0
- 80006d6:	4603      	mov	r3, r0
- 80006d8:	6039      	str	r1, [r7, #0]
- 80006da:	71fb      	strb	r3, [r7, #7]
+ 8000718:	b480      	push	{r7}
+ 800071a:	b085      	sub	sp, #20
+ 800071c:	af00      	add	r7, sp, #0
+ 800071e:	4603      	mov	r3, r0
+ 8000720:	6039      	str	r1, [r7, #0]
+ 8000722:	71fb      	strb	r3, [r7, #7]
     TIM_RegDef_t*   UsedTimerRegSet;
     switch(Channel)
- 80006dc:	79fb      	ldrb	r3, [r7, #7]
- 80006de:	3b01      	subs	r3, #1
- 80006e0:	2b0e      	cmp	r3, #14
- 80006e2:	d84c      	bhi.n	800077e <Gpt_StartTimer+0xae>
- 80006e4:	a201      	add	r2, pc, #4	; (adr r2, 80006ec <Gpt_StartTimer+0x1c>)
- 80006e6:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 80006ea:	bf00      	nop
- 80006ec:	08000729 	.word	0x08000729
- 80006f0:	0800072f 	.word	0x0800072f
- 80006f4:	08000737 	.word	0x08000737
- 80006f8:	0800073d 	.word	0x0800073d
- 80006fc:	08000743 	.word	0x08000743
- 8000700:	08000749 	.word	0x08000749
- 8000704:	0800074f 	.word	0x0800074f
- 8000708:	08000755 	.word	0x08000755
- 800070c:	0800075b 	.word	0x0800075b
- 8000710:	08000761 	.word	0x08000761
- 8000714:	08000767 	.word	0x08000767
- 8000718:	0800076d 	.word	0x0800076d
- 800071c:	08000773 	.word	0x08000773
- 8000720:	08000779 	.word	0x08000779
- 8000724:	0800077f 	.word	0x0800077f
+ 8000724:	79fb      	ldrb	r3, [r7, #7]
+ 8000726:	3b01      	subs	r3, #1
+ 8000728:	2b0e      	cmp	r3, #14
+ 800072a:	d84c      	bhi.n	80007c6 <Gpt_StartTimer+0xae>
+ 800072c:	a201      	add	r2, pc, #4	; (adr r2, 8000734 <Gpt_StartTimer+0x1c>)
+ 800072e:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 8000732:	bf00      	nop
+ 8000734:	08000771 	.word	0x08000771
+ 8000738:	08000777 	.word	0x08000777
+ 800073c:	0800077f 	.word	0x0800077f
+ 8000740:	08000785 	.word	0x08000785
+ 8000744:	0800078b 	.word	0x0800078b
+ 8000748:	08000791 	.word	0x08000791
+ 800074c:	08000797 	.word	0x08000797
+ 8000750:	0800079d 	.word	0x0800079d
+ 8000754:	080007a3 	.word	0x080007a3
+ 8000758:	080007a9 	.word	0x080007a9
+ 800075c:	080007af 	.word	0x080007af
+ 8000760:	080007b5 	.word	0x080007b5
+ 8000764:	080007bb 	.word	0x080007bb
+ 8000768:	080007c1 	.word	0x080007c1
+ 800076c:	080007c7 	.word	0x080007c7
         {
             case GPT_TIMER_CHANNEL_1 : UsedTimerRegSet =TIM1 ;break;
- 8000728:	4b23      	ldr	r3, [pc, #140]	; (80007b8 <Gpt_StartTimer+0xe8>)
- 800072a:	60fb      	str	r3, [r7, #12]
- 800072c:	e028      	b.n	8000780 <Gpt_StartTimer+0xb0>
+ 8000770:	4b23      	ldr	r3, [pc, #140]	; (8000800 <Gpt_StartTimer+0xe8>)
+ 8000772:	60fb      	str	r3, [r7, #12]
+ 8000774:	e028      	b.n	80007c8 <Gpt_StartTimer+0xb0>
             case GPT_TIMER_CHANNEL_2 : UsedTimerRegSet =TIM2 ;break;
- 800072e:	f04f 4380 	mov.w	r3, #1073741824	; 0x40000000
- 8000732:	60fb      	str	r3, [r7, #12]
- 8000734:	e024      	b.n	8000780 <Gpt_StartTimer+0xb0>
-            case GPT_TIMER_CHANNEL_3 : UsedTimerRegSet =TIM3 ;break;
- 8000736:	4b21      	ldr	r3, [pc, #132]	; (80007bc <Gpt_StartTimer+0xec>)
- 8000738:	60fb      	str	r3, [r7, #12]
- 800073a:	e021      	b.n	8000780 <Gpt_StartTimer+0xb0>
-            case GPT_TIMER_CHANNEL_4 : UsedTimerRegSet =TIM4 ;break;
- 800073c:	4b20      	ldr	r3, [pc, #128]	; (80007c0 <Gpt_StartTimer+0xf0>)
- 800073e:	60fb      	str	r3, [r7, #12]
- 8000740:	e01e      	b.n	8000780 <Gpt_StartTimer+0xb0>
-            case GPT_TIMER_CHANNEL_5 : UsedTimerRegSet =TIM5 ;break;
- 8000742:	4b20      	ldr	r3, [pc, #128]	; (80007c4 <Gpt_StartTimer+0xf4>)
- 8000744:	60fb      	str	r3, [r7, #12]
- 8000746:	e01b      	b.n	8000780 <Gpt_StartTimer+0xb0>
-            case GPT_TIMER_CHANNEL_6 : UsedTimerRegSet =TIM6 ;break;
- 8000748:	4b1f      	ldr	r3, [pc, #124]	; (80007c8 <Gpt_StartTimer+0xf8>)
- 800074a:	60fb      	str	r3, [r7, #12]
- 800074c:	e018      	b.n	8000780 <Gpt_StartTimer+0xb0>
-            case GPT_TIMER_CHANNEL_7 : UsedTimerRegSet =TIM7 ;break;
- 800074e:	4b1f      	ldr	r3, [pc, #124]	; (80007cc <Gpt_StartTimer+0xfc>)
- 8000750:	60fb      	str	r3, [r7, #12]
- 8000752:	e015      	b.n	8000780 <Gpt_StartTimer+0xb0>
-            case GPT_TIMER_CHANNEL_8 : UsedTimerRegSet =TIM8 ;break;
- 8000754:	4b1e      	ldr	r3, [pc, #120]	; (80007d0 <Gpt_StartTimer+0x100>)
- 8000756:	60fb      	str	r3, [r7, #12]
- 8000758:	e012      	b.n	8000780 <Gpt_StartTimer+0xb0>
-            case GPT_TIMER_CHANNEL_9 : UsedTimerRegSet =TIM9 ;break;
- 800075a:	4b1e      	ldr	r3, [pc, #120]	; (80007d4 <Gpt_StartTimer+0x104>)
- 800075c:	60fb      	str	r3, [r7, #12]
- 800075e:	e00f      	b.n	8000780 <Gpt_StartTimer+0xb0>
-            case GPT_TIMER_CHANNEL_10: UsedTimerRegSet =TIM10;break;
- 8000760:	4b1d      	ldr	r3, [pc, #116]	; (80007d8 <Gpt_StartTimer+0x108>)
- 8000762:	60fb      	str	r3, [r7, #12]
- 8000764:	e00c      	b.n	8000780 <Gpt_StartTimer+0xb0>
-            case GPT_TIMER_CHANNEL_11: UsedTimerRegSet =TIM11;break;
- 8000766:	4b1d      	ldr	r3, [pc, #116]	; (80007dc <Gpt_StartTimer+0x10c>)
- 8000768:	60fb      	str	r3, [r7, #12]
- 800076a:	e009      	b.n	8000780 <Gpt_StartTimer+0xb0>
-            case GPT_TIMER_CHANNEL_12: UsedTimerRegSet =TIM12;break;
- 800076c:	4b1c      	ldr	r3, [pc, #112]	; (80007e0 <Gpt_StartTimer+0x110>)
- 800076e:	60fb      	str	r3, [r7, #12]
- 8000770:	e006      	b.n	8000780 <Gpt_StartTimer+0xb0>
-            case GPT_TIMER_CHANNEL_13: UsedTimerRegSet =TIM13;break;
- 8000772:	4b1c      	ldr	r3, [pc, #112]	; (80007e4 <Gpt_StartTimer+0x114>)
- 8000774:	60fb      	str	r3, [r7, #12]
- 8000776:	e003      	b.n	8000780 <Gpt_StartTimer+0xb0>
-            case GPT_TIMER_CHANNEL_14: UsedTimerRegSet =TIM14;break;
- 8000778:	4b1b      	ldr	r3, [pc, #108]	; (80007e8 <Gpt_StartTimer+0x118>)
+ 8000776:	f04f 4380 	mov.w	r3, #1073741824	; 0x40000000
  800077a:	60fb      	str	r3, [r7, #12]
- 800077c:	e000      	b.n	8000780 <Gpt_StartTimer+0xb0>
+ 800077c:	e024      	b.n	80007c8 <Gpt_StartTimer+0xb0>
+            case GPT_TIMER_CHANNEL_3 : UsedTimerRegSet =TIM3 ;break;
+ 800077e:	4b21      	ldr	r3, [pc, #132]	; (8000804 <Gpt_StartTimer+0xec>)
+ 8000780:	60fb      	str	r3, [r7, #12]
+ 8000782:	e021      	b.n	80007c8 <Gpt_StartTimer+0xb0>
+            case GPT_TIMER_CHANNEL_4 : UsedTimerRegSet =TIM4 ;break;
+ 8000784:	4b20      	ldr	r3, [pc, #128]	; (8000808 <Gpt_StartTimer+0xf0>)
+ 8000786:	60fb      	str	r3, [r7, #12]
+ 8000788:	e01e      	b.n	80007c8 <Gpt_StartTimer+0xb0>
+            case GPT_TIMER_CHANNEL_5 : UsedTimerRegSet =TIM5 ;break;
+ 800078a:	4b20      	ldr	r3, [pc, #128]	; (800080c <Gpt_StartTimer+0xf4>)
+ 800078c:	60fb      	str	r3, [r7, #12]
+ 800078e:	e01b      	b.n	80007c8 <Gpt_StartTimer+0xb0>
+            case GPT_TIMER_CHANNEL_6 : UsedTimerRegSet =TIM6 ;break;
+ 8000790:	4b1f      	ldr	r3, [pc, #124]	; (8000810 <Gpt_StartTimer+0xf8>)
+ 8000792:	60fb      	str	r3, [r7, #12]
+ 8000794:	e018      	b.n	80007c8 <Gpt_StartTimer+0xb0>
+            case GPT_TIMER_CHANNEL_7 : UsedTimerRegSet =TIM7 ;break;
+ 8000796:	4b1f      	ldr	r3, [pc, #124]	; (8000814 <Gpt_StartTimer+0xfc>)
+ 8000798:	60fb      	str	r3, [r7, #12]
+ 800079a:	e015      	b.n	80007c8 <Gpt_StartTimer+0xb0>
+            case GPT_TIMER_CHANNEL_8 : UsedTimerRegSet =TIM8 ;break;
+ 800079c:	4b1e      	ldr	r3, [pc, #120]	; (8000818 <Gpt_StartTimer+0x100>)
+ 800079e:	60fb      	str	r3, [r7, #12]
+ 80007a0:	e012      	b.n	80007c8 <Gpt_StartTimer+0xb0>
+            case GPT_TIMER_CHANNEL_9 : UsedTimerRegSet =TIM9 ;break;
+ 80007a2:	4b1e      	ldr	r3, [pc, #120]	; (800081c <Gpt_StartTimer+0x104>)
+ 80007a4:	60fb      	str	r3, [r7, #12]
+ 80007a6:	e00f      	b.n	80007c8 <Gpt_StartTimer+0xb0>
+            case GPT_TIMER_CHANNEL_10: UsedTimerRegSet =TIM10;break;
+ 80007a8:	4b1d      	ldr	r3, [pc, #116]	; (8000820 <Gpt_StartTimer+0x108>)
+ 80007aa:	60fb      	str	r3, [r7, #12]
+ 80007ac:	e00c      	b.n	80007c8 <Gpt_StartTimer+0xb0>
+            case GPT_TIMER_CHANNEL_11: UsedTimerRegSet =TIM11;break;
+ 80007ae:	4b1d      	ldr	r3, [pc, #116]	; (8000824 <Gpt_StartTimer+0x10c>)
+ 80007b0:	60fb      	str	r3, [r7, #12]
+ 80007b2:	e009      	b.n	80007c8 <Gpt_StartTimer+0xb0>
+            case GPT_TIMER_CHANNEL_12: UsedTimerRegSet =TIM12;break;
+ 80007b4:	4b1c      	ldr	r3, [pc, #112]	; (8000828 <Gpt_StartTimer+0x110>)
+ 80007b6:	60fb      	str	r3, [r7, #12]
+ 80007b8:	e006      	b.n	80007c8 <Gpt_StartTimer+0xb0>
+            case GPT_TIMER_CHANNEL_13: UsedTimerRegSet =TIM13;break;
+ 80007ba:	4b1c      	ldr	r3, [pc, #112]	; (800082c <Gpt_StartTimer+0x114>)
+ 80007bc:	60fb      	str	r3, [r7, #12]
+ 80007be:	e003      	b.n	80007c8 <Gpt_StartTimer+0xb0>
+            case GPT_TIMER_CHANNEL_14: UsedTimerRegSet =TIM14;break;
+ 80007c0:	4b1b      	ldr	r3, [pc, #108]	; (8000830 <Gpt_StartTimer+0x118>)
+ 80007c2:	60fb      	str	r3, [r7, #12]
+ 80007c4:	e000      	b.n	80007c8 <Gpt_StartTimer+0xb0>
             case GPT_TIMER_CHANNEL_15: /*********/;break;
             default:break;
- 800077e:	bf00      	nop
+ 80007c6:	bf00      	nop
         }
         if(Channel==GPT_SYSTICK_TIMER)
- 8000780:	79fb      	ldrb	r3, [r7, #7]
- 8000782:	2b0f      	cmp	r3, #15
- 8000784:	d10c      	bne.n	80007a0 <Gpt_StartTimer+0xd0>
+ 80007c8:	79fb      	ldrb	r3, [r7, #7]
+ 80007ca:	2b0f      	cmp	r3, #15
+ 80007cc:	d10c      	bne.n	80007e8 <Gpt_StartTimer+0xd0>
         {
             /*Put Value in STK Load register*/
             SYSTICK->STK_LOAD = Value;
- 8000786:	4a19      	ldr	r2, [pc, #100]	; (80007ec <Gpt_StartTimer+0x11c>)
- 8000788:	683b      	ldr	r3, [r7, #0]
- 800078a:	6053      	str	r3, [r2, #4]
+ 80007ce:	4a19      	ldr	r2, [pc, #100]	; (8000834 <Gpt_StartTimer+0x11c>)
+ 80007d0:	683b      	ldr	r3, [r7, #0]
+ 80007d2:	6053      	str	r3, [r2, #4]
             /*STK counter = 0*/
             SYSTICK->STK_VAL=0;
- 800078c:	4b17      	ldr	r3, [pc, #92]	; (80007ec <Gpt_StartTimer+0x11c>)
- 800078e:	2200      	movs	r2, #0
- 8000790:	609a      	str	r2, [r3, #8]
+ 80007d4:	4b17      	ldr	r3, [pc, #92]	; (8000834 <Gpt_StartTimer+0x11c>)
+ 80007d6:	2200      	movs	r2, #0
+ 80007d8:	609a      	str	r2, [r3, #8]
             /*Enable counter*/
             SYSTICK->STK_CTRL |= (STCR_MASK<<STCR_COUNTER_PIN_ACCESS);// To start counting down
- 8000792:	4b16      	ldr	r3, [pc, #88]	; (80007ec <Gpt_StartTimer+0x11c>)
- 8000794:	681b      	ldr	r3, [r3, #0]
- 8000796:	4a15      	ldr	r2, [pc, #84]	; (80007ec <Gpt_StartTimer+0x11c>)
- 8000798:	f043 0301 	orr.w	r3, r3, #1
- 800079c:	6013      	str	r3, [r2, #0]
+ 80007da:	4b16      	ldr	r3, [pc, #88]	; (8000834 <Gpt_StartTimer+0x11c>)
+ 80007dc:	681b      	ldr	r3, [r3, #0]
+ 80007de:	4a15      	ldr	r2, [pc, #84]	; (8000834 <Gpt_StartTimer+0x11c>)
+ 80007e0:	f043 0301 	orr.w	r3, r3, #1
+ 80007e4:	6013      	str	r3, [r2, #0]
         {
        // UsedTimerRegSet->ARR = Value;
         UsedTimerRegSet->CR1|=(1<<0);
         }
 
 }	
- 800079e:	e005      	b.n	80007ac <Gpt_StartTimer+0xdc>
+ 80007e6:	e005      	b.n	80007f4 <Gpt_StartTimer+0xdc>
         UsedTimerRegSet->CR1|=(1<<0);
- 80007a0:	68fb      	ldr	r3, [r7, #12]
- 80007a2:	681b      	ldr	r3, [r3, #0]
- 80007a4:	f043 0201 	orr.w	r2, r3, #1
- 80007a8:	68fb      	ldr	r3, [r7, #12]
- 80007aa:	601a      	str	r2, [r3, #0]
+ 80007e8:	68fb      	ldr	r3, [r7, #12]
+ 80007ea:	681b      	ldr	r3, [r3, #0]
+ 80007ec:	f043 0201 	orr.w	r2, r3, #1
+ 80007f0:	68fb      	ldr	r3, [r7, #12]
+ 80007f2:	601a      	str	r2, [r3, #0]
 }	
- 80007ac:	bf00      	nop
- 80007ae:	3714      	adds	r7, #20
- 80007b0:	46bd      	mov	sp, r7
- 80007b2:	f85d 7b04 	ldr.w	r7, [sp], #4
- 80007b6:	4770      	bx	lr
- 80007b8:	40010000 	.word	0x40010000
- 80007bc:	40000400 	.word	0x40000400
- 80007c0:	40000800 	.word	0x40000800
- 80007c4:	40000c00 	.word	0x40000c00
- 80007c8:	40001000 	.word	0x40001000
- 80007cc:	40001400 	.word	0x40001400
- 80007d0:	40010400 	.word	0x40010400
- 80007d4:	40014000 	.word	0x40014000
- 80007d8:	40014400 	.word	0x40014400
- 80007dc:	40014800 	.word	0x40014800
- 80007e0:	40001800 	.word	0x40001800
- 80007e4:	40001c00 	.word	0x40001c00
- 80007e8:	40002000 	.word	0x40002000
- 80007ec:	e000e010 	.word	0xe000e010
+ 80007f4:	bf00      	nop
+ 80007f6:	3714      	adds	r7, #20
+ 80007f8:	46bd      	mov	sp, r7
+ 80007fa:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80007fe:	4770      	bx	lr
+ 8000800:	40010000 	.word	0x40010000
+ 8000804:	40000400 	.word	0x40000400
+ 8000808:	40000800 	.word	0x40000800
+ 800080c:	40000c00 	.word	0x40000c00
+ 8000810:	40001000 	.word	0x40001000
+ 8000814:	40001400 	.word	0x40001400
+ 8000818:	40010400 	.word	0x40010400
+ 800081c:	40014000 	.word	0x40014000
+ 8000820:	40014400 	.word	0x40014400
+ 8000824:	40014800 	.word	0x40014800
+ 8000828:	40001800 	.word	0x40001800
+ 800082c:	40001c00 	.word	0x40001c00
+ 8000830:	40002000 	.word	0x40002000
+ 8000834:	e000e010 	.word	0xe000e010
 
-080007f0 <Gpt_EnableNotification>:
+08000838 <Gpt_EnableNotification>:
 *  Description         : Enables the interrupt notification for a channel
 *                        relevant in normal mode).
 ***********************************************************************************************************************
 */
 void Gpt_EnableNotification	(Gpt_ChannelType Channel)
 {
- 80007f0:	b480      	push	{r7}
- 80007f2:	b085      	sub	sp, #20
- 80007f4:	af00      	add	r7, sp, #0
- 80007f6:	4603      	mov	r3, r0
- 80007f8:	71fb      	strb	r3, [r7, #7]
+ 8000838:	b480      	push	{r7}
+ 800083a:	b085      	sub	sp, #20
+ 800083c:	af00      	add	r7, sp, #0
+ 800083e:	4603      	mov	r3, r0
+ 8000840:	71fb      	strb	r3, [r7, #7]
     TIM_RegDef_t*   UsedTimerRegSet;
     switch(Channel)
- 80007fa:	79fb      	ldrb	r3, [r7, #7]
- 80007fc:	3b01      	subs	r3, #1
- 80007fe:	2b0e      	cmp	r3, #14
- 8000800:	d84b      	bhi.n	800089a <Gpt_EnableNotification+0xaa>
- 8000802:	a201      	add	r2, pc, #4	; (adr r2, 8000808 <Gpt_EnableNotification+0x18>)
- 8000804:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 8000808:	08000845 	.word	0x08000845
- 800080c:	0800084b 	.word	0x0800084b
- 8000810:	08000853 	.word	0x08000853
- 8000814:	08000859 	.word	0x08000859
- 8000818:	0800085f 	.word	0x0800085f
- 800081c:	08000865 	.word	0x08000865
- 8000820:	0800086b 	.word	0x0800086b
- 8000824:	08000871 	.word	0x08000871
- 8000828:	08000877 	.word	0x08000877
- 800082c:	0800087d 	.word	0x0800087d
- 8000830:	08000883 	.word	0x08000883
- 8000834:	08000889 	.word	0x08000889
- 8000838:	0800088f 	.word	0x0800088f
- 800083c:	08000895 	.word	0x08000895
- 8000840:	0800089b 	.word	0x0800089b
+ 8000842:	79fb      	ldrb	r3, [r7, #7]
+ 8000844:	3b01      	subs	r3, #1
+ 8000846:	2b0e      	cmp	r3, #14
+ 8000848:	d84b      	bhi.n	80008e2 <Gpt_EnableNotification+0xaa>
+ 800084a:	a201      	add	r2, pc, #4	; (adr r2, 8000850 <Gpt_EnableNotification+0x18>)
+ 800084c:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 8000850:	0800088d 	.word	0x0800088d
+ 8000854:	08000893 	.word	0x08000893
+ 8000858:	0800089b 	.word	0x0800089b
+ 800085c:	080008a1 	.word	0x080008a1
+ 8000860:	080008a7 	.word	0x080008a7
+ 8000864:	080008ad 	.word	0x080008ad
+ 8000868:	080008b3 	.word	0x080008b3
+ 800086c:	080008b9 	.word	0x080008b9
+ 8000870:	080008bf 	.word	0x080008bf
+ 8000874:	080008c5 	.word	0x080008c5
+ 8000878:	080008cb 	.word	0x080008cb
+ 800087c:	080008d1 	.word	0x080008d1
+ 8000880:	080008d7 	.word	0x080008d7
+ 8000884:	080008dd 	.word	0x080008dd
+ 8000888:	080008e3 	.word	0x080008e3
         {
             case GPT_TIMER_CHANNEL_1 : UsedTimerRegSet =TIM1 ;break;
- 8000844:	4b23      	ldr	r3, [pc, #140]	; (80008d4 <Gpt_EnableNotification+0xe4>)
- 8000846:	60fb      	str	r3, [r7, #12]
- 8000848:	e028      	b.n	800089c <Gpt_EnableNotification+0xac>
+ 800088c:	4b23      	ldr	r3, [pc, #140]	; (800091c <Gpt_EnableNotification+0xe4>)
+ 800088e:	60fb      	str	r3, [r7, #12]
+ 8000890:	e028      	b.n	80008e4 <Gpt_EnableNotification+0xac>
             case GPT_TIMER_CHANNEL_2 : UsedTimerRegSet =TIM2 ;break;
- 800084a:	f04f 4380 	mov.w	r3, #1073741824	; 0x40000000
- 800084e:	60fb      	str	r3, [r7, #12]
- 8000850:	e024      	b.n	800089c <Gpt_EnableNotification+0xac>
-            case GPT_TIMER_CHANNEL_3 : UsedTimerRegSet =TIM3 ;break;
- 8000852:	4b21      	ldr	r3, [pc, #132]	; (80008d8 <Gpt_EnableNotification+0xe8>)
- 8000854:	60fb      	str	r3, [r7, #12]
- 8000856:	e021      	b.n	800089c <Gpt_EnableNotification+0xac>
-            case GPT_TIMER_CHANNEL_4 : UsedTimerRegSet =TIM4 ;break;
- 8000858:	4b20      	ldr	r3, [pc, #128]	; (80008dc <Gpt_EnableNotification+0xec>)
- 800085a:	60fb      	str	r3, [r7, #12]
- 800085c:	e01e      	b.n	800089c <Gpt_EnableNotification+0xac>
-            case GPT_TIMER_CHANNEL_5 : UsedTimerRegSet =TIM5 ;break;
- 800085e:	4b20      	ldr	r3, [pc, #128]	; (80008e0 <Gpt_EnableNotification+0xf0>)
- 8000860:	60fb      	str	r3, [r7, #12]
- 8000862:	e01b      	b.n	800089c <Gpt_EnableNotification+0xac>
-            case GPT_TIMER_CHANNEL_6 : UsedTimerRegSet =TIM6 ;break;
- 8000864:	4b1f      	ldr	r3, [pc, #124]	; (80008e4 <Gpt_EnableNotification+0xf4>)
- 8000866:	60fb      	str	r3, [r7, #12]
- 8000868:	e018      	b.n	800089c <Gpt_EnableNotification+0xac>
-            case GPT_TIMER_CHANNEL_7 : UsedTimerRegSet =TIM7 ;break;
- 800086a:	4b1f      	ldr	r3, [pc, #124]	; (80008e8 <Gpt_EnableNotification+0xf8>)
- 800086c:	60fb      	str	r3, [r7, #12]
- 800086e:	e015      	b.n	800089c <Gpt_EnableNotification+0xac>
-            case GPT_TIMER_CHANNEL_8 : UsedTimerRegSet =TIM8 ;break;
- 8000870:	4b1e      	ldr	r3, [pc, #120]	; (80008ec <Gpt_EnableNotification+0xfc>)
- 8000872:	60fb      	str	r3, [r7, #12]
- 8000874:	e012      	b.n	800089c <Gpt_EnableNotification+0xac>
-            case GPT_TIMER_CHANNEL_9 : UsedTimerRegSet =TIM9 ;break;
- 8000876:	4b1e      	ldr	r3, [pc, #120]	; (80008f0 <Gpt_EnableNotification+0x100>)
- 8000878:	60fb      	str	r3, [r7, #12]
- 800087a:	e00f      	b.n	800089c <Gpt_EnableNotification+0xac>
-            case GPT_TIMER_CHANNEL_10: UsedTimerRegSet =TIM10;break;
- 800087c:	4b1d      	ldr	r3, [pc, #116]	; (80008f4 <Gpt_EnableNotification+0x104>)
- 800087e:	60fb      	str	r3, [r7, #12]
- 8000880:	e00c      	b.n	800089c <Gpt_EnableNotification+0xac>
-            case GPT_TIMER_CHANNEL_11: UsedTimerRegSet =TIM11;break;
- 8000882:	4b1d      	ldr	r3, [pc, #116]	; (80008f8 <Gpt_EnableNotification+0x108>)
- 8000884:	60fb      	str	r3, [r7, #12]
- 8000886:	e009      	b.n	800089c <Gpt_EnableNotification+0xac>
-            case GPT_TIMER_CHANNEL_12: UsedTimerRegSet =TIM12;break;
- 8000888:	4b1c      	ldr	r3, [pc, #112]	; (80008fc <Gpt_EnableNotification+0x10c>)
- 800088a:	60fb      	str	r3, [r7, #12]
- 800088c:	e006      	b.n	800089c <Gpt_EnableNotification+0xac>
-            case GPT_TIMER_CHANNEL_13: UsedTimerRegSet =TIM13;break;
- 800088e:	4b1c      	ldr	r3, [pc, #112]	; (8000900 <Gpt_EnableNotification+0x110>)
- 8000890:	60fb      	str	r3, [r7, #12]
- 8000892:	e003      	b.n	800089c <Gpt_EnableNotification+0xac>
-            case GPT_TIMER_CHANNEL_14: UsedTimerRegSet =TIM14;break;
- 8000894:	4b1b      	ldr	r3, [pc, #108]	; (8000904 <Gpt_EnableNotification+0x114>)
+ 8000892:	f04f 4380 	mov.w	r3, #1073741824	; 0x40000000
  8000896:	60fb      	str	r3, [r7, #12]
- 8000898:	e000      	b.n	800089c <Gpt_EnableNotification+0xac>
+ 8000898:	e024      	b.n	80008e4 <Gpt_EnableNotification+0xac>
+            case GPT_TIMER_CHANNEL_3 : UsedTimerRegSet =TIM3 ;break;
+ 800089a:	4b21      	ldr	r3, [pc, #132]	; (8000920 <Gpt_EnableNotification+0xe8>)
+ 800089c:	60fb      	str	r3, [r7, #12]
+ 800089e:	e021      	b.n	80008e4 <Gpt_EnableNotification+0xac>
+            case GPT_TIMER_CHANNEL_4 : UsedTimerRegSet =TIM4 ;break;
+ 80008a0:	4b20      	ldr	r3, [pc, #128]	; (8000924 <Gpt_EnableNotification+0xec>)
+ 80008a2:	60fb      	str	r3, [r7, #12]
+ 80008a4:	e01e      	b.n	80008e4 <Gpt_EnableNotification+0xac>
+            case GPT_TIMER_CHANNEL_5 : UsedTimerRegSet =TIM5 ;break;
+ 80008a6:	4b20      	ldr	r3, [pc, #128]	; (8000928 <Gpt_EnableNotification+0xf0>)
+ 80008a8:	60fb      	str	r3, [r7, #12]
+ 80008aa:	e01b      	b.n	80008e4 <Gpt_EnableNotification+0xac>
+            case GPT_TIMER_CHANNEL_6 : UsedTimerRegSet =TIM6 ;break;
+ 80008ac:	4b1f      	ldr	r3, [pc, #124]	; (800092c <Gpt_EnableNotification+0xf4>)
+ 80008ae:	60fb      	str	r3, [r7, #12]
+ 80008b0:	e018      	b.n	80008e4 <Gpt_EnableNotification+0xac>
+            case GPT_TIMER_CHANNEL_7 : UsedTimerRegSet =TIM7 ;break;
+ 80008b2:	4b1f      	ldr	r3, [pc, #124]	; (8000930 <Gpt_EnableNotification+0xf8>)
+ 80008b4:	60fb      	str	r3, [r7, #12]
+ 80008b6:	e015      	b.n	80008e4 <Gpt_EnableNotification+0xac>
+            case GPT_TIMER_CHANNEL_8 : UsedTimerRegSet =TIM8 ;break;
+ 80008b8:	4b1e      	ldr	r3, [pc, #120]	; (8000934 <Gpt_EnableNotification+0xfc>)
+ 80008ba:	60fb      	str	r3, [r7, #12]
+ 80008bc:	e012      	b.n	80008e4 <Gpt_EnableNotification+0xac>
+            case GPT_TIMER_CHANNEL_9 : UsedTimerRegSet =TIM9 ;break;
+ 80008be:	4b1e      	ldr	r3, [pc, #120]	; (8000938 <Gpt_EnableNotification+0x100>)
+ 80008c0:	60fb      	str	r3, [r7, #12]
+ 80008c2:	e00f      	b.n	80008e4 <Gpt_EnableNotification+0xac>
+            case GPT_TIMER_CHANNEL_10: UsedTimerRegSet =TIM10;break;
+ 80008c4:	4b1d      	ldr	r3, [pc, #116]	; (800093c <Gpt_EnableNotification+0x104>)
+ 80008c6:	60fb      	str	r3, [r7, #12]
+ 80008c8:	e00c      	b.n	80008e4 <Gpt_EnableNotification+0xac>
+            case GPT_TIMER_CHANNEL_11: UsedTimerRegSet =TIM11;break;
+ 80008ca:	4b1d      	ldr	r3, [pc, #116]	; (8000940 <Gpt_EnableNotification+0x108>)
+ 80008cc:	60fb      	str	r3, [r7, #12]
+ 80008ce:	e009      	b.n	80008e4 <Gpt_EnableNotification+0xac>
+            case GPT_TIMER_CHANNEL_12: UsedTimerRegSet =TIM12;break;
+ 80008d0:	4b1c      	ldr	r3, [pc, #112]	; (8000944 <Gpt_EnableNotification+0x10c>)
+ 80008d2:	60fb      	str	r3, [r7, #12]
+ 80008d4:	e006      	b.n	80008e4 <Gpt_EnableNotification+0xac>
+            case GPT_TIMER_CHANNEL_13: UsedTimerRegSet =TIM13;break;
+ 80008d6:	4b1c      	ldr	r3, [pc, #112]	; (8000948 <Gpt_EnableNotification+0x110>)
+ 80008d8:	60fb      	str	r3, [r7, #12]
+ 80008da:	e003      	b.n	80008e4 <Gpt_EnableNotification+0xac>
+            case GPT_TIMER_CHANNEL_14: UsedTimerRegSet =TIM14;break;
+ 80008dc:	4b1b      	ldr	r3, [pc, #108]	; (800094c <Gpt_EnableNotification+0x114>)
+ 80008de:	60fb      	str	r3, [r7, #12]
+ 80008e0:	e000      	b.n	80008e4 <Gpt_EnableNotification+0xac>
             case GPT_TIMER_CHANNEL_15: /*********/;break;
             default:break;
- 800089a:	bf00      	nop
+ 80008e2:	bf00      	nop
         }
         if(Channel==GPT_SYSTICK_TIMER)
- 800089c:	79fb      	ldrb	r3, [r7, #7]
- 800089e:	2b0f      	cmp	r3, #15
- 80008a0:	d106      	bne.n	80008b0 <Gpt_EnableNotification+0xc0>
+ 80008e4:	79fb      	ldrb	r3, [r7, #7]
+ 80008e6:	2b0f      	cmp	r3, #15
+ 80008e8:	d106      	bne.n	80008f8 <Gpt_EnableNotification+0xc0>
         {
             SYSTICK ->STK_CTRL |= (STCR_MASK<<STCR_TICKINT_PIN_ACCESS);
- 80008a2:	4b19      	ldr	r3, [pc, #100]	; (8000908 <Gpt_EnableNotification+0x118>)
- 80008a4:	681b      	ldr	r3, [r3, #0]
- 80008a6:	4a18      	ldr	r2, [pc, #96]	; (8000908 <Gpt_EnableNotification+0x118>)
- 80008a8:	f043 0302 	orr.w	r3, r3, #2
- 80008ac:	6013      	str	r3, [r2, #0]
+ 80008ea:	4b19      	ldr	r3, [pc, #100]	; (8000950 <Gpt_EnableNotification+0x118>)
+ 80008ec:	681b      	ldr	r3, [r3, #0]
+ 80008ee:	4a18      	ldr	r2, [pc, #96]	; (8000950 <Gpt_EnableNotification+0x118>)
+ 80008f0:	f043 0302 	orr.w	r3, r3, #2
+ 80008f4:	6013      	str	r3, [r2, #0]
 //        	UsedTimerRegSet->EGR &=~(EGR_TG_MASK<<EGR_TG_BIT_ACCESS);
 //        	UsedTimerRegSet->EGR |= (EGR_TG_MASK<<EGR_TG_BIT_ACCESS);
         	UsedTimerRegSet->DIER&=~(DIER_TIE_MASK<<DIER_TIE_BIT_ACCESS);
         	UsedTimerRegSet->DIER |= (DIER_TIE_MASK<<DIER_TIE_BIT_ACCESS);
         }
 }	
- 80008ae:	e00b      	b.n	80008c8 <Gpt_EnableNotification+0xd8>
+ 80008f6:	e00b      	b.n	8000910 <Gpt_EnableNotification+0xd8>
         	UsedTimerRegSet->DIER&=~(DIER_TIE_MASK<<DIER_TIE_BIT_ACCESS);
- 80008b0:	68fb      	ldr	r3, [r7, #12]
- 80008b2:	68db      	ldr	r3, [r3, #12]
- 80008b4:	f023 0240 	bic.w	r2, r3, #64	; 0x40
- 80008b8:	68fb      	ldr	r3, [r7, #12]
- 80008ba:	60da      	str	r2, [r3, #12]
+ 80008f8:	68fb      	ldr	r3, [r7, #12]
+ 80008fa:	68db      	ldr	r3, [r3, #12]
+ 80008fc:	f023 0240 	bic.w	r2, r3, #64	; 0x40
+ 8000900:	68fb      	ldr	r3, [r7, #12]
+ 8000902:	60da      	str	r2, [r3, #12]
         	UsedTimerRegSet->DIER |= (DIER_TIE_MASK<<DIER_TIE_BIT_ACCESS);
- 80008bc:	68fb      	ldr	r3, [r7, #12]
- 80008be:	68db      	ldr	r3, [r3, #12]
- 80008c0:	f043 0240 	orr.w	r2, r3, #64	; 0x40
- 80008c4:	68fb      	ldr	r3, [r7, #12]
- 80008c6:	60da      	str	r2, [r3, #12]
+ 8000904:	68fb      	ldr	r3, [r7, #12]
+ 8000906:	68db      	ldr	r3, [r3, #12]
+ 8000908:	f043 0240 	orr.w	r2, r3, #64	; 0x40
+ 800090c:	68fb      	ldr	r3, [r7, #12]
+ 800090e:	60da      	str	r2, [r3, #12]
 }	
- 80008c8:	bf00      	nop
- 80008ca:	3714      	adds	r7, #20
- 80008cc:	46bd      	mov	sp, r7
- 80008ce:	f85d 7b04 	ldr.w	r7, [sp], #4
- 80008d2:	4770      	bx	lr
- 80008d4:	40010000 	.word	0x40010000
- 80008d8:	40000400 	.word	0x40000400
- 80008dc:	40000800 	.word	0x40000800
- 80008e0:	40000c00 	.word	0x40000c00
- 80008e4:	40001000 	.word	0x40001000
- 80008e8:	40001400 	.word	0x40001400
- 80008ec:	40010400 	.word	0x40010400
- 80008f0:	40014000 	.word	0x40014000
- 80008f4:	40014400 	.word	0x40014400
- 80008f8:	40014800 	.word	0x40014800
- 80008fc:	40001800 	.word	0x40001800
- 8000900:	40001c00 	.word	0x40001c00
- 8000904:	40002000 	.word	0x40002000
- 8000908:	e000e010 	.word	0xe000e010
+ 8000910:	bf00      	nop
+ 8000912:	3714      	adds	r7, #20
+ 8000914:	46bd      	mov	sp, r7
+ 8000916:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800091a:	4770      	bx	lr
+ 800091c:	40010000 	.word	0x40010000
+ 8000920:	40000400 	.word	0x40000400
+ 8000924:	40000800 	.word	0x40000800
+ 8000928:	40000c00 	.word	0x40000c00
+ 800092c:	40001000 	.word	0x40001000
+ 8000930:	40001400 	.word	0x40001400
+ 8000934:	40010400 	.word	0x40010400
+ 8000938:	40014000 	.word	0x40014000
+ 800093c:	40014400 	.word	0x40014400
+ 8000940:	40014800 	.word	0x40014800
+ 8000944:	40001800 	.word	0x40001800
+ 8000948:	40001c00 	.word	0x40001c00
+ 800094c:	40002000 	.word	0x40002000
+ 8000950:	e000e010 	.word	0xe000e010
 
-0800090c <NVIC_Init>:
+08000954 <delay_ms>:
+        	UsedTimerRegSet->EGR &=~(EGR_TG_MASK<<EGR_TG_BIT_ACCESS);
+        }
+}	
+	
+void delay_ms(uint32_t delay)
+{
+ 8000954:	b580      	push	{r7, lr}
+ 8000956:	b084      	sub	sp, #16
+ 8000958:	af00      	add	r7, sp, #0
+ 800095a:	6078      	str	r0, [r7, #4]
+	uint32_t Current = Gpt_GetTimeRemaining(GPT_TIMER_CHANNEL_2);
+ 800095c:	2002      	movs	r0, #2
+ 800095e:	f7ff fe55 	bl	800060c <Gpt_GetTimeRemaining>
+ 8000962:	60f8      	str	r0, [r7, #12]
+	while((  Gpt_GetTimeRemaining(GPT_TIMER_CHANNEL_2) -Current ) < (delay*16000) );
+ 8000964:	bf00      	nop
+ 8000966:	2002      	movs	r0, #2
+ 8000968:	f7ff fe50 	bl	800060c <Gpt_GetTimeRemaining>
+ 800096c:	4602      	mov	r2, r0
+ 800096e:	68fb      	ldr	r3, [r7, #12]
+ 8000970:	1ad2      	subs	r2, r2, r3
+ 8000972:	687b      	ldr	r3, [r7, #4]
+ 8000974:	f44f 517a 	mov.w	r1, #16000	; 0x3e80
+ 8000978:	fb01 f303 	mul.w	r3, r1, r3
+ 800097c:	429a      	cmp	r2, r3
+ 800097e:	d3f2      	bcc.n	8000966 <delay_ms+0x12>
+}
+ 8000980:	bf00      	nop
+ 8000982:	bf00      	nop
+ 8000984:	3710      	adds	r7, #16
+ 8000986:	46bd      	mov	sp, r7
+ 8000988:	bd80      	pop	{r7, pc}
+	...
+
+0800098c <NVIC_Init>:
 * \Parameters (in) : None                     
 * \Parameters (out): None                                                      
 * \Return value:   : None
 *******************************************************************************/
 void NVIC_Init(void)
 {
- 800090c:	b490      	push	{r4, r7}
- 800090e:	b082      	sub	sp, #8
- 8000910:	af00      	add	r7, sp, #0
+ 800098c:	b490      	push	{r4, r7}
+ 800098e:	b082      	sub	sp, #8
+ 8000990:	af00      	add	r7, sp, #0
 	uint8_t Groupriority;
 	NVIC_InterruptState_t InterruptState;
 	
 
 /*TODO Configure Grouping\SubGrouping System in Application Interrupt and Reset Control Register (AIRCR) in SCB*/
     SCB_AIRCR =  (Group);
- 8000912:	4a78      	ldr	r2, [pc, #480]	; (8000af4 <NVIC_Init+0x1e8>)
- 8000914:	4b78      	ldr	r3, [pc, #480]	; (8000af8 <NVIC_Init+0x1ec>)
- 8000916:	681b      	ldr	r3, [r3, #0]
- 8000918:	6013      	str	r3, [r2, #0]
+ 8000992:	4a78      	ldr	r2, [pc, #480]	; (8000b74 <NVIC_Init+0x1e8>)
+ 8000994:	4b78      	ldr	r3, [pc, #480]	; (8000b78 <NVIC_Init+0x1ec>)
+ 8000996:	681b      	ldr	r3, [r3, #0]
+ 8000998:	6013      	str	r3, [r2, #0]
 
 /*TODO : Assign Group\Subgroup priority in NVIC_PRIx Nvic and SCB_SHPRx Registers*/  
 	for(NVIC_Cfg_Counter=0;NVIC_Cfg_Counter<NVIC_ACTIVATED_INT_SIZE;NVIC_Cfg_Counter++)
- 800091a:	2300      	movs	r3, #0
- 800091c:	71fb      	strb	r3, [r7, #7]
- 800091e:	e0df      	b.n	8000ae0 <NVIC_Init+0x1d4>
+ 800099a:	2300      	movs	r3, #0
+ 800099c:	71fb      	strb	r3, [r7, #7]
+ 800099e:	e0df      	b.n	8000b60 <NVIC_Init+0x1d4>
 	{	
 		InterruptNumber =NVIC_Cfg[NVIC_Cfg_Counter].interruptNumber;
- 8000920:	79fb      	ldrb	r3, [r7, #7]
- 8000922:	4a76      	ldr	r2, [pc, #472]	; (8000afc <NVIC_Init+0x1f0>)
- 8000924:	f812 3023 	ldrb.w	r3, [r2, r3, lsl #2]
- 8000928:	71bb      	strb	r3, [r7, #6]
+ 80009a0:	79fb      	ldrb	r3, [r7, #7]
+ 80009a2:	4a76      	ldr	r2, [pc, #472]	; (8000b7c <NVIC_Init+0x1f0>)
+ 80009a4:	f812 3023 	ldrb.w	r3, [r2, r3, lsl #2]
+ 80009a8:	71bb      	strb	r3, [r7, #6]
 		SubgroupPriority=NVIC_Cfg[NVIC_Cfg_Counter].subgroupPriority;
- 800092a:	79fb      	ldrb	r3, [r7, #7]
- 800092c:	4a73      	ldr	r2, [pc, #460]	; (8000afc <NVIC_Init+0x1f0>)
- 800092e:	009b      	lsls	r3, r3, #2
- 8000930:	4413      	add	r3, r2
- 8000932:	789b      	ldrb	r3, [r3, #2]
- 8000934:	717b      	strb	r3, [r7, #5]
+ 80009aa:	79fb      	ldrb	r3, [r7, #7]
+ 80009ac:	4a73      	ldr	r2, [pc, #460]	; (8000b7c <NVIC_Init+0x1f0>)
+ 80009ae:	009b      	lsls	r3, r3, #2
+ 80009b0:	4413      	add	r3, r2
+ 80009b2:	789b      	ldrb	r3, [r3, #2]
+ 80009b4:	717b      	strb	r3, [r7, #5]
 		Groupriority	=NVIC_Cfg[NVIC_Cfg_Counter].groupPriority;
- 8000936:	79fb      	ldrb	r3, [r7, #7]
- 8000938:	4a70      	ldr	r2, [pc, #448]	; (8000afc <NVIC_Init+0x1f0>)
- 800093a:	009b      	lsls	r3, r3, #2
- 800093c:	4413      	add	r3, r2
- 800093e:	785b      	ldrb	r3, [r3, #1]
- 8000940:	713b      	strb	r3, [r7, #4]
+ 80009b6:	79fb      	ldrb	r3, [r7, #7]
+ 80009b8:	4a70      	ldr	r2, [pc, #448]	; (8000b7c <NVIC_Init+0x1f0>)
+ 80009ba:	009b      	lsls	r3, r3, #2
+ 80009bc:	4413      	add	r3, r2
+ 80009be:	785b      	ldrb	r3, [r3, #1]
+ 80009c0:	713b      	strb	r3, [r7, #4]
 		InterruptState  =NVIC_Cfg[NVIC_Cfg_Counter].interruptState; 
- 8000942:	79fb      	ldrb	r3, [r7, #7]
- 8000944:	4a6d      	ldr	r2, [pc, #436]	; (8000afc <NVIC_Init+0x1f0>)
- 8000946:	009b      	lsls	r3, r3, #2
- 8000948:	4413      	add	r3, r2
- 800094a:	78db      	ldrb	r3, [r3, #3]
- 800094c:	70fb      	strb	r3, [r7, #3]
+ 80009c2:	79fb      	ldrb	r3, [r7, #7]
+ 80009c4:	4a6d      	ldr	r2, [pc, #436]	; (8000b7c <NVIC_Init+0x1f0>)
+ 80009c6:	009b      	lsls	r3, r3, #2
+ 80009c8:	4413      	add	r3, r2
+ 80009ca:	78db      	ldrb	r3, [r3, #3]
+ 80009cc:	70fb      	strb	r3, [r7, #3]
 		//page 229 in f446 programming manual
 		uint8_t Priority =  (SubgroupPriority) | (Groupriority) << ( (Group - BASE_GROUP) / GROUP_UNIT_DIFFERECE )  ;// 0x100 Hex  ---> 256 Decimal
- 800094e:	793a      	ldrb	r2, [r7, #4]
- 8000950:	4b69      	ldr	r3, [pc, #420]	; (8000af8 <NVIC_Init+0x1ec>)
- 8000952:	6819      	ldr	r1, [r3, #0]
- 8000954:	4b6a      	ldr	r3, [pc, #424]	; (8000b00 <NVIC_Init+0x1f4>)
- 8000956:	440b      	add	r3, r1
- 8000958:	0a1b      	lsrs	r3, r3, #8
- 800095a:	fa02 f303 	lsl.w	r3, r2, r3
- 800095e:	b25a      	sxtb	r2, r3
- 8000960:	f997 3005 	ldrsb.w	r3, [r7, #5]
- 8000964:	4313      	orrs	r3, r2
- 8000966:	b25b      	sxtb	r3, r3
- 8000968:	70bb      	strb	r3, [r7, #2]
+ 80009ce:	793a      	ldrb	r2, [r7, #4]
+ 80009d0:	4b69      	ldr	r3, [pc, #420]	; (8000b78 <NVIC_Init+0x1ec>)
+ 80009d2:	6819      	ldr	r1, [r3, #0]
+ 80009d4:	4b6a      	ldr	r3, [pc, #424]	; (8000b80 <NVIC_Init+0x1f4>)
+ 80009d6:	440b      	add	r3, r1
+ 80009d8:	0a1b      	lsrs	r3, r3, #8
+ 80009da:	fa02 f303 	lsl.w	r3, r2, r3
+ 80009de:	b25a      	sxtb	r2, r3
+ 80009e0:	f997 3005 	ldrsb.w	r3, [r7, #5]
+ 80009e4:	4313      	orrs	r3, r2
+ 80009e6:	b25b      	sxtb	r3, r3
+ 80009e8:	70bb      	strb	r3, [r7, #2]
 		
 		if( InterruptNumber < NVIC_ZERO )
- 800096a:	f997 3006 	ldrsb.w	r3, [r7, #6]
- 800096e:	2b00      	cmp	r3, #0
- 8000970:	da5d      	bge.n	8000a2e <NVIC_Init+0x122>
+ 80009ea:	f997 3006 	ldrsb.w	r3, [r7, #6]
+ 80009ee:	2b00      	cmp	r3, #0
+ 80009f0:	da5d      	bge.n	8000aae <NVIC_Init+0x122>
 		{
 			//Core Peripheral
 			switch(InterruptNumber)
- 8000972:	f997 3006 	ldrsb.w	r3, [r7, #6]
- 8000976:	330c      	adds	r3, #12
- 8000978:	2b0b      	cmp	r3, #11
- 800097a:	f200 80ad 	bhi.w	8000ad8 <NVIC_Init+0x1cc>
- 800097e:	a201      	add	r2, pc, #4	; (adr r2, 8000984 <NVIC_Init+0x78>)
- 8000980:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 8000984:	080009b5 	.word	0x080009b5
- 8000988:	080009d1 	.word	0x080009d1
- 800098c:	080009ed 	.word	0x080009ed
- 8000990:	08000ad9 	.word	0x08000ad9
- 8000994:	08000ad9 	.word	0x08000ad9
- 8000998:	08000ad9 	.word	0x08000ad9
- 800099c:	08000ad9 	.word	0x08000ad9
- 80009a0:	08000a09 	.word	0x08000a09
- 80009a4:	08000ad9 	.word	0x08000ad9
- 80009a8:	08000ad9 	.word	0x08000ad9
- 80009ac:	08000a13 	.word	0x08000a13
- 80009b0:	08000a1d 	.word	0x08000a1d
+ 80009f2:	f997 3006 	ldrsb.w	r3, [r7, #6]
+ 80009f6:	330c      	adds	r3, #12
+ 80009f8:	2b0b      	cmp	r3, #11
+ 80009fa:	f200 80ad 	bhi.w	8000b58 <NVIC_Init+0x1cc>
+ 80009fe:	a201      	add	r2, pc, #4	; (adr r2, 8000a04 <NVIC_Init+0x78>)
+ 8000a00:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 8000a04:	08000a35 	.word	0x08000a35
+ 8000a08:	08000a51 	.word	0x08000a51
+ 8000a0c:	08000a6d 	.word	0x08000a6d
+ 8000a10:	08000b59 	.word	0x08000b59
+ 8000a14:	08000b59 	.word	0x08000b59
+ 8000a18:	08000b59 	.word	0x08000b59
+ 8000a1c:	08000b59 	.word	0x08000b59
+ 8000a20:	08000a89 	.word	0x08000a89
+ 8000a24:	08000b59 	.word	0x08000b59
+ 8000a28:	08000b59 	.word	0x08000b59
+ 8000a2c:	08000a93 	.word	0x08000a93
+ 8000a30:	08000a9d 	.word	0x08000a9d
 			{
 				case MemoryManagement_IRQn :
 					SCB->SCB_SHPR1 = ( Priority ) << (MEMMANAGE_BITSHIFT );
- 80009b4:	78bb      	ldrb	r3, [r7, #2]
- 80009b6:	011a      	lsls	r2, r3, #4
- 80009b8:	4b52      	ldr	r3, [pc, #328]	; (8000b04 <NVIC_Init+0x1f8>)
- 80009ba:	619a      	str	r2, [r3, #24]
+ 8000a34:	78bb      	ldrb	r3, [r7, #2]
+ 8000a36:	011a      	lsls	r2, r3, #4
+ 8000a38:	4b52      	ldr	r3, [pc, #328]	; (8000b84 <NVIC_Init+0x1f8>)
+ 8000a3a:	619a      	str	r2, [r3, #24]
 					SCB_SHCSR->BIT.MEMFAULTENA=InterruptState;
- 80009bc:	4a52      	ldr	r2, [pc, #328]	; (8000b08 <NVIC_Init+0x1fc>)
- 80009be:	78fb      	ldrb	r3, [r7, #3]
- 80009c0:	f003 0301 	and.w	r3, r3, #1
- 80009c4:	b2d9      	uxtb	r1, r3
- 80009c6:	6813      	ldr	r3, [r2, #0]
- 80009c8:	f361 4310 	bfi	r3, r1, #16, #1
- 80009cc:	6013      	str	r3, [r2, #0]
+ 8000a3c:	4a52      	ldr	r2, [pc, #328]	; (8000b88 <NVIC_Init+0x1fc>)
+ 8000a3e:	78fb      	ldrb	r3, [r7, #3]
+ 8000a40:	f003 0301 	and.w	r3, r3, #1
+ 8000a44:	b2d9      	uxtb	r1, r3
+ 8000a46:	6813      	ldr	r3, [r2, #0]
+ 8000a48:	f361 4310 	bfi	r3, r1, #16, #1
+ 8000a4c:	6013      	str	r3, [r2, #0]
 					break;
- 80009ce:	e084      	b.n	8000ada <NVIC_Init+0x1ce>
+ 8000a4e:	e084      	b.n	8000b5a <NVIC_Init+0x1ce>
 				case BusFault_IRQn  :
 					SCB->SCB_SHPR1 = ( Priority ) << (BUSFAULT_BITSHIFT  );
- 80009d0:	78bb      	ldrb	r3, [r7, #2]
- 80009d2:	031a      	lsls	r2, r3, #12
- 80009d4:	4b4b      	ldr	r3, [pc, #300]	; (8000b04 <NVIC_Init+0x1f8>)
- 80009d6:	619a      	str	r2, [r3, #24]
+ 8000a50:	78bb      	ldrb	r3, [r7, #2]
+ 8000a52:	031a      	lsls	r2, r3, #12
+ 8000a54:	4b4b      	ldr	r3, [pc, #300]	; (8000b84 <NVIC_Init+0x1f8>)
+ 8000a56:	619a      	str	r2, [r3, #24]
 					SCB_SHCSR->BIT.BUSFAULTENA=InterruptState;
- 80009d8:	4a4b      	ldr	r2, [pc, #300]	; (8000b08 <NVIC_Init+0x1fc>)
- 80009da:	78fb      	ldrb	r3, [r7, #3]
- 80009dc:	f003 0301 	and.w	r3, r3, #1
- 80009e0:	b2d9      	uxtb	r1, r3
- 80009e2:	6813      	ldr	r3, [r2, #0]
- 80009e4:	f361 4351 	bfi	r3, r1, #17, #1
- 80009e8:	6013      	str	r3, [r2, #0]
+ 8000a58:	4a4b      	ldr	r2, [pc, #300]	; (8000b88 <NVIC_Init+0x1fc>)
+ 8000a5a:	78fb      	ldrb	r3, [r7, #3]
+ 8000a5c:	f003 0301 	and.w	r3, r3, #1
+ 8000a60:	b2d9      	uxtb	r1, r3
+ 8000a62:	6813      	ldr	r3, [r2, #0]
+ 8000a64:	f361 4351 	bfi	r3, r1, #17, #1
+ 8000a68:	6013      	str	r3, [r2, #0]
 					break;
- 80009ea:	e076      	b.n	8000ada <NVIC_Init+0x1ce>
+ 8000a6a:	e076      	b.n	8000b5a <NVIC_Init+0x1ce>
 				case UsageFault_IRQn:
 					SCB->SCB_SHPR1 = ( Priority ) << (USAGEFAULT_BITSHIFT);
- 80009ec:	78bb      	ldrb	r3, [r7, #2]
- 80009ee:	051a      	lsls	r2, r3, #20
- 80009f0:	4b44      	ldr	r3, [pc, #272]	; (8000b04 <NVIC_Init+0x1f8>)
- 80009f2:	619a      	str	r2, [r3, #24]
+ 8000a6c:	78bb      	ldrb	r3, [r7, #2]
+ 8000a6e:	051a      	lsls	r2, r3, #20
+ 8000a70:	4b44      	ldr	r3, [pc, #272]	; (8000b84 <NVIC_Init+0x1f8>)
+ 8000a72:	619a      	str	r2, [r3, #24]
 					SCB_SHCSR->BIT.USGFAULTENA=InterruptState;
- 80009f4:	4a44      	ldr	r2, [pc, #272]	; (8000b08 <NVIC_Init+0x1fc>)
- 80009f6:	78fb      	ldrb	r3, [r7, #3]
- 80009f8:	f003 0301 	and.w	r3, r3, #1
- 80009fc:	b2d9      	uxtb	r1, r3
- 80009fe:	6813      	ldr	r3, [r2, #0]
- 8000a00:	f361 4392 	bfi	r3, r1, #18, #1
- 8000a04:	6013      	str	r3, [r2, #0]
+ 8000a74:	4a44      	ldr	r2, [pc, #272]	; (8000b88 <NVIC_Init+0x1fc>)
+ 8000a76:	78fb      	ldrb	r3, [r7, #3]
+ 8000a78:	f003 0301 	and.w	r3, r3, #1
+ 8000a7c:	b2d9      	uxtb	r1, r3
+ 8000a7e:	6813      	ldr	r3, [r2, #0]
+ 8000a80:	f361 4392 	bfi	r3, r1, #18, #1
+ 8000a84:	6013      	str	r3, [r2, #0]
 					break;
- 8000a06:	e068      	b.n	8000ada <NVIC_Init+0x1ce>
+ 8000a86:	e068      	b.n	8000b5a <NVIC_Init+0x1ce>
 				case SVCall_IRQn :SCB->SCB_SHPR2 = ( Priority ) << (SVC_BITSHIFT   );break;
- 8000a08:	78bb      	ldrb	r3, [r7, #2]
- 8000a0a:	071a      	lsls	r2, r3, #28
- 8000a0c:	4b3d      	ldr	r3, [pc, #244]	; (8000b04 <NVIC_Init+0x1f8>)
- 8000a0e:	61da      	str	r2, [r3, #28]
- 8000a10:	e063      	b.n	8000ada <NVIC_Init+0x1ce>
+ 8000a88:	78bb      	ldrb	r3, [r7, #2]
+ 8000a8a:	071a      	lsls	r2, r3, #28
+ 8000a8c:	4b3d      	ldr	r3, [pc, #244]	; (8000b84 <NVIC_Init+0x1f8>)
+ 8000a8e:	61da      	str	r2, [r3, #28]
+ 8000a90:	e063      	b.n	8000b5a <NVIC_Init+0x1ce>
 				case PendSV_IRQn :SCB->SCB_SHPR3 = ( Priority ) << (PENDSV_BITSHIFT);break;
- 8000a12:	78bb      	ldrb	r3, [r7, #2]
- 8000a14:	051a      	lsls	r2, r3, #20
- 8000a16:	4b3b      	ldr	r3, [pc, #236]	; (8000b04 <NVIC_Init+0x1f8>)
- 8000a18:	621a      	str	r2, [r3, #32]
- 8000a1a:	e05e      	b.n	8000ada <NVIC_Init+0x1ce>
+ 8000a92:	78bb      	ldrb	r3, [r7, #2]
+ 8000a94:	051a      	lsls	r2, r3, #20
+ 8000a96:	4b3b      	ldr	r3, [pc, #236]	; (8000b84 <NVIC_Init+0x1f8>)
+ 8000a98:	621a      	str	r2, [r3, #32]
+ 8000a9a:	e05e      	b.n	8000b5a <NVIC_Init+0x1ce>
 				case SysTick_IRQn:
 					SCB->SCB_SHPR3 = ( Priority ) << (SYSTICK_BITSHIFT);
- 8000a1c:	78bb      	ldrb	r3, [r7, #2]
- 8000a1e:	071a      	lsls	r2, r3, #28
- 8000a20:	4b38      	ldr	r3, [pc, #224]	; (8000b04 <NVIC_Init+0x1f8>)
- 8000a22:	621a      	str	r2, [r3, #32]
+ 8000a9c:	78bb      	ldrb	r3, [r7, #2]
+ 8000a9e:	071a      	lsls	r2, r3, #28
+ 8000aa0:	4b38      	ldr	r3, [pc, #224]	; (8000b84 <NVIC_Init+0x1f8>)
+ 8000aa2:	621a      	str	r2, [r3, #32]
 					SYSTICK->STK_CTRL = InterruptState << SYSTICK_INT_EN_BITSHIFT;
- 8000a24:	78fb      	ldrb	r3, [r7, #3]
- 8000a26:	005a      	lsls	r2, r3, #1
- 8000a28:	4b38      	ldr	r3, [pc, #224]	; (8000b0c <NVIC_Init+0x200>)
- 8000a2a:	601a      	str	r2, [r3, #0]
+ 8000aa4:	78fb      	ldrb	r3, [r7, #3]
+ 8000aa6:	005a      	lsls	r2, r3, #1
+ 8000aa8:	4b38      	ldr	r3, [pc, #224]	; (8000b8c <NVIC_Init+0x200>)
+ 8000aaa:	601a      	str	r2, [r3, #0]
 					break;
- 8000a2c:	e055      	b.n	8000ada <NVIC_Init+0x1ce>
+ 8000aac:	e055      	b.n	8000b5a <NVIC_Init+0x1ce>
 				default:break;
 			}
 		}
 		/*TODO : Enable\Disable based on user configurations in NVIC_ENx and SCB_Sys Registers */
 		else if( InterruptNumber >= 0 )
- 8000a2e:	f997 3006 	ldrsb.w	r3, [r7, #6]
- 8000a32:	2b00      	cmp	r3, #0
- 8000a34:	db51      	blt.n	8000ada <NVIC_Init+0x1ce>
+ 8000aae:	f997 3006 	ldrsb.w	r3, [r7, #6]
+ 8000ab2:	2b00      	cmp	r3, #0
+ 8000ab4:	db51      	blt.n	8000b5a <NVIC_Init+0x1ce>
 		{
 			NVIC->NVIC_IPR [ InterruptNumber    ] &= ~0xF << (4) ;
- 8000a36:	4a36      	ldr	r2, [pc, #216]	; (8000b10 <NVIC_Init+0x204>)
- 8000a38:	f997 3006 	ldrsb.w	r3, [r7, #6]
- 8000a3c:	4413      	add	r3, r2
- 8000a3e:	f893 3300 	ldrb.w	r3, [r3, #768]	; 0x300
- 8000a42:	4a33      	ldr	r2, [pc, #204]	; (8000b10 <NVIC_Init+0x204>)
- 8000a44:	f997 3006 	ldrsb.w	r3, [r7, #6]
- 8000a48:	4413      	add	r3, r2
- 8000a4a:	2200      	movs	r2, #0
- 8000a4c:	f883 2300 	strb.w	r2, [r3, #768]	; 0x300
+ 8000ab6:	4a36      	ldr	r2, [pc, #216]	; (8000b90 <NVIC_Init+0x204>)
+ 8000ab8:	f997 3006 	ldrsb.w	r3, [r7, #6]
+ 8000abc:	4413      	add	r3, r2
+ 8000abe:	f893 3300 	ldrb.w	r3, [r3, #768]	; 0x300
+ 8000ac2:	4a33      	ldr	r2, [pc, #204]	; (8000b90 <NVIC_Init+0x204>)
+ 8000ac4:	f997 3006 	ldrsb.w	r3, [r7, #6]
+ 8000ac8:	4413      	add	r3, r2
+ 8000aca:	2200      	movs	r2, #0
+ 8000acc:	f883 2300 	strb.w	r2, [r3, #768]	; 0x300
 			NVIC->NVIC_IPR [ InterruptNumber    ]  =  (uint8_t)(Priority << (4) );
- 8000a50:	492f      	ldr	r1, [pc, #188]	; (8000b10 <NVIC_Init+0x204>)
- 8000a52:	f997 3006 	ldrsb.w	r3, [r7, #6]
- 8000a56:	78ba      	ldrb	r2, [r7, #2]
- 8000a58:	0112      	lsls	r2, r2, #4
- 8000a5a:	b2d2      	uxtb	r2, r2
- 8000a5c:	440b      	add	r3, r1
- 8000a5e:	f883 2300 	strb.w	r2, [r3, #768]	; 0x300
+ 8000ad0:	492f      	ldr	r1, [pc, #188]	; (8000b90 <NVIC_Init+0x204>)
+ 8000ad2:	f997 3006 	ldrsb.w	r3, [r7, #6]
+ 8000ad6:	78ba      	ldrb	r2, [r7, #2]
+ 8000ad8:	0112      	lsls	r2, r2, #4
+ 8000ada:	b2d2      	uxtb	r2, r2
+ 8000adc:	440b      	add	r3, r1
+ 8000ade:	f883 2300 	strb.w	r2, [r3, #768]	; 0x300
 			NVIC->NVIC_ISER[ InterruptNumber/32 ] &= ~(NVIC_ONE << (InterruptNumber%32));
- 8000a62:	4a2b      	ldr	r2, [pc, #172]	; (8000b10 <NVIC_Init+0x204>)
- 8000a64:	f997 3006 	ldrsb.w	r3, [r7, #6]
- 8000a68:	2b00      	cmp	r3, #0
- 8000a6a:	da00      	bge.n	8000a6e <NVIC_Init+0x162>
- 8000a6c:	331f      	adds	r3, #31
- 8000a6e:	115b      	asrs	r3, r3, #5
- 8000a70:	b258      	sxtb	r0, r3
- 8000a72:	4603      	mov	r3, r0
- 8000a74:	f852 2023 	ldr.w	r2, [r2, r3, lsl #2]
- 8000a78:	f997 3006 	ldrsb.w	r3, [r7, #6]
- 8000a7c:	4259      	negs	r1, r3
- 8000a7e:	f003 031f 	and.w	r3, r3, #31
- 8000a82:	f001 011f 	and.w	r1, r1, #31
- 8000a86:	bf58      	it	pl
- 8000a88:	424b      	negpl	r3, r1
- 8000a8a:	b25b      	sxtb	r3, r3
- 8000a8c:	4619      	mov	r1, r3
- 8000a8e:	2301      	movs	r3, #1
- 8000a90:	408b      	lsls	r3, r1
- 8000a92:	43db      	mvns	r3, r3
- 8000a94:	491e      	ldr	r1, [pc, #120]	; (8000b10 <NVIC_Init+0x204>)
- 8000a96:	4013      	ands	r3, r2
- 8000a98:	f841 3020 	str.w	r3, [r1, r0, lsl #2]
+ 8000ae2:	4a2b      	ldr	r2, [pc, #172]	; (8000b90 <NVIC_Init+0x204>)
+ 8000ae4:	f997 3006 	ldrsb.w	r3, [r7, #6]
+ 8000ae8:	2b00      	cmp	r3, #0
+ 8000aea:	da00      	bge.n	8000aee <NVIC_Init+0x162>
+ 8000aec:	331f      	adds	r3, #31
+ 8000aee:	115b      	asrs	r3, r3, #5
+ 8000af0:	b258      	sxtb	r0, r3
+ 8000af2:	4603      	mov	r3, r0
+ 8000af4:	f852 2023 	ldr.w	r2, [r2, r3, lsl #2]
+ 8000af8:	f997 3006 	ldrsb.w	r3, [r7, #6]
+ 8000afc:	4259      	negs	r1, r3
+ 8000afe:	f003 031f 	and.w	r3, r3, #31
+ 8000b02:	f001 011f 	and.w	r1, r1, #31
+ 8000b06:	bf58      	it	pl
+ 8000b08:	424b      	negpl	r3, r1
+ 8000b0a:	b25b      	sxtb	r3, r3
+ 8000b0c:	4619      	mov	r1, r3
+ 8000b0e:	2301      	movs	r3, #1
+ 8000b10:	408b      	lsls	r3, r1
+ 8000b12:	43db      	mvns	r3, r3
+ 8000b14:	491e      	ldr	r1, [pc, #120]	; (8000b90 <NVIC_Init+0x204>)
+ 8000b16:	4013      	ands	r3, r2
+ 8000b18:	f841 3020 	str.w	r3, [r1, r0, lsl #2]
 			NVIC->NVIC_ISER[ InterruptNumber/32 ] |= InterruptState << (InterruptNumber%32) ;
- 8000a9c:	4a1c      	ldr	r2, [pc, #112]	; (8000b10 <NVIC_Init+0x204>)
- 8000a9e:	f997 3006 	ldrsb.w	r3, [r7, #6]
- 8000aa2:	2b00      	cmp	r3, #0
- 8000aa4:	da00      	bge.n	8000aa8 <NVIC_Init+0x19c>
- 8000aa6:	331f      	adds	r3, #31
- 8000aa8:	115b      	asrs	r3, r3, #5
- 8000aaa:	b25c      	sxtb	r4, r3
- 8000aac:	4623      	mov	r3, r4
- 8000aae:	f852 2023 	ldr.w	r2, [r2, r3, lsl #2]
- 8000ab2:	78f9      	ldrb	r1, [r7, #3]
- 8000ab4:	f997 3006 	ldrsb.w	r3, [r7, #6]
- 8000ab8:	4258      	negs	r0, r3
- 8000aba:	f003 031f 	and.w	r3, r3, #31
- 8000abe:	f000 001f 	and.w	r0, r0, #31
- 8000ac2:	bf58      	it	pl
- 8000ac4:	4243      	negpl	r3, r0
- 8000ac6:	b25b      	sxtb	r3, r3
- 8000ac8:	fa01 f303 	lsl.w	r3, r1, r3
- 8000acc:	4910      	ldr	r1, [pc, #64]	; (8000b10 <NVIC_Init+0x204>)
- 8000ace:	4620      	mov	r0, r4
- 8000ad0:	4313      	orrs	r3, r2
- 8000ad2:	f841 3020 	str.w	r3, [r1, r0, lsl #2]
- 8000ad6:	e000      	b.n	8000ada <NVIC_Init+0x1ce>
+ 8000b1c:	4a1c      	ldr	r2, [pc, #112]	; (8000b90 <NVIC_Init+0x204>)
+ 8000b1e:	f997 3006 	ldrsb.w	r3, [r7, #6]
+ 8000b22:	2b00      	cmp	r3, #0
+ 8000b24:	da00      	bge.n	8000b28 <NVIC_Init+0x19c>
+ 8000b26:	331f      	adds	r3, #31
+ 8000b28:	115b      	asrs	r3, r3, #5
+ 8000b2a:	b25c      	sxtb	r4, r3
+ 8000b2c:	4623      	mov	r3, r4
+ 8000b2e:	f852 2023 	ldr.w	r2, [r2, r3, lsl #2]
+ 8000b32:	78f9      	ldrb	r1, [r7, #3]
+ 8000b34:	f997 3006 	ldrsb.w	r3, [r7, #6]
+ 8000b38:	4258      	negs	r0, r3
+ 8000b3a:	f003 031f 	and.w	r3, r3, #31
+ 8000b3e:	f000 001f 	and.w	r0, r0, #31
+ 8000b42:	bf58      	it	pl
+ 8000b44:	4243      	negpl	r3, r0
+ 8000b46:	b25b      	sxtb	r3, r3
+ 8000b48:	fa01 f303 	lsl.w	r3, r1, r3
+ 8000b4c:	4910      	ldr	r1, [pc, #64]	; (8000b90 <NVIC_Init+0x204>)
+ 8000b4e:	4620      	mov	r0, r4
+ 8000b50:	4313      	orrs	r3, r2
+ 8000b52:	f841 3020 	str.w	r3, [r1, r0, lsl #2]
+ 8000b56:	e000      	b.n	8000b5a <NVIC_Init+0x1ce>
 				default:break;
- 8000ad8:	bf00      	nop
+ 8000b58:	bf00      	nop
 	for(NVIC_Cfg_Counter=0;NVIC_Cfg_Counter<NVIC_ACTIVATED_INT_SIZE;NVIC_Cfg_Counter++)
- 8000ada:	79fb      	ldrb	r3, [r7, #7]
- 8000adc:	3301      	adds	r3, #1
- 8000ade:	71fb      	strb	r3, [r7, #7]
- 8000ae0:	79fb      	ldrb	r3, [r7, #7]
- 8000ae2:	2b04      	cmp	r3, #4
- 8000ae4:	f67f af1c 	bls.w	8000920 <NVIC_Init+0x14>
-		}
-	}
-    
-
+ 8000b5a:	79fb      	ldrb	r3, [r7, #7]
+ 8000b5c:	3301      	adds	r3, #1
+ 8000b5e:	71fb      	strb	r3, [r7, #7]
+ 8000b60:	79fb      	ldrb	r3, [r7, #7]
+ 8000b62:	2b04      	cmp	r3, #4
+ 8000b64:	f67f af1c 	bls.w	80009a0 <NVIC_Init+0x14>
+//		{
+//			NVIC->NVIC_ISER[ InterruptNumber/8 ] &= ~(NVIC_ONE << (InterruptNumber%8));
+//			NVIC->NVIC_ISER[ InterruptNumber/8 ] |= InterruptState << (InterruptNumber%8) ;
+//		}
+//	}
 }
- 8000ae8:	bf00      	nop
- 8000aea:	bf00      	nop
- 8000aec:	3708      	adds	r7, #8
- 8000aee:	46bd      	mov	sp, r7
- 8000af0:	bc90      	pop	{r4, r7}
- 8000af2:	4770      	bx	lr
- 8000af4:	e000ed0c 	.word	0xe000ed0c
- 8000af8:	08000da4 	.word	0x08000da4
- 8000afc:	08000d90 	.word	0x08000d90
- 8000b00:	fa05fd00 	.word	0xfa05fd00
- 8000b04:	e000ed00 	.word	0xe000ed00
- 8000b08:	e000ed24 	.word	0xe000ed24
- 8000b0c:	e000e010 	.word	0xe000e010
- 8000b10:	e000e100 	.word	0xe000e100
+ 8000b68:	bf00      	nop
+ 8000b6a:	bf00      	nop
+ 8000b6c:	3708      	adds	r7, #8
+ 8000b6e:	46bd      	mov	sp, r7
+ 8000b70:	bc90      	pop	{r4, r7}
+ 8000b72:	4770      	bx	lr
+ 8000b74:	e000ed0c 	.word	0xe000ed0c
+ 8000b78:	08000e24 	.word	0x08000e24
+ 8000b7c:	08000e10 	.word	0x08000e10
+ 8000b80:	fa05fd00 	.word	0xfa05fd00
+ 8000b84:	e000ed00 	.word	0xe000ed00
+ 8000b88:	e000ed24 	.word	0xe000ed24
+ 8000b8c:	e000e010 	.word	0xe000e010
+ 8000b90:	e000e100 	.word	0xe000e100
 
-08000b14 <Port_Init>:
+08000b94 <Port_Init>:
  *  @param        
  *  @param       
  *  @return      
  *********************************************************************************************************************/
 void Port_Init(Port_ConfigType* ConfigArrayOfPtrs)
 {
- 8000b14:	b580      	push	{r7, lr}
- 8000b16:	b086      	sub	sp, #24
- 8000b18:	af00      	add	r7, sp, #0
- 8000b1a:	6078      	str	r0, [r7, #4]
+ 8000b94:	b580      	push	{r7, lr}
+ 8000b96:	b086      	sub	sp, #24
+ 8000b98:	af00      	add	r7, sp, #0
+ 8000b9a:	6078      	str	r0, [r7, #4]
     uint8_t PinPort;
     uint8_t PinNumber; 
     GPIO_RegDef_t* UsedGpioPort_Ptr;
 
 
     for(uint8_t i=0; i<NUM_OF_USED_PINS;i++)
- 8000b1c:	2300      	movs	r3, #0
- 8000b1e:	75fb      	strb	r3, [r7, #23]
- 8000b20:	e0ab      	b.n	8000c7a <Port_Init+0x166>
+ 8000b9c:	2300      	movs	r3, #0
+ 8000b9e:	75fb      	strb	r3, [r7, #23]
+ 8000ba0:	e0ab      	b.n	8000cfa <Port_Init+0x166>
     {
         PinId            =ConfigArrayOfPtrs[i].pinId;
- 8000b22:	7dfa      	ldrb	r2, [r7, #23]
- 8000b24:	4613      	mov	r3, r2
- 8000b26:	00db      	lsls	r3, r3, #3
- 8000b28:	1a9b      	subs	r3, r3, r2
- 8000b2a:	687a      	ldr	r2, [r7, #4]
- 8000b2c:	4413      	add	r3, r2
- 8000b2e:	781b      	ldrb	r3, [r3, #0]
- 8000b30:	75bb      	strb	r3, [r7, #22]
+ 8000ba2:	7dfa      	ldrb	r2, [r7, #23]
+ 8000ba4:	4613      	mov	r3, r2
+ 8000ba6:	00db      	lsls	r3, r3, #3
+ 8000ba8:	1a9b      	subs	r3, r3, r2
+ 8000baa:	687a      	ldr	r2, [r7, #4]
+ 8000bac:	4413      	add	r3, r2
+ 8000bae:	781b      	ldrb	r3, [r3, #0]
+ 8000bb0:	75bb      	strb	r3, [r7, #22]
         PinMode          =ConfigArrayOfPtrs[i].pinMode;
- 8000b32:	7dfa      	ldrb	r2, [r7, #23]
- 8000b34:	4613      	mov	r3, r2
- 8000b36:	00db      	lsls	r3, r3, #3
- 8000b38:	1a9b      	subs	r3, r3, r2
- 8000b3a:	687a      	ldr	r2, [r7, #4]
- 8000b3c:	4413      	add	r3, r2
- 8000b3e:	78db      	ldrb	r3, [r3, #3]
- 8000b40:	757b      	strb	r3, [r7, #21]
+ 8000bb2:	7dfa      	ldrb	r2, [r7, #23]
+ 8000bb4:	4613      	mov	r3, r2
+ 8000bb6:	00db      	lsls	r3, r3, #3
+ 8000bb8:	1a9b      	subs	r3, r3, r2
+ 8000bba:	687a      	ldr	r2, [r7, #4]
+ 8000bbc:	4413      	add	r3, r2
+ 8000bbe:	78db      	ldrb	r3, [r3, #3]
+ 8000bc0:	757b      	strb	r3, [r7, #21]
         PinInternalAttach=ConfigArrayOfPtrs[i].pinInternalAttach;
- 8000b42:	7dfa      	ldrb	r2, [r7, #23]
- 8000b44:	4613      	mov	r3, r2
- 8000b46:	00db      	lsls	r3, r3, #3
- 8000b48:	1a9b      	subs	r3, r3, r2
- 8000b4a:	687a      	ldr	r2, [r7, #4]
- 8000b4c:	4413      	add	r3, r2
- 8000b4e:	795b      	ldrb	r3, [r3, #5]
- 8000b50:	753b      	strb	r3, [r7, #20]
+ 8000bc2:	7dfa      	ldrb	r2, [r7, #23]
+ 8000bc4:	4613      	mov	r3, r2
+ 8000bc6:	00db      	lsls	r3, r3, #3
+ 8000bc8:	1a9b      	subs	r3, r3, r2
+ 8000bca:	687a      	ldr	r2, [r7, #4]
+ 8000bcc:	4413      	add	r3, r2
+ 8000bce:	795b      	ldrb	r3, [r3, #5]
+ 8000bd0:	753b      	strb	r3, [r7, #20]
         PinOutputSpeed   =ConfigArrayOfPtrs[i].pinOutputSpeed;
- 8000b52:	7dfa      	ldrb	r2, [r7, #23]
- 8000b54:	4613      	mov	r3, r2
- 8000b56:	00db      	lsls	r3, r3, #3
- 8000b58:	1a9b      	subs	r3, r3, r2
- 8000b5a:	687a      	ldr	r2, [r7, #4]
- 8000b5c:	4413      	add	r3, r2
- 8000b5e:	799b      	ldrb	r3, [r3, #6]
- 8000b60:	74fb      	strb	r3, [r7, #19]
+ 8000bd2:	7dfa      	ldrb	r2, [r7, #23]
+ 8000bd4:	4613      	mov	r3, r2
+ 8000bd6:	00db      	lsls	r3, r3, #3
+ 8000bd8:	1a9b      	subs	r3, r3, r2
+ 8000bda:	687a      	ldr	r2, [r7, #4]
+ 8000bdc:	4413      	add	r3, r2
+ 8000bde:	799b      	ldrb	r3, [r3, #6]
+ 8000be0:	74fb      	strb	r3, [r7, #19]
         PinOutputType    =ConfigArrayOfPtrs[i].OutputType;
- 8000b62:	7dfa      	ldrb	r2, [r7, #23]
- 8000b64:	4613      	mov	r3, r2
- 8000b66:	00db      	lsls	r3, r3, #3
- 8000b68:	1a9b      	subs	r3, r3, r2
- 8000b6a:	687a      	ldr	r2, [r7, #4]
- 8000b6c:	4413      	add	r3, r2
- 8000b6e:	789b      	ldrb	r3, [r3, #2]
- 8000b70:	74bb      	strb	r3, [r7, #18]
+ 8000be2:	7dfa      	ldrb	r2, [r7, #23]
+ 8000be4:	4613      	mov	r3, r2
+ 8000be6:	00db      	lsls	r3, r3, #3
+ 8000be8:	1a9b      	subs	r3, r3, r2
+ 8000bea:	687a      	ldr	r2, [r7, #4]
+ 8000bec:	4413      	add	r3, r2
+ 8000bee:	789b      	ldrb	r3, [r3, #2]
+ 8000bf0:	74bb      	strb	r3, [r7, #18]
 
         PinPort          = PinId/PIN_PORT_CONST;
- 8000b72:	7dbb      	ldrb	r3, [r7, #22]
- 8000b74:	091b      	lsrs	r3, r3, #4
- 8000b76:	747b      	strb	r3, [r7, #17]
+ 8000bf2:	7dbb      	ldrb	r3, [r7, #22]
+ 8000bf4:	091b      	lsrs	r3, r3, #4
+ 8000bf6:	747b      	strb	r3, [r7, #17]
         PinNumber        = PinId%PIN_PORT_CONST; 
- 8000b78:	7dbb      	ldrb	r3, [r7, #22]
- 8000b7a:	f003 030f 	and.w	r3, r3, #15
- 8000b7e:	743b      	strb	r3, [r7, #16]
+ 8000bf8:	7dbb      	ldrb	r3, [r7, #22]
+ 8000bfa:	f003 030f 	and.w	r3, r3, #15
+ 8000bfe:	743b      	strb	r3, [r7, #16]
 
         UsedGpioPort_Ptr = GPIOx(PinPort*GPIO_OFFSET);
- 8000b80:	7c7b      	ldrb	r3, [r7, #17]
- 8000b82:	029b      	lsls	r3, r3, #10
- 8000b84:	f103 4380 	add.w	r3, r3, #1073741824	; 0x40000000
- 8000b88:	f503 3300 	add.w	r3, r3, #131072	; 0x20000
- 8000b8c:	60fb      	str	r3, [r7, #12]
+ 8000c00:	7c7b      	ldrb	r3, [r7, #17]
+ 8000c02:	029b      	lsls	r3, r3, #10
+ 8000c04:	f103 4380 	add.w	r3, r3, #1073741824	; 0x40000000
+ 8000c08:	f503 3300 	add.w	r3, r3, #131072	; 0x20000
+ 8000c0c:	60fb      	str	r3, [r7, #12]
         /*Pin mode*/
         UsedGpioPort_Ptr->MODER &=~(PORT_CONST_3<< (PORT_CONST_2*PinNumber));
- 8000b8e:	68fb      	ldr	r3, [r7, #12]
- 8000b90:	681b      	ldr	r3, [r3, #0]
- 8000b92:	7c3a      	ldrb	r2, [r7, #16]
- 8000b94:	0052      	lsls	r2, r2, #1
- 8000b96:	2103      	movs	r1, #3
- 8000b98:	fa01 f202 	lsl.w	r2, r1, r2
- 8000b9c:	43d2      	mvns	r2, r2
- 8000b9e:	401a      	ands	r2, r3
- 8000ba0:	68fb      	ldr	r3, [r7, #12]
- 8000ba2:	601a      	str	r2, [r3, #0]
+ 8000c0e:	68fb      	ldr	r3, [r7, #12]
+ 8000c10:	681b      	ldr	r3, [r3, #0]
+ 8000c12:	7c3a      	ldrb	r2, [r7, #16]
+ 8000c14:	0052      	lsls	r2, r2, #1
+ 8000c16:	2103      	movs	r1, #3
+ 8000c18:	fa01 f202 	lsl.w	r2, r1, r2
+ 8000c1c:	43d2      	mvns	r2, r2
+ 8000c1e:	401a      	ands	r2, r3
+ 8000c20:	68fb      	ldr	r3, [r7, #12]
+ 8000c22:	601a      	str	r2, [r3, #0]
         UsedGpioPort_Ptr->MODER |=PinMode<< (PORT_CONST_2*PinNumber);
- 8000ba4:	68fb      	ldr	r3, [r7, #12]
- 8000ba6:	681b      	ldr	r3, [r3, #0]
- 8000ba8:	7d79      	ldrb	r1, [r7, #21]
- 8000baa:	7c3a      	ldrb	r2, [r7, #16]
- 8000bac:	0052      	lsls	r2, r2, #1
- 8000bae:	fa01 f202 	lsl.w	r2, r1, r2
- 8000bb2:	431a      	orrs	r2, r3
- 8000bb4:	68fb      	ldr	r3, [r7, #12]
- 8000bb6:	601a      	str	r2, [r3, #0]
+ 8000c24:	68fb      	ldr	r3, [r7, #12]
+ 8000c26:	681b      	ldr	r3, [r3, #0]
+ 8000c28:	7d79      	ldrb	r1, [r7, #21]
+ 8000c2a:	7c3a      	ldrb	r2, [r7, #16]
+ 8000c2c:	0052      	lsls	r2, r2, #1
+ 8000c2e:	fa01 f202 	lsl.w	r2, r1, r2
+ 8000c32:	431a      	orrs	r2, r3
+ 8000c34:	68fb      	ldr	r3, [r7, #12]
+ 8000c36:	601a      	str	r2, [r3, #0]
         /*Pin Pull up or pull down*/
         UsedGpioPort_Ptr->PUPDR &=~(PORT_CONST_3   <<(PORT_CONST_2*PinNumber));
- 8000bb8:	68fb      	ldr	r3, [r7, #12]
- 8000bba:	68db      	ldr	r3, [r3, #12]
- 8000bbc:	7c3a      	ldrb	r2, [r7, #16]
- 8000bbe:	0052      	lsls	r2, r2, #1
- 8000bc0:	2103      	movs	r1, #3
- 8000bc2:	fa01 f202 	lsl.w	r2, r1, r2
- 8000bc6:	43d2      	mvns	r2, r2
- 8000bc8:	401a      	ands	r2, r3
- 8000bca:	68fb      	ldr	r3, [r7, #12]
- 8000bcc:	60da      	str	r2, [r3, #12]
+ 8000c38:	68fb      	ldr	r3, [r7, #12]
+ 8000c3a:	68db      	ldr	r3, [r3, #12]
+ 8000c3c:	7c3a      	ldrb	r2, [r7, #16]
+ 8000c3e:	0052      	lsls	r2, r2, #1
+ 8000c40:	2103      	movs	r1, #3
+ 8000c42:	fa01 f202 	lsl.w	r2, r1, r2
+ 8000c46:	43d2      	mvns	r2, r2
+ 8000c48:	401a      	ands	r2, r3
+ 8000c4a:	68fb      	ldr	r3, [r7, #12]
+ 8000c4c:	60da      	str	r2, [r3, #12]
         UsedGpioPort_Ptr->PUPDR |=PinInternalAttach<<(PORT_CONST_2*PinNumber);
- 8000bce:	68fb      	ldr	r3, [r7, #12]
- 8000bd0:	68db      	ldr	r3, [r3, #12]
- 8000bd2:	7d39      	ldrb	r1, [r7, #20]
- 8000bd4:	7c3a      	ldrb	r2, [r7, #16]
- 8000bd6:	0052      	lsls	r2, r2, #1
- 8000bd8:	fa01 f202 	lsl.w	r2, r1, r2
- 8000bdc:	431a      	orrs	r2, r3
- 8000bde:	68fb      	ldr	r3, [r7, #12]
- 8000be0:	60da      	str	r2, [r3, #12]
+ 8000c4e:	68fb      	ldr	r3, [r7, #12]
+ 8000c50:	68db      	ldr	r3, [r3, #12]
+ 8000c52:	7d39      	ldrb	r1, [r7, #20]
+ 8000c54:	7c3a      	ldrb	r2, [r7, #16]
+ 8000c56:	0052      	lsls	r2, r2, #1
+ 8000c58:	fa01 f202 	lsl.w	r2, r1, r2
+ 8000c5c:	431a      	orrs	r2, r3
+ 8000c5e:	68fb      	ldr	r3, [r7, #12]
+ 8000c60:	60da      	str	r2, [r3, #12]
         
         switch(PinMode)
- 8000be2:	7d7b      	ldrb	r3, [r7, #21]
- 8000be4:	2b03      	cmp	r3, #3
- 8000be6:	d844      	bhi.n	8000c72 <Port_Init+0x15e>
- 8000be8:	a201      	add	r2, pc, #4	; (adr r2, 8000bf0 <Port_Init+0xdc>)
- 8000bea:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 8000bee:	bf00      	nop
- 8000bf0:	08000c73 	.word	0x08000c73
- 8000bf4:	08000c01 	.word	0x08000c01
- 8000bf8:	08000c73 	.word	0x08000c73
- 8000bfc:	08000c73 	.word	0x08000c73
+ 8000c62:	7d7b      	ldrb	r3, [r7, #21]
+ 8000c64:	2b03      	cmp	r3, #3
+ 8000c66:	d844      	bhi.n	8000cf2 <Port_Init+0x15e>
+ 8000c68:	a201      	add	r2, pc, #4	; (adr r2, 8000c70 <Port_Init+0xdc>)
+ 8000c6a:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 8000c6e:	bf00      	nop
+ 8000c70:	08000cf3 	.word	0x08000cf3
+ 8000c74:	08000c81 	.word	0x08000c81
+ 8000c78:	08000cf3 	.word	0x08000cf3
+ 8000c7c:	08000cf3 	.word	0x08000cf3
         {
             case Port_PIN_MODE_INPUT: /*Do Nothing*/break;
             case Port_PIN_MODE_GENERAL_PURPOSE_OUTPUT:
                 /*Pin Output type*/
                 UsedGpioPort_Ptr->OTYPER&=~(PORT_CONST_1<< (PORT_CONST_2*PinNumber));
- 8000c00:	68fb      	ldr	r3, [r7, #12]
- 8000c02:	685b      	ldr	r3, [r3, #4]
- 8000c04:	7c3a      	ldrb	r2, [r7, #16]
- 8000c06:	0052      	lsls	r2, r2, #1
- 8000c08:	2101      	movs	r1, #1
- 8000c0a:	fa01 f202 	lsl.w	r2, r1, r2
- 8000c0e:	43d2      	mvns	r2, r2
- 8000c10:	401a      	ands	r2, r3
- 8000c12:	68fb      	ldr	r3, [r7, #12]
- 8000c14:	605a      	str	r2, [r3, #4]
+ 8000c80:	68fb      	ldr	r3, [r7, #12]
+ 8000c82:	685b      	ldr	r3, [r3, #4]
+ 8000c84:	7c3a      	ldrb	r2, [r7, #16]
+ 8000c86:	0052      	lsls	r2, r2, #1
+ 8000c88:	2101      	movs	r1, #1
+ 8000c8a:	fa01 f202 	lsl.w	r2, r1, r2
+ 8000c8e:	43d2      	mvns	r2, r2
+ 8000c90:	401a      	ands	r2, r3
+ 8000c92:	68fb      	ldr	r3, [r7, #12]
+ 8000c94:	605a      	str	r2, [r3, #4]
                 UsedGpioPort_Ptr->OTYPER|= (PinOutputType<<(PORT_CONST_2*PinNumber));
- 8000c16:	68fb      	ldr	r3, [r7, #12]
- 8000c18:	685b      	ldr	r3, [r3, #4]
- 8000c1a:	7cb9      	ldrb	r1, [r7, #18]
- 8000c1c:	7c3a      	ldrb	r2, [r7, #16]
- 8000c1e:	0052      	lsls	r2, r2, #1
- 8000c20:	fa01 f202 	lsl.w	r2, r1, r2
- 8000c24:	431a      	orrs	r2, r3
- 8000c26:	68fb      	ldr	r3, [r7, #12]
- 8000c28:	605a      	str	r2, [r3, #4]
+ 8000c96:	68fb      	ldr	r3, [r7, #12]
+ 8000c98:	685b      	ldr	r3, [r3, #4]
+ 8000c9a:	7cb9      	ldrb	r1, [r7, #18]
+ 8000c9c:	7c3a      	ldrb	r2, [r7, #16]
+ 8000c9e:	0052      	lsls	r2, r2, #1
+ 8000ca0:	fa01 f202 	lsl.w	r2, r1, r2
+ 8000ca4:	431a      	orrs	r2, r3
+ 8000ca6:	68fb      	ldr	r3, [r7, #12]
+ 8000ca8:	605a      	str	r2, [r3, #4]
                 /*Set initial value*/
                 PinInitialLevel  =ConfigArrayOfPtrs[i].pinInitialLevel;
- 8000c2a:	7dfa      	ldrb	r2, [r7, #23]
- 8000c2c:	4613      	mov	r3, r2
- 8000c2e:	00db      	lsls	r3, r3, #3
- 8000c30:	1a9b      	subs	r3, r3, r2
- 8000c32:	687a      	ldr	r2, [r7, #4]
- 8000c34:	4413      	add	r3, r2
- 8000c36:	791b      	ldrb	r3, [r3, #4]
- 8000c38:	72fb      	strb	r3, [r7, #11]
+ 8000caa:	7dfa      	ldrb	r2, [r7, #23]
+ 8000cac:	4613      	mov	r3, r2
+ 8000cae:	00db      	lsls	r3, r3, #3
+ 8000cb0:	1a9b      	subs	r3, r3, r2
+ 8000cb2:	687a      	ldr	r2, [r7, #4]
+ 8000cb4:	4413      	add	r3, r2
+ 8000cb6:	791b      	ldrb	r3, [r3, #4]
+ 8000cb8:	72fb      	strb	r3, [r7, #11]
                 Dio_WriteChannel(PinId,PinInitialLevel);
- 8000c3a:	7afa      	ldrb	r2, [r7, #11]
- 8000c3c:	7dbb      	ldrb	r3, [r7, #22]
- 8000c3e:	4611      	mov	r1, r2
- 8000c40:	4618      	mov	r0, r3
- 8000c42:	f7ff fb5e 	bl	8000302 <Dio_WriteChannel>
+ 8000cba:	7afa      	ldrb	r2, [r7, #11]
+ 8000cbc:	7dbb      	ldrb	r3, [r7, #22]
+ 8000cbe:	4611      	mov	r1, r2
+ 8000cc0:	4618      	mov	r0, r3
+ 8000cc2:	f7ff fb41 	bl	8000348 <Dio_WriteChannel>
                 /*Pin Speed*/
                 UsedGpioPort_Ptr->OSPEEDR &=~(PORT_CONST_3<< (PORT_CONST_2*PinNumber));
- 8000c46:	68fb      	ldr	r3, [r7, #12]
- 8000c48:	689b      	ldr	r3, [r3, #8]
- 8000c4a:	7c3a      	ldrb	r2, [r7, #16]
- 8000c4c:	0052      	lsls	r2, r2, #1
- 8000c4e:	2103      	movs	r1, #3
- 8000c50:	fa01 f202 	lsl.w	r2, r1, r2
- 8000c54:	43d2      	mvns	r2, r2
- 8000c56:	401a      	ands	r2, r3
- 8000c58:	68fb      	ldr	r3, [r7, #12]
- 8000c5a:	609a      	str	r2, [r3, #8]
+ 8000cc6:	68fb      	ldr	r3, [r7, #12]
+ 8000cc8:	689b      	ldr	r3, [r3, #8]
+ 8000cca:	7c3a      	ldrb	r2, [r7, #16]
+ 8000ccc:	0052      	lsls	r2, r2, #1
+ 8000cce:	2103      	movs	r1, #3
+ 8000cd0:	fa01 f202 	lsl.w	r2, r1, r2
+ 8000cd4:	43d2      	mvns	r2, r2
+ 8000cd6:	401a      	ands	r2, r3
+ 8000cd8:	68fb      	ldr	r3, [r7, #12]
+ 8000cda:	609a      	str	r2, [r3, #8]
                 UsedGpioPort_Ptr->OSPEEDR |=PinOutputSpeed<< (PORT_CONST_2*PinNumber);
- 8000c5c:	68fb      	ldr	r3, [r7, #12]
- 8000c5e:	689b      	ldr	r3, [r3, #8]
- 8000c60:	7cf9      	ldrb	r1, [r7, #19]
- 8000c62:	7c3a      	ldrb	r2, [r7, #16]
- 8000c64:	0052      	lsls	r2, r2, #1
- 8000c66:	fa01 f202 	lsl.w	r2, r1, r2
- 8000c6a:	431a      	orrs	r2, r3
- 8000c6c:	68fb      	ldr	r3, [r7, #12]
- 8000c6e:	609a      	str	r2, [r3, #8]
+ 8000cdc:	68fb      	ldr	r3, [r7, #12]
+ 8000cde:	689b      	ldr	r3, [r3, #8]
+ 8000ce0:	7cf9      	ldrb	r1, [r7, #19]
+ 8000ce2:	7c3a      	ldrb	r2, [r7, #16]
+ 8000ce4:	0052      	lsls	r2, r2, #1
+ 8000ce6:	fa01 f202 	lsl.w	r2, r1, r2
+ 8000cea:	431a      	orrs	r2, r3
+ 8000cec:	68fb      	ldr	r3, [r7, #12]
+ 8000cee:	609a      	str	r2, [r3, #8]
                 break;
- 8000c70:	e000      	b.n	8000c74 <Port_Init+0x160>
+ 8000cf0:	e000      	b.n	8000cf4 <Port_Init+0x160>
             case Port_PIN_MODE_ALTERNATE_FUNCTION: /*Not Available*/ break;
             case Port_PIN_MODE_ANALOG:             /*Not Available*/ break;
             default:break;
- 8000c72:	bf00      	nop
+ 8000cf2:	bf00      	nop
     for(uint8_t i=0; i<NUM_OF_USED_PINS;i++)
- 8000c74:	7dfb      	ldrb	r3, [r7, #23]
- 8000c76:	3301      	adds	r3, #1
- 8000c78:	75fb      	strb	r3, [r7, #23]
- 8000c7a:	7dfb      	ldrb	r3, [r7, #23]
- 8000c7c:	2b04      	cmp	r3, #4
- 8000c7e:	f67f af50 	bls.w	8000b22 <Port_Init+0xe>
+ 8000cf4:	7dfb      	ldrb	r3, [r7, #23]
+ 8000cf6:	3301      	adds	r3, #1
+ 8000cf8:	75fb      	strb	r3, [r7, #23]
+ 8000cfa:	7dfb      	ldrb	r3, [r7, #23]
+ 8000cfc:	2b04      	cmp	r3, #4
+ 8000cfe:	f67f af50 	bls.w	8000ba2 <Port_Init+0xe>
         }
 
 
     }
 
 }
- 8000c82:	bf00      	nop
- 8000c84:	bf00      	nop
- 8000c86:	3718      	adds	r7, #24
- 8000c88:	46bd      	mov	sp, r7
- 8000c8a:	bd80      	pop	{r7, pc}
+ 8000d02:	bf00      	nop
+ 8000d04:	bf00      	nop
+ 8000d06:	3718      	adds	r7, #24
+ 8000d08:	46bd      	mov	sp, r7
+ 8000d0a:	bd80      	pop	{r7, pc}
 
-08000c8c <Reset_Handler>:
+08000d0c <Reset_Handler>:
 
   .section .text.Reset_Handler
   .weak Reset_Handler
   .type Reset_Handler, %function
 Reset_Handler:
   ldr   r0, =_estack
- 8000c8c:	480d      	ldr	r0, [pc, #52]	; (8000cc4 <LoopForever+0x2>)
+ 8000d0c:	480d      	ldr	r0, [pc, #52]	; (8000d44 <LoopForever+0x2>)
   mov   sp, r0          /* set stack pointer */
- 8000c8e:	4685      	mov	sp, r0
+ 8000d0e:	4685      	mov	sp, r0
 /* Call the clock system initialization function.*/
   bl  SystemInit
- 8000c90:	f3af 8000 	nop.w
+ 8000d10:	f3af 8000 	nop.w
 
 /* Copy the data segment initializers from flash to SRAM */
   ldr r0, =_sdata
- 8000c94:	480c      	ldr	r0, [pc, #48]	; (8000cc8 <LoopForever+0x6>)
+ 8000d14:	480c      	ldr	r0, [pc, #48]	; (8000d48 <LoopForever+0x6>)
   ldr r1, =_edata
- 8000c96:	490d      	ldr	r1, [pc, #52]	; (8000ccc <LoopForever+0xa>)
+ 8000d16:	490d      	ldr	r1, [pc, #52]	; (8000d4c <LoopForever+0xa>)
   ldr r2, =_sidata
- 8000c98:	4a0d      	ldr	r2, [pc, #52]	; (8000cd0 <LoopForever+0xe>)
+ 8000d18:	4a0d      	ldr	r2, [pc, #52]	; (8000d50 <LoopForever+0xe>)
   movs r3, #0
- 8000c9a:	2300      	movs	r3, #0
+ 8000d1a:	2300      	movs	r3, #0
   b LoopCopyDataInit
- 8000c9c:	e002      	b.n	8000ca4 <LoopCopyDataInit>
+ 8000d1c:	e002      	b.n	8000d24 <LoopCopyDataInit>
 
-08000c9e <CopyDataInit>:
+08000d1e <CopyDataInit>:
 
 CopyDataInit:
   ldr r4, [r2, r3]
- 8000c9e:	58d4      	ldr	r4, [r2, r3]
+ 8000d1e:	58d4      	ldr	r4, [r2, r3]
   str r4, [r0, r3]
- 8000ca0:	50c4      	str	r4, [r0, r3]
+ 8000d20:	50c4      	str	r4, [r0, r3]
   adds r3, r3, #4
- 8000ca2:	3304      	adds	r3, #4
+ 8000d22:	3304      	adds	r3, #4
 
-08000ca4 <LoopCopyDataInit>:
+08000d24 <LoopCopyDataInit>:
 
 LoopCopyDataInit:
   adds r4, r0, r3
- 8000ca4:	18c4      	adds	r4, r0, r3
+ 8000d24:	18c4      	adds	r4, r0, r3
   cmp r4, r1
- 8000ca6:	428c      	cmp	r4, r1
+ 8000d26:	428c      	cmp	r4, r1
   bcc CopyDataInit
- 8000ca8:	d3f9      	bcc.n	8000c9e <CopyDataInit>
+ 8000d28:	d3f9      	bcc.n	8000d1e <CopyDataInit>
 
 /* Zero fill the bss segment. */
   ldr r2, =_sbss
- 8000caa:	4a0a      	ldr	r2, [pc, #40]	; (8000cd4 <LoopForever+0x12>)
+ 8000d2a:	4a0a      	ldr	r2, [pc, #40]	; (8000d54 <LoopForever+0x12>)
   ldr r4, =_ebss
- 8000cac:	4c0a      	ldr	r4, [pc, #40]	; (8000cd8 <LoopForever+0x16>)
+ 8000d2c:	4c0a      	ldr	r4, [pc, #40]	; (8000d58 <LoopForever+0x16>)
   movs r3, #0
- 8000cae:	2300      	movs	r3, #0
+ 8000d2e:	2300      	movs	r3, #0
   b LoopFillZerobss
- 8000cb0:	e001      	b.n	8000cb6 <LoopFillZerobss>
+ 8000d30:	e001      	b.n	8000d36 <LoopFillZerobss>
 
-08000cb2 <FillZerobss>:
+08000d32 <FillZerobss>:
 
 FillZerobss:
   str  r3, [r2]
- 8000cb2:	6013      	str	r3, [r2, #0]
+ 8000d32:	6013      	str	r3, [r2, #0]
   adds r2, r2, #4
- 8000cb4:	3204      	adds	r2, #4
+ 8000d34:	3204      	adds	r2, #4
 
-08000cb6 <LoopFillZerobss>:
+08000d36 <LoopFillZerobss>:
 
 LoopFillZerobss:
   cmp r2, r4
- 8000cb6:	42a2      	cmp	r2, r4
+ 8000d36:	42a2      	cmp	r2, r4
   bcc FillZerobss
- 8000cb8:	d3fb      	bcc.n	8000cb2 <FillZerobss>
+ 8000d38:	d3fb      	bcc.n	8000d32 <FillZerobss>
 
 /* Call static constructors */
   bl __libc_init_array
- 8000cba:	f000 f811 	bl	8000ce0 <__libc_init_array>
+ 8000d3a:	f000 f811 	bl	8000d60 <__libc_init_array>
 /* Call the application's entry point.*/
   bl main
- 8000cbe:	f7ff faa1 	bl	8000204 <main>
+ 8000d3e:	f7ff fa61 	bl	8000204 <main>
 
-08000cc2 <LoopForever>:
+08000d42 <LoopForever>:
 
 LoopForever:
     b LoopForever
- 8000cc2:	e7fe      	b.n	8000cc2 <LoopForever>
+ 8000d42:	e7fe      	b.n	8000d42 <LoopForever>
   ldr   r0, =_estack
- 8000cc4:	20004000 	.word	0x20004000
+ 8000d44:	20004000 	.word	0x20004000
   ldr r0, =_sdata
- 8000cc8:	20000000 	.word	0x20000000
+ 8000d48:	20000000 	.word	0x20000000
   ldr r1, =_edata
- 8000ccc:	20000024 	.word	0x20000024
+ 8000d4c:	20000024 	.word	0x20000024
   ldr r2, =_sidata
- 8000cd0:	08000db0 	.word	0x08000db0
+ 8000d50:	08000e30 	.word	0x08000e30
   ldr r2, =_sbss
- 8000cd4:	20000024 	.word	0x20000024
+ 8000d54:	20000024 	.word	0x20000024
   ldr r4, =_ebss
- 8000cd8:	20000048 	.word	0x20000048
+ 8000d58:	20000048 	.word	0x20000048
 
-08000cdc <ADC_IRQHandler>:
+08000d5c <ADC_IRQHandler>:
  * @retval : None
 */
   .section .text.Default_Handler,"ax",%progbits
 Default_Handler:
 Infinite_Loop:
   b Infinite_Loop
- 8000cdc:	e7fe      	b.n	8000cdc <ADC_IRQHandler>
+ 8000d5c:	e7fe      	b.n	8000d5c <ADC_IRQHandler>
 	...
 
-08000ce0 <__libc_init_array>:
- 8000ce0:	b570      	push	{r4, r5, r6, lr}
- 8000ce2:	4d0d      	ldr	r5, [pc, #52]	; (8000d18 <__libc_init_array+0x38>)
- 8000ce4:	4c0d      	ldr	r4, [pc, #52]	; (8000d1c <__libc_init_array+0x3c>)
- 8000ce6:	1b64      	subs	r4, r4, r5
- 8000ce8:	10a4      	asrs	r4, r4, #2
- 8000cea:	2600      	movs	r6, #0
- 8000cec:	42a6      	cmp	r6, r4
- 8000cee:	d109      	bne.n	8000d04 <__libc_init_array+0x24>
- 8000cf0:	4d0b      	ldr	r5, [pc, #44]	; (8000d20 <__libc_init_array+0x40>)
- 8000cf2:	4c0c      	ldr	r4, [pc, #48]	; (8000d24 <__libc_init_array+0x44>)
- 8000cf4:	f000 f818 	bl	8000d28 <_init>
- 8000cf8:	1b64      	subs	r4, r4, r5
- 8000cfa:	10a4      	asrs	r4, r4, #2
- 8000cfc:	2600      	movs	r6, #0
- 8000cfe:	42a6      	cmp	r6, r4
- 8000d00:	d105      	bne.n	8000d0e <__libc_init_array+0x2e>
- 8000d02:	bd70      	pop	{r4, r5, r6, pc}
- 8000d04:	f855 3b04 	ldr.w	r3, [r5], #4
- 8000d08:	4798      	blx	r3
- 8000d0a:	3601      	adds	r6, #1
- 8000d0c:	e7ee      	b.n	8000cec <__libc_init_array+0xc>
- 8000d0e:	f855 3b04 	ldr.w	r3, [r5], #4
- 8000d12:	4798      	blx	r3
- 8000d14:	3601      	adds	r6, #1
- 8000d16:	e7f2      	b.n	8000cfe <__libc_init_array+0x1e>
- 8000d18:	08000da8 	.word	0x08000da8
- 8000d1c:	08000da8 	.word	0x08000da8
- 8000d20:	08000da8 	.word	0x08000da8
- 8000d24:	08000dac 	.word	0x08000dac
+08000d60 <__libc_init_array>:
+ 8000d60:	b570      	push	{r4, r5, r6, lr}
+ 8000d62:	4d0d      	ldr	r5, [pc, #52]	; (8000d98 <__libc_init_array+0x38>)
+ 8000d64:	4c0d      	ldr	r4, [pc, #52]	; (8000d9c <__libc_init_array+0x3c>)
+ 8000d66:	1b64      	subs	r4, r4, r5
+ 8000d68:	10a4      	asrs	r4, r4, #2
+ 8000d6a:	2600      	movs	r6, #0
+ 8000d6c:	42a6      	cmp	r6, r4
+ 8000d6e:	d109      	bne.n	8000d84 <__libc_init_array+0x24>
+ 8000d70:	4d0b      	ldr	r5, [pc, #44]	; (8000da0 <__libc_init_array+0x40>)
+ 8000d72:	4c0c      	ldr	r4, [pc, #48]	; (8000da4 <__libc_init_array+0x44>)
+ 8000d74:	f000 f818 	bl	8000da8 <_init>
+ 8000d78:	1b64      	subs	r4, r4, r5
+ 8000d7a:	10a4      	asrs	r4, r4, #2
+ 8000d7c:	2600      	movs	r6, #0
+ 8000d7e:	42a6      	cmp	r6, r4
+ 8000d80:	d105      	bne.n	8000d8e <__libc_init_array+0x2e>
+ 8000d82:	bd70      	pop	{r4, r5, r6, pc}
+ 8000d84:	f855 3b04 	ldr.w	r3, [r5], #4
+ 8000d88:	4798      	blx	r3
+ 8000d8a:	3601      	adds	r6, #1
+ 8000d8c:	e7ee      	b.n	8000d6c <__libc_init_array+0xc>
+ 8000d8e:	f855 3b04 	ldr.w	r3, [r5], #4
+ 8000d92:	4798      	blx	r3
+ 8000d94:	3601      	adds	r6, #1
+ 8000d96:	e7f2      	b.n	8000d7e <__libc_init_array+0x1e>
+ 8000d98:	08000e28 	.word	0x08000e28
+ 8000d9c:	08000e28 	.word	0x08000e28
+ 8000da0:	08000e28 	.word	0x08000e28
+ 8000da4:	08000e2c 	.word	0x08000e2c
 
-08000d28 <_init>:
- 8000d28:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 8000d2a:	bf00      	nop
- 8000d2c:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 8000d2e:	bc08      	pop	{r3}
- 8000d30:	469e      	mov	lr, r3
- 8000d32:	4770      	bx	lr
+08000da8 <_init>:
+ 8000da8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 8000daa:	bf00      	nop
+ 8000dac:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8000dae:	bc08      	pop	{r3}
+ 8000db0:	469e      	mov	lr, r3
+ 8000db2:	4770      	bx	lr
 
-08000d34 <_fini>:
- 8000d34:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 8000d36:	bf00      	nop
- 8000d38:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 8000d3a:	bc08      	pop	{r3}
- 8000d3c:	469e      	mov	lr, r3
- 8000d3e:	4770      	bx	lr
+08000db4 <_fini>:
+ 8000db4:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 8000db6:	bf00      	nop
+ 8000db8:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8000dba:	bc08      	pop	{r3}
+ 8000dbc:	469e      	mov	lr, r3
+ 8000dbe:	4770      	bx	lr
